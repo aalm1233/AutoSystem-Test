@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.w3school.com.cn" xmlns="http://www.w3school.com.cn"
+	elementFormDefault="qualified">
+	<xs:element name="resources">
+		<xs:complexType mixed="true">
+			<xs:all minOccurs="0">
+				<xs:element name="add" type="operation" />
+				<xs:element name="delete" type="operation" />
+				<xs:element name="update" type="operation" />
+				<xs:element name="find" type="operation" />
+			</xs:all>
+			<xs:attribute name="id" type="xs:string" use="required" />
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="base" type="xs:string" use="required" />
+			<xs:attribute name="premise" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="operation">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="resource">
+				<xs:complexType mixed="true">
+					<xs:sequence>
+						<xs:element name="request">
+							<xs:complexType>
+								<xs:sequence maxOccurs="unbounded">
+									<xs:element name="param">
+										<xs:complexType>
+											<xs:all minOccurs="0">
+												<xs:element name="restriction" type="constraint"></xs:element>
+												<xs:element name="element"><!-- 去掉了string类型修饰 -->
+													<xs:complexType>
+														<xs:attribute name="name" type="xs:string" />
+														<xs:attribute name="type" type="xs:string"
+															use="required" />
+													</xs:complexType>
+												</xs:element>
+											</xs:all>
+											<xs:attribute name="name" type="xs:string" use="required" />
+											<xs:attribute name="attribute" type="xs:string"
+												use="required" />
+											<xs:attribute name="type" type="xs:string" use="required" />
+											<xs:attribute name="required" type="xs:boolean"
+												default="true" />
+										</xs:complexType>
+									</xs:element><!--param元素 -->
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element><!--request元素 -->
+						<xs:element name="response">
+							<xs:complexType mixed="true">
+								<xs:sequence>
+									<xs:element name="data">
+										<xs:complexType>
+											<xs:all minOccurs="0">
+												<xs:element name="element"><!-- 去掉了string类型修饰 -->
+					 								<xs:complexType>
+														<xs:attribute name="name" type="xs:string" />
+														<xs:attribute name="type" type="xs:string"
+															use="required" />
+													</xs:complexType>
+												</xs:element><!--element元素 -->
+												<xs:element name="restriction" type="constraint" />
+											</xs:all>
+											<xs:attribute name="name" type="xs:string" use="required" />
+											<xs:attribute name="type" type="xs:string" use="required" />
+										</xs:complexType>
+									</xs:element><!--data元素 -->
+								</xs:sequence>
+								<xs:attribute name="dataType" type="xs:string" use="required" />
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:string" use="required" />
+					<xs:attribute name="name" type="xs:string" use="required" />
+					<xs:attribute name="path" type="xs:string" use="required" />
+					<xs:attribute name="cascade" type="xs:boolean"
+						default="false" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="constraint">
+		<xs:all minOccurs="0">
+			<xs:element name="enumeration" type="xs:string" />
+			<xs:element name="totalDigits" type="xs:integer" />
+			<xs:element name="fractionDigit" type="xs:integer" />
+			<xs:element name="minExclusive" type="xs:integer" />
+			<xs:element name="maxExclusive" type="xs:integer" />
+			<xs:element name="minInclusive" type="xs:integer" />
+			<xs:element name="maxInclusive" type="xs:integer" />
+			<xs:element name="length" type="xs:integer" />
+			<xs:element name="minLength" type="xs:integer" />
+			<xs:element name="maxLength" type="xs:integer" />
+			<xs:element name="minDate" type="xs:date" />
+			<xs:element name="maxDate" type="xs:date" />
+			<xs:element name="pattern" type="xs:string" />
+			<xs:element name="format" type="xs:string" />
+			<xs:element name="size" type="xs:decimal" />
+			<xs:element name="minSize" type="xs:decimal" />
+			<xs:element name="maxSize" type="xs:decimal" />
+			<xs:element name="whiteSpace" type="xs:string" />
+		</xs:all>
+	</xs:complexType>
+</xs:schema>
