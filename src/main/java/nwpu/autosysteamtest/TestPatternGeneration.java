@@ -16,7 +16,7 @@ public class TestPatternGeneration {
 	public TestPatternGeneration(ConcurrentHashMap<String, String> operaterTypesMap){
 		this.operaterTypesMap = operaterTypesMap;
 		mode = new ConcurrentHashMap<>();
-	}
+	} 
 	public void run(){	
 		Set<String> key = operaterTypesMap.keySet();
 		for (Iterator<String> it = key.iterator(); it.hasNext();){
