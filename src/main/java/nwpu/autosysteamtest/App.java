@@ -1,33 +1,26 @@
 package nwpu.autosysteamtest;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
- * Hello world!
- *
+ * @author Dengtong
+ * @version 2.0,23/11/2017
  */
 public class App 
 {
-    public static void main( String[] args ) throws IOException
+    public static void main( String[] args ) throws IOException, InterruptedException
     {
     	switch (args.length) {
 		case 0:
-			System.out.println("Please start in the following format >> Java App xmlpath");
+			System.out.println("Please start in the following format >> Java App xmldirpath");
 			break;
 		case 1:
 			String path = args[0];
-			File folder = new File(path+"\\resource\\inputxml");
-			File[] fileSet = folder.listFiles();
-			 DocumentPrepcessing dp = new DocumentPrepcessing(fileSet);
-			 dp.run();
-			 TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
-			 tpg.run();
-			 ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\",dp.getAddInterfaceSetMap(), dp.getDeleteInterfaceSetMap(), dp.getUpdateInterfaceSetMap(), dp.getFindInterfaceSetMap(), tpg.getMode());
-			 sg.run();
-			 break;
+			RunThread run = new RunThread(path);
+			break;
 		default:
 			break;
 		}
     }
+    
 }
