@@ -1,6 +1,7 @@
 package nwpu.autosysteamtest;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -70,7 +71,6 @@ public class ScriptGeneration {
 		int num = 0;
 		String line = null;
 		while ((line = in.readLine()) != null) {
-
 			String outputfileName = filename + "OperationSequence.txt";
 			PrintWriter out = new PrintWriter(path + "operationsequencelfiles\\" + outputfileName);
 			ArrayList<String> outputlines = analyticeExpression(line);
@@ -95,6 +95,17 @@ public class ScriptGeneration {
 	private void generatingInterfaceSequenceFiles(String filename) throws IOException {
 		String inputfilename = filename + "OperationSequence.txt";
 		BufferedReader in = new BufferedReader(new FileReader(path + "operationsequencelfiles\\" + inputfilename));
+		File file = null;
+		try{
+			file = new File(path + "outputxml\\"+filename);
+			if(!file.exists()){
+				file.mkdirs();
+			}
+		}catch(Exception e){
+			
+		}finally {
+			file = null;
+		}
 		String line = null;
 		while ((line = in.readLine()) != null) {
 			new Cartesian(filename,line,resourcesId);	
@@ -230,8 +241,17 @@ public class ScriptGeneration {
 		 * @throws FileNotFoundException
 		 */
 		private void generatingInterfaceSequenceFiles(ArrayList<String> output) throws FileNotFoundException {
-			String outputfileName = filename + "-APISequence" + filenum + ".xml";
-			PrintWriter out = new PrintWriter(path + "outputxml\\" + outputfileName);
+			int xnum = sequenceLenth-2;
+			File file = null;
+			try{
+				file = new File(path + "outputxml\\"+filename+"\\"+xnum);
+				if(!file.exists()){
+					file.mkdirs();
+				}
+			}catch(Exception e){
+				
+			}
+			PrintWriter out = new PrintWriter(path + "outputxml\\"+filename+"\\"+xnum+"\\"+filenum+".xml");
 			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			out.flush();
 			out.println("<script resourcesID=\""+resourcesId+"\""+" sequence=\"\">");
