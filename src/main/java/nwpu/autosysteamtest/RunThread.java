@@ -17,7 +17,7 @@ public class RunThread {
 			while(Thread.activeCount()!=1){}
 			TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
 			tpg.run();
-			ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\",dp.getAddInterfaceSetMap(), dp.getDeleteInterfaceSetMap(), dp.getUpdateInterfaceSetMap(), dp.getFindInterfaceSetMap(), tpg.getMode());
+			ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\", tpg.getMode());
 			sg.run();
 		} catch (Exception e) {
 			e.printStackTrace();

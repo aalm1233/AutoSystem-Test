@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 3.0,30/11/2017
  */
 public class ScriptGeneration {
+	DocumentPrepcessing  documentPrepcessing;
 	private ConcurrentHashMap<String, ArrayList<String>> addInterfaceSetMap;
 	private ConcurrentHashMap<String, ArrayList<String>> deleteInterfaceSetMap;
 	private ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
@@ -24,16 +25,14 @@ public class ScriptGeneration {
 	private String path;
 	int filenum;
 	String resourcesId;
-	public ScriptGeneration(String path, ConcurrentHashMap<String, ArrayList<String>> addInterfaceSetMap,
-			ConcurrentHashMap<String, ArrayList<String>> deleteInterfaceSetMap,
-			ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap,
-			ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap,
-			ConcurrentHashMap<String, ArrayList<String>> mode) {
+	public ScriptGeneration(String path,
+			ConcurrentHashMap<String, ArrayList<String>> mode) throws InterruptedException {
+		documentPrepcessing = DocumentPrepcessing.getInstance();
 		this.path = path;
-		this.addInterfaceSetMap = addInterfaceSetMap;
-		this.deleteInterfaceSetMap = deleteInterfaceSetMap;
-		this.updateInterfaceSetMap = updateInterfaceSetMap;
-		this.findInterfaceSetMap = findInterfaceSetMap;
+		this.addInterfaceSetMap = documentPrepcessing.getAddInterfaceSetMap();
+		this.deleteInterfaceSetMap = documentPrepcessing.getDeleteInterfaceSetMap();
+		this.updateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
+		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
 		this.mode = mode;
 	}
 
@@ -144,16 +143,21 @@ public class ScriptGeneration {
 			deleteInterfaceSet = deleteInterfaceSetMap.get(resourcesId);
 			findInterfaceSet = findInterfaceSetMap.get(resourcesId);
 			updateInterfaceSet = updateInterfaceSetMap.get(resourcesId);
-			run(0,new ArrayList<String>());
+			recursiveGenerationInterfaceSequence(0,new ArrayList<String>());
 		}
-		private void run(int i,ArrayList<String> arrayList){
+		/**
+		 * 递归生成脚本(接口序列)
+		 * @param i
+		 * @param arrayList 接口序列
+		 */
+		private void recursiveGenerationInterfaceSequence(int i,ArrayList<String> arrayList){
 			if(i<sequenceLenth){
 				switch (line.charAt(i)) {
 				case 'A':
 					for(int j = 0;j<addnum;j++){
 						arrayList.add("add "+addInterfaceSet.get(j));
-						if(APISequenceConstraint1(arrayList)){
-							run(++i,arrayList);
+						if(interfaceSequenceConstraint1(arrayList)){
+							recursiveGenerationInterfaceSequence(++i,arrayList);
 						}
 						arrayList.remove(arrayList.size()-1);
 					}
@@ -161,8 +165,8 @@ public class ScriptGeneration {
 				case 'U':
 					for(int j = 0;j<updatenum;j++){
 						arrayList.add("update "+updateInterfaceSet.get(j));
-						if(APISequenceConstraint1(arrayList)){
-							run(++i,arrayList);
+						if(interfaceSequenceConstraint1(arrayList)){
+							recursiveGenerationInterfaceSequence(++i,arrayList);
 						}
 						arrayList.remove(arrayList.size()-1);
 					}
@@ -170,8 +174,8 @@ public class ScriptGeneration {
 				case 'D':
 					for(int j = 0;j<deletenum;j++){
 						arrayList.add("delete "+deleteInterfaceSet.get(j));
-						if(APISequenceConstraint1(arrayList)){
-							run(++i,arrayList);
+						if(interfaceSequenceConstraint1(arrayList)){
+							recursiveGenerationInterfaceSequence(++i,arrayList);
 						}
 						arrayList.remove(arrayList.size()-1);
 					}
@@ -179,8 +183,8 @@ public class ScriptGeneration {
 				case 'F':
 					for(int j = 0;j<findnum;j++){
 						arrayList.add("find "+findInterfaceSet.get(j));
-						if(APISequenceConstraint2(arrayList)){
-							run(++i,arrayList);
+						if(interfaceSequenceConstraint2(arrayList)){
+							recursiveGenerationInterfaceSequence(++i,arrayList);
 						}
 						arrayList.remove(arrayList.size()-1);
 					}
@@ -202,7 +206,7 @@ public class ScriptGeneration {
 		 * 
 		 * @return
 		 */
-		private boolean APISequenceConstraint1(ArrayList<String> arrayList) {
+		private boolean interfaceSequenceConstraint1(ArrayList<String> arrayList) {
 			String last = arrayList.get(arrayList.size()-1);
 			int tempnum = 0;
 			for(String line :arrayList){
@@ -222,7 +226,7 @@ public class ScriptGeneration {
 		 * 
 		 * @return
 		 */
-		private boolean APISequenceConstraint2(ArrayList<String> arrayList) {
+		private boolean interfaceSequenceConstraint2(ArrayList<String> arrayList) {
 			int size = arrayList.size()-1;
 			if(arrayList.get(size).equals(arrayList.get(size-1))){
 				return false;
@@ -303,40 +307,40 @@ public class ScriptGeneration {
 		}
 		int expressionLength = getMaxExpressionLength();
 		for (int i = 0; i < expressionLength - 2; i++) {
-			a(0, i, midle, new StringBuffer(head), result);
+			recursiveGenerationOperationSequence(0, i, midle, new StringBuffer(head), result);
 		}
 		return result;
 	}
 
 	/**
-	 * 生成操作序列
+	 * 递归生成操作序列
 	 * 
 	 * @param result
 	 */
-	private void a(int i, int j, String midle, StringBuffer sb, ArrayList<String> result) {
+	private void recursiveGenerationOperationSequence(int i, int j, String midle, StringBuffer sb, ArrayList<String> result) {
 		if (i < j) {
 			if (midle.contains("A")) {
 				sb.append("A");
-				a(++i, j, midle, sb, result);
+				recursiveGenerationOperationSequence(++i, j, midle, sb, result);
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("U")) {
 				sb.append("U");
 				if (operationSequenceConstraint2(sb.toString())) {
-					a(++i, j, midle, sb, result);
+					recursiveGenerationOperationSequence(++i, j, midle, sb, result);
 				}
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("D")) {
 				sb.append("D");
 				if (operationSequenceConstraint2(sb.toString())) {
-					a(++i, j, midle, sb, result);
+					recursiveGenerationOperationSequence(++i, j, midle, sb, result);
 				}
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("F")) {
 				sb.append("F");
-				a(++i, j, midle, sb, result);
+				recursiveGenerationOperationSequence(++i, j, midle, sb, result);
 				sb.deleteCharAt(sb.length() - 1);
 			}
 		} else if (i == j) {
