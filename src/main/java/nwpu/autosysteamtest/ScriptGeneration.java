@@ -257,7 +257,6 @@ public class ScriptGeneration {
 			out.println("<script resourcesID=\""+resourcesId+"\""+" sequence=\"\">");
 			out.flush();
 			for(String line :output){
-				System.out.println(line);
 				String operation = line.split(" ")[0];
 				String step = line.split(" ")[1];
 				String path = step.split("\\|")[0].split(",")[1];//这里还没改

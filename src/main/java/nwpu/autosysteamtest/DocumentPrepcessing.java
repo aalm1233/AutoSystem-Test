@@ -236,6 +236,7 @@ public class DocumentPrepcessing {
 										resource.getAttribute(ResourcesAttribute.id.toString()),
 										param.getAttribute(ParamAttribute.name.toString()), restriction);
 								String parameterConstrains = constrain.getResult();
+								System.err.println(parameterConstrains);
 								parameterConstrainsSet.add(parameterConstrains);
 							}
 							if (j < params.getLength() - 1) {
@@ -254,6 +255,7 @@ public class DocumentPrepcessing {
 			}
 		}
 }
+
 enum ResourcesAttribute {
 	// 每一个实体的属性
 	id, name, base, premise
