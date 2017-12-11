@@ -32,6 +32,7 @@ public class AutomatedTestData {
 		Set<String> key = operaterTypesMap.keySet();
 		File file = null;
 		try{
+			
 			file = new File(path + "date");
 			if(!file.exists()){
 				file.mkdirs();
@@ -41,10 +42,11 @@ public class AutomatedTestData {
 		}finally {
 			file = null;
 		}
+		this.path = path + "date\\";
 		for(Iterator<String> it = key.iterator(); it.hasNext();){
 			this.resourcesid = (String) it.next();
 			try{
-				file = new File(path + "date\\"+this.resourcesid);
+				file = new File(path+this.resourcesid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -71,7 +73,7 @@ public class AutomatedTestData {
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\update\\"+this.resourceid);
+				file = new File(path+this.resourcesid+"\\update\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -89,7 +91,7 @@ public class AutomatedTestData {
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\delete\\"+this.resourceid);
+				file = new File(path+this.resourcesid+"\\delete\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -107,7 +109,7 @@ public class AutomatedTestData {
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\add\\"+this.resourceid);
+				file = new File(path+this.resourcesid+"\\add\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
