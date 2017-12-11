@@ -69,6 +69,7 @@ public class AutomatedTestData {
 	}
 	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap) {
 		ArrayList<String> xInterfaceSets = xInterfaceSetMap.get(this.resourcesid);
+		ArrayList<String> parameterConstrains = this.parameterConstrainsMap.get(this.resourcesid);
 		for(String xInterface:xInterfaceSets){
 			this.resourceid = xInterface.split("\\|")[0].split(",")[0];
 			File file = null;
@@ -81,6 +82,12 @@ public class AutomatedTestData {
 				
 			}finally {
 				file = null;
+			}
+			ArrayList<String> resourceParameterConstrains = new ArrayList<>();
+			for(String parameterConstrain:parameterConstrains){
+				if(parameterConstrain.startsWith(resourceid)){
+					resourceParameterConstrains.add(parameterConstrain);
+				}
 			}
 		}
 		
