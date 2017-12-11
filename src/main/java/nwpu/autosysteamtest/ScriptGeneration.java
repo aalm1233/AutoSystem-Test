@@ -417,6 +417,25 @@ public class ScriptGeneration {
 	}
 	public void run() throws IOException {
 		Set<String> key = mode.keySet();
+		File file = null;
+		try{
+			file = new File(path + "outputxml");
+			if(!file.exists()){
+				file.mkdirs();
+			}
+			file = new File(path + "testmodelfiles");
+			if(!file.exists()){
+				file.mkdirs();
+			}
+			file = new File(path + "operationsequencelfiles");
+			if(!file.exists()){
+				file.mkdirs();
+			}
+		}catch(Exception e){
+			
+		}finally {
+			file = null;
+		}
 		for (Iterator<String> it = key.iterator(); it.hasNext();) {
 			resourcesId = (String) it.next();
 			System.out.println(resourcesId);

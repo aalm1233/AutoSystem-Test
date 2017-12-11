@@ -16,7 +16,7 @@ public class App
 			break;
 		case 1:
 			String path = args[0];
-			RunThread run = new RunThread(path);
+			new RunThread(path);
 			break;
 		default:
 			break;
