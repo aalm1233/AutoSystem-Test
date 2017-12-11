@@ -59,19 +59,19 @@ public class AutomatedTestData {
 	protected void run2(){
 		addDateAutomated();
 		deleteDateAutomated();
-		DateAutomated();
+		upDateAutomated();
 		//findDateAutomated();
 	}
 	private void findDateAutomated() {
 
 	}
-	private void DateAutomated() {
+	private void upDateAutomated() {
 		ArrayList<String> updateInterfaceSets = this.updateInterfaceSetMap.get(this.resourcesid);
 		for(String updateInterface:updateInterfaceSets){
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\"+this.resourceid);
+				file = new File(path + "date\\"+this.resourcesid+"\\update\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -89,7 +89,7 @@ public class AutomatedTestData {
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\"+this.resourceid);
+				file = new File(path + "date\\"+this.resourcesid+"\\delete\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -107,7 +107,7 @@ public class AutomatedTestData {
 			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path + "date\\"+this.resourcesid+"\\"+this.resourceid);
+				file = new File(path + "date\\"+this.resourcesid+"\\add\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
