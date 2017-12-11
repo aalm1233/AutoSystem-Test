@@ -59,21 +59,21 @@ public class AutomatedTestData {
 		}
 	}
 	protected void run2(){
-		addDateAutomated();
-		deleteDateAutomated();
-		upDateAutomated();
+		xAutomated("add",this.addInterfaceSetMap);
+		xAutomated("update",this.updateInterfaceSetMap);
+		xAutomated("delete",this.deleteInterfaceSetMap);
 		//findDateAutomated();
 	}
 	private void findDateAutomated() {
 
 	}
-	private void upDateAutomated() {
-		ArrayList<String> updateInterfaceSets = this.updateInterfaceSetMap.get(this.resourcesid);
-		for(String updateInterface:updateInterfaceSets){
-			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
+	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap) {
+		ArrayList<String> xInterfaceSets = xInterfaceSetMap.get(this.resourcesid);
+		for(String xInterface:xInterfaceSets){
+			this.resourceid = xInterface.split("\\|")[0].split(",")[0];
 			File file = null;
 			try{
-				file = new File(path+this.resourcesid+"\\update\\"+this.resourceid);
+				file = new File(path+this.resourcesid+"\\"+operation+"\\"+this.resourceid);
 				if(!file.exists()){
 					file.mkdirs();
 				}
@@ -85,40 +85,5 @@ public class AutomatedTestData {
 		}
 		
 	}
-	private void deleteDateAutomated() {
-		ArrayList<String> deleteInterfaceSets = this.deleteInterfaceSetMap.get(this.resourcesid);
-		for(String updateInterface:deleteInterfaceSets){
-			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
-			File file = null;
-			try{
-				file = new File(path+this.resourcesid+"\\delete\\"+this.resourceid);
-				if(!file.exists()){
-					file.mkdirs();
-				}
-			}catch(Exception e){
-				
-			}finally {
-				file = null;
-			}
-		}
-		
-	}
-	private void addDateAutomated() {
-		ArrayList<String> addInterfaceSets = this.addInterfaceSetMap.get(this.resourcesid);
-		for(String updateInterface:addInterfaceSets){
-			this.resourceid = updateInterface.split("\\|")[0].split(",")[0];
-			File file = null;
-			try{
-				file = new File(path+this.resourcesid+"\\add\\"+this.resourceid);
-				if(!file.exists()){
-					file.mkdirs();
-				}
-			}catch(Exception e){
-				
-			}finally {
-				file = null;
-			}
-		}
-		
-	}
+
 }
