@@ -1,6 +1,8 @@
 package nwpu.autosysteamtest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -26,6 +28,7 @@ public class AutomatedTestData {
 		this.deleteInterfaceSetMap = documentPrepcessing.getDeleteInterfaceSetMap();
 		this.updateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
 		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
+		this.parameterConstrainsMap = documentPrepcessing.getParameterConstrainsMap();
 		this.run1();
 	}
 	protected void run1(){
@@ -55,10 +58,15 @@ public class AutomatedTestData {
 			}finally {
 				file = null;
 			}
-			run2();
+			try {
+				run2();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	protected void run2(){
+	protected void run2() throws FileNotFoundException{
 		xAutomated("add",this.addInterfaceSetMap);
 		xAutomated("update",this.updateInterfaceSetMap);
 		xAutomated("delete",this.deleteInterfaceSetMap);
@@ -67,9 +75,12 @@ public class AutomatedTestData {
 	private void findDateAutomated() {
 
 	}
-	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap) {
+	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap) throws FileNotFoundException {
 		ArrayList<String> xInterfaceSets = xInterfaceSetMap.get(this.resourcesid);
-		ArrayList<String> parameterConstrains = this.parameterConstrainsMap.get(this.resourcesid);
+		ArrayList<String> parameterConstrains = null;
+		if(this.parameterConstrainsMap.containsKey(resourcesid)){
+			parameterConstrains = this.parameterConstrainsMap.get(this.resourcesid);
+		}
 		for(String xInterface:xInterfaceSets){
 			this.resourceid = xInterface.split("\\|")[0].split(",")[0];
 			File file = null;
@@ -89,6 +100,7 @@ public class AutomatedTestData {
 					resourceParameterConstrains.add(parameterConstrain);
 				}
 			}
+			PrintWriter out = new PrintWriter(path+this.resourcesid+"\\"+operation+"\\"+this.resourceid+"\\0.xml");
 		}
 		
 	}
