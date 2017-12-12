@@ -100,7 +100,26 @@ public class AutomatedTestData {
 					resourceParameterConstrains.add(parameterConstrain);
 				}
 			}
-			PrintWriter out = new PrintWriter(path+this.resourcesid+"\\"+operation+"\\"+this.resourceid+"\\0.xml");
+			generateDataFile(this.path+this.resourcesid+"\\"+operation+"\\"+this.resourceid+"\\",xInterface,resourceParameterConstrains);
+		}
+		
+	}
+	private void generateDataFile(String path,String xInterface,ArrayList<String> parameterConstrains){
+		System.out.println(xInterface);
+		String[] paramsplt = xInterface.split("->");
+		if(paramsplt.length >1){
+			String[] params = paramsplt[1].split("_");
+			for(String param:params){
+				String paramName = param.split(",")[0];
+				try {
+					PrintWriter out = new PrintWriter(path + paramName+".xml");
+					out.println(param);
+					out.flush();
+					out.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}

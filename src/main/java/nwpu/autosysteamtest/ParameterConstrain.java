@@ -9,18 +9,18 @@ import org.w3c.dom.NodeList;
  *
  */
 public class ParameterConstrain {
-	private String resourceAttributeId;
+	private String resourceId;
 	private String paramName;
 	private NodeList constraints;
 
 	public ParameterConstrain(String attribute, String attribute2, Node restriction) {
-		this.resourceAttributeId = attribute;
+		this.resourceId = attribute;
 		this.paramName = attribute2;
 		this.constraints = restriction.getChildNodes();
 	}
 
 	public String getResult() {
-		return this.resourceAttributeId+"_"+this.paramName+"<"+constrainAnalysis()+">";
+		return this.resourceId+"-"+this.paramName+"<"+constrainAnalysis()+">";
 	}
 	private String constrainAnalysis(){
 		StringBuffer result = new StringBuffer();
