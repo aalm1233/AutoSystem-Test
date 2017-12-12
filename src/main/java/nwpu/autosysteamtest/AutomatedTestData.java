@@ -111,9 +111,15 @@ public class AutomatedTestData {
 			String[] params = paramsplt[1].split("_");
 			for(String param:params){
 				String paramName = param.split(",")[0];
+				String paramConstrains = null;
+				for(String s:parameterConstrains){
+					if(s.startsWith(resourceid+"-"+paramName))paramConstrains = s;
+				}
 				try {
 					PrintWriter out = new PrintWriter(path + paramName+".xml");
 					out.println(param);
+					out.flush();
+					out.println(paramConstrains);
 					out.flush();
 					out.close();
 				} catch (FileNotFoundException e) {
