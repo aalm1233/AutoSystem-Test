@@ -149,11 +149,11 @@ public class AutomatedTestData {
 		case "unsignedByte":
 		case "float":
 		case "double":
-			numericalType();
+			numericalType(constraints);
 			break;
 		case "string":
 		case "token":
-			stringType();
+			stringType(constraints);
 			break;
 		case "date":
 		case "dateTime":
@@ -164,40 +164,43 @@ public class AutomatedTestData {
 		case "gYear":	
 		case "gYearMonth":
 		case "time":
-			dateType();
+			dateType(constraints);
 			break;
 		case "boolean":
 			boolType();
 			break;
 		case "anyURI":
-			fileType();
+			fileType(constraints);
 			break;
 		default:
 			break;
 		}
 		
 	}
-	private void fileType() {
+	private void fileType(String[] constraints) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	private void boolType() {
 		// TODO Auto-generated method stub
+		ArrayList<String> values = new ArrayList<>();	
+		values.add("true");
+		values.add("false");
 		
 	}
 
-	private void dateType() {
+	private void dateType(String[] constraints) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void stringType() {
+	private void stringType(String[] constraints) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void numericalType() {
+	private void numericalType(String[] constraints) {
 		// TODO Auto-generated method stub
 		
 	}
