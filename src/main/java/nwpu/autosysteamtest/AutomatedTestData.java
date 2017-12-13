@@ -132,8 +132,76 @@ public class AutomatedTestData {
 		String paramType = param.split(",")[1];
 		String paramAtributte = param.split(",")[2];
 		String[] constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
+		switch (paramType) {
+		case "byte":
+		case"decimal":
+		case "int":
+		case "integer":
+		case "long":
+		case "negativeInteger":
+		case "nonNegativeInteger":
+		case "nonPositiveInteger":
+		case "positiveInteger":	
+		case "short":
+		case "unsignedLong":
+		case "unsignedInt":
+		case "unsignedShort":
+		case "unsignedByte":
+		case "float":
+		case "double":
+			numericalType();
+			break;
+		case "string":
+		case "token":
+			stringType();
+			break;
+		case "date":
+		case "dateTime":
+		case "duration":		
+		case "gDay":
+		case "gMonth":
+		case "gMonthDay":
+		case "gYear":	
+		case "gYearMonth":
+		case "time":
+			dateType();
+			break;
+		case "boolean":
+			boolType();
+			break;
+		case "anyURI":
+			fileType();
+			break;
+		default:
+			break;
+		}
 		
 	}
+	private void fileType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void boolType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void dateType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void stringType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void numericalType() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void generateDataFile(String paramName){		
 		try {
 			PrintWriter out = new PrintWriter(path + paramName + ".xml");
@@ -143,3 +211,4 @@ public class AutomatedTestData {
 	}
 
 }
+
