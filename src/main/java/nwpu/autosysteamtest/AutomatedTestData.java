@@ -103,14 +103,13 @@ public class AutomatedTestData {
 					resourceParameterConstrains.add(parameterConstrain);
 				}
 			}
-			generateDataFile(this.path + this.resourcesid + "\\" + operation + "\\" + this.resourceid + "\\",
+			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + this.resourceid + "\\",
 					xInterface, resourceParameterConstrains);
 		}
 
 	}
 
-	private void generateDataFile(String path, String xInterface, ArrayList<String> parameterConstrains) {
-		System.out.println(xInterface);
+	private void analyticParameter(String path, String xInterface, ArrayList<String> parameterConstrains) {
 		String[] paramsplt = xInterface.split("->");
 		if (paramsplt.length > 1) {
 			String[] params = paramsplt[1].split("_");
@@ -121,19 +120,26 @@ public class AutomatedTestData {
 					if (s.startsWith(resourceid + "-" + paramName))
 						paramConstrains = s;
 				}
-				try {
-					PrintWriter out = new PrintWriter(path + paramName + ".xml");
-					out.println(param);
-					out.flush();
-					out.println(paramConstrains);
-					out.flush();
-					out.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+				analyticParameterComposition(param,paramName,paramConstrains);
+				
 			}
 		}
 
+	}
+	private void  analyticParameterComposition(String param,String paramName,String paramConstrains){
+		System.out.println(param);
+		System.out.println(paramConstrains);
+		String paramType = param.split(",")[1];
+		String paramAtributte = param.split(",")[2];
+		String[] constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
+		
+	}
+	private void generateDataFile(String paramName){		
+		try {
+			PrintWriter out = new PrintWriter(path + paramName + ".xml");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
