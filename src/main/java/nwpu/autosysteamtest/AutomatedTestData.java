@@ -19,7 +19,9 @@ public class AutomatedTestData {
 	protected String resourcesid;
 	protected String resourceid;
 	protected String path;
-
+	static final long MAX_POINT_DIGIT = 15;//小数点后最大位数
+	static final long MAX_TOTAL_DIGIT = 15;//小数最大位数
+	
 	public AutomatedTestData(String path) throws InterruptedException {
 		this.path = path;
 		documentPrepcessing = DocumentPrepcessing.getInstance();
@@ -202,6 +204,25 @@ public class AutomatedTestData {
 
 	private void numericalType(String[] constraints) {
 		// TODO Auto-generated method stub
+		String constraintses = constraints.toString();
+		ArrayList<String> values = new ArrayList<>();	
+		if(constraintses.contains("enumeration")){
+			for(String enumerations :constraints){
+				values.add(enumerations.split(":")[1]);
+			}
+		}else{
+			ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+			for(String t:constraints){
+				String[] tt = t.split(",");
+				constraint.put(tt[0], tt[1]);
+			}
+			if(constraintses.contains("fractionDigits")){
+				long fractionDigits = MAX_POINT_DIGIT;
+			}
+			if(constraintses.contains("maxExclusive")){
+				long maxExclusive = Long.MAX_VALUE;
+			}
+		}
 		
 	}
 
