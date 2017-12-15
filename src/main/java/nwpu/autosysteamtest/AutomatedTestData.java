@@ -151,11 +151,11 @@ public class AutomatedTestData {
 		case "unsignedByte":
 		case "float":
 		case "double":
-			numericalType(constraints);
+			numericalType(constraints,paramType);
 			break;
 		case "string":
 		case "token":
-			stringType(constraints);
+			stringType(constraints,paramType);
 			break;
 		case "date":
 		case "dateTime":
@@ -166,20 +166,20 @@ public class AutomatedTestData {
 		case "gYear":	
 		case "gYearMonth":
 		case "time":
-			dateType(constraints);
+			dateType(constraints,paramType);
 			break;
 		case "boolean":
 			boolType();
 			break;
 		case "anyURI":
-			fileType(constraints);
+			fileType(constraints,paramType);
 			break;
 		default:
 			break;
 		}
 		
 	}
-	private void fileType(String[] constraints) {
+	private void fileType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -192,17 +192,17 @@ public class AutomatedTestData {
 		
 	}
 
-	private void dateType(String[] constraints) {
+	private void dateType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void stringType(String[] constraints) {
+	private void stringType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void numericalType(String[] constraints) {
+	private void numericalType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
 		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();	
@@ -216,14 +216,80 @@ public class AutomatedTestData {
 				String[] tt = t.split(",");
 				constraint.put(tt[0], tt[1]);
 			}
-			if(constraintses.contains("fractionDigits")){
-				long fractionDigits = MAX_POINT_DIGIT;
-			}
-			if(constraintses.contains("maxExclusive")){
-				long maxExclusive = Long.MAX_VALUE;
+			switch (paramType) {
+			case "byte":
+			case "int":
+			case "integer":
+			case "long":
+				values = longTypedate(constraint);
+				break;
+			case "negativeInteger":
+			case "nonNegativeInteger":
+			case "nonPositiveInteger":
+			case "positiveInteger":	
+			case "short":
+			case "unsignedLong":
+			case "unsignedInt":
+			case "unsignedShort":
+			case "unsignedByte":
+				break;
+			case "decimal":
+			case "float":
+			case "double":
+				break;
+			default:
+				break;
 			}
 		}
 		
+	}
+
+	private ArrayList<String> longTypedate(ConcurrentHashMap<String, String> constraint) {
+		// TODO Auto-generated method stub
+		ArrayList<String> values = new ArrayList<>();
+		long value = 0L;
+		if(constraint.containsKey("minExclusive")){
+			if(constraint.containsKey("maxExclusive")){
+				value = p(Long.parseLong(constraint.get("minExclusive"))+1L,Long.parseLong(constraint.get("maxExclusive"))-1L);
+			}else if(constraint.containsKey("maxIxclusive")){
+				value = p(Long.parseLong(constraint.get("minExclusive"))+1L,Long.parseLong(constraint.get("maxIxclusive")));
+			}else{
+				value = p(Long.parseLong(constraint.get("minExclusive"))+1L,Long.MAX_VALUE);
+			}
+		}else if(constraint.containsKey("minInclusive")){
+			if(constraint.containsKey("maxExclusive")){
+				value = p(Long.parseLong(constraint.get("minInclusive")),Long.parseLong(constraint.get("maxExclusive"))-1L);
+			}else if(constraint.containsKey("maxIxclusive")){
+				value = p(Long.parseLong(constraint.get("minInclusive")),Long.parseLong(constraint.get("maxIxclusive")));
+			}else{
+				value = p(Long.parseLong(constraint.get("minInclusive")),Long.MAX_VALUE);			
+			}
+		}else if(constraint.containsKey("maxExclusive")){
+			if(constraint.containsKey("minExclusive")){
+				value = p(Long.parseLong(constraint.get("minExclusive"))+1L,Long.parseLong(constraint.get("maxExclusive"))-1L);
+			}else if(constraint.containsKey("minInclusive")){
+				value = p(Long.parseLong(constraint.get("minInclusive")),Long.parseLong(constraint.get("maxExclusive"))-1L);
+			}else{
+				value = p(Long.MIN_VALUE,Long.parseLong(constraint.get("maxExclusive"))-1L);
+			}
+		}else if(constraint.containsKey("maxIxclusive")){
+			if(constraint.containsKey("minExclusive")){
+				value = p(Long.parseLong(constraint.get("minExclusive"))+1L,Long.parseLong(constraint.get("maxIxclusive")));
+			}else if(constraint.containsKey("minInclusive")){
+				value = p(Long.parseLong(constraint.get("minIxclusive")),Long.parseLong(constraint.get("maxIxclusive")));
+			}else{
+				value = p(Long.MIN_VALUE,Long.parseLong(constraint.get("maxIxclusive")));
+			}
+		}else{
+			value = p(Long.MIN_VALUE,Long.MAX_VALUE);
+		}
+		return values;
+		
+	}
+
+	private long p(long l, long m) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	private void generateDataFile(String paramName){		
