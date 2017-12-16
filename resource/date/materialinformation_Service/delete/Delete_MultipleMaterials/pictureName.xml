@@ -1,2 +1,3 @@
-pictureName,String[],Materialinformation.pictureName
-null
+<?xml version="1.0" encoding="UTF-8"?>
+<param name="pictureName" attribute="Materialinformation.pictureName" >
+</param>

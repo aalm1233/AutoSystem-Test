@@ -1,2 +1,3 @@
-CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile
-null
+<?xml version="1.0" encoding="UTF-8"?>
+<param name="CommonsMultipartFile" attribute="Materialinformation.CommonsMultipartFile" >
+</param>

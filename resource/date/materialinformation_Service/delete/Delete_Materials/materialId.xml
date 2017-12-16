@@ -1,2 +1,3 @@
-materialId,String,Materialinformation.materialId
-null
+<?xml version="1.0" encoding="UTF-8"?>
+<param name="materialId" attribute="Materialinformation.materialId" >
+</param>

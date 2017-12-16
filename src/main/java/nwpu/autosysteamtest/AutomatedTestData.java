@@ -122,18 +122,22 @@ public class AutomatedTestData {
 					if (s.startsWith(resourceid + "-" + paramName))
 						paramConstrains = s;
 				}
-				analyticParameterComposition(param,paramName,paramConstrains);
+				analyticParameterComposition(path,param,paramName,paramConstrains);
 				
 			}
 		}
 
 	}
-	private void  analyticParameterComposition(String param,String paramName,String paramConstrains){
-		System.out.println(param);
-		System.out.println(paramConstrains);
+	private void  analyticParameterComposition(String path,String param,String paramName,String paramConstrains){
 		String paramType = param.split(",")[1];
 		String paramAtributte = param.split(",")[2];
-		String[] constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
+		ArrayList<String> values = new ArrayList<>();
+		String[] constraints = null;
+		if(paramConstrains != null&&paramConstrains.contains("#")){
+			constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
+		}else if(paramConstrains != null){
+			constraints = paramConstrains.split("<")[1].split(">");
+		}
 		switch (paramType) {
 		case "byte":
 		case"decimal":
@@ -151,11 +155,11 @@ public class AutomatedTestData {
 		case "unsignedByte":
 		case "float":
 		case "double":
-			numericalType(constraints,paramType);
+			values = numericalType(constraints,paramType);
 			break;
 		case "string":
 		case "token":
-			stringType(constraints,paramType);
+			values = stringType(constraints,paramType);
 			break;
 		case "date":
 		case "dateTime":
@@ -166,43 +170,64 @@ public class AutomatedTestData {
 		case "gYear":	
 		case "gYearMonth":
 		case "time":
-			dateType(constraints,paramType);
+			values = dateType(constraints,paramType);
 			break;
 		case "boolean":
-			boolType();
+			values = boolType();
 			break;
 		case "anyURI":
-			fileType(constraints,paramType);
+			values = fileType(constraints,paramType);
 			break;
 		default:
 			break;
 		}
+		try {
+			
+			PrintWriter out = new PrintWriter(path + paramName + ".xml");
+			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			out.flush();
+			out.println("<param name=\""+paramName+"\" attribute=\""+paramAtributte+"\" >");
+			out.flush();
+			for(String value:values){
+				out.println("	<value>"+value+"</value>");
+				out.flush();
+			}
+			out.println("</param>");
+			out.flush();
+			out.close();
+			System.err.println("!!!");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
 	}
-	private void fileType(String[] constraints, String paramType) {
+	private ArrayList<String> fileType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<String> values = new ArrayList<>();	
+		return values;
 	}
 
-	private void boolType() {
+	private ArrayList<String> boolType() {
 		// TODO Auto-generated method stub
 		ArrayList<String> values = new ArrayList<>();	
 		values.add("true");
 		values.add("false");
-		
+		return values;
 	}
 
-	private void dateType(String[] constraints, String paramType) {
+	private ArrayList<String> dateType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<String> values = new ArrayList<>();	
+		return values;
 	}
 
-	private void stringType(String[] constraints, String paramType) {
+	private ArrayList<String> stringType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<String> values = new ArrayList<>();	
+		return values;
 	}
 
-	private void numericalType(String[] constraints, String paramType) {
+	private ArrayList<String> numericalType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
 		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();	
@@ -241,6 +266,7 @@ public class AutomatedTestData {
 				break;
 			}
 		}
+		return values;
 		
 	}
 
@@ -285,18 +311,25 @@ public class AutomatedTestData {
 		return values;
 		
 	}
-
+	/**
+	 * 生成边界值，以及边界值外，和中间值共5个
+	 * @param l
+	 * @param m
+	 * @return
+	 */
 	private ArrayList<String> p(long l, long m) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> t = new ArrayList<>();
+		t.add(String.valueOf(l));
+		t.add(String.valueOf(l-1));
+		t.add(String.valueOf(m));
+		t.add(String.valueOf(m+1));
+		t.add(String.valueOf((m+l)/2));
+		return t;
 	}
 
 	private void generateDataFile(String paramName){		
-		try {
-			PrintWriter out = new PrintWriter(path + paramName + ".xml");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 }

@@ -1,2 +1,3 @@
-imgAuthor1,String,Materialinformation.imgAuthor1
-UPDATE_MaterialInfo-imgAuthor1<enumeration:sdgsdf>
+<?xml version="1.0" encoding="UTF-8"?>
+<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" >
+</param>
