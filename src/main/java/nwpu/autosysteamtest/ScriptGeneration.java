@@ -274,7 +274,7 @@ public class ScriptGeneration {
 						out.flush();
 					}
 				}
-				if(operation.equals("find")){
+				if("find".equals(operation)){
 					out.println("<response name=\"\" />");
 					out.flush();
 				}

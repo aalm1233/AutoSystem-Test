@@ -190,14 +190,13 @@ public class DocumentPrepcessing {
 						Element resource = (Element) resourceList.item(i);
 						Element request = (Element) resource.getChildNodes().item(0);
 						Element response = (Element) resource.getChildNodes().item(1);
-						Element data = (Element) response.getChildNodes().item(0);
-						NodeList params = request.getElementsByTagName(Param.param.toString());
+						NodeList requestParams = request.getElementsByTagName(Param.param.toString());
 						NodeList dependencys = request.getElementsByTagName(Param.dependency.toString());
 						if(dependencys.getLength()!=0){
 							for (int j = 0; j < dependencys.getLength(); j++) {
 								Element dependency = (Element) dependencys.item(j);
-								String resourcesid = dependency.getAttribute("resourcesid");
-								String resourceid = dependency.getAttribute("resourceid");
+								String resourcesid = dependency.getAttribute(DependencyAttribute.resourcesid.toString());
+								String resourceid = dependency.getAttribute(DependencyAttribute.resourceid.toString());
 								while(!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)){
 									synchronized (this) {
 										try {
@@ -224,28 +223,39 @@ public class DocumentPrepcessing {
 							}	
 						}
 						StringBuffer xInteInterface = new StringBuffer(resource.getAttribute(ResourceAttribute.id.toString())
-								+","+resource.getAttribute(ResourceAttribute.path.toString())+ "|" + data.getAttribute(DataAttribute.type.toString()) + "->");
-						for (int j = 0; j < params.getLength(); j++) {
-							Element param = (Element) params.item(j);
-							xInteInterface.append(param.getAttribute(ParamAttribute.name.toString()) + ","
-									+ param.getAttribute(ParamAttribute.type.toString())+","+param.getAttribute(ParamAttribute.attribute.toString()));
-							NodeList restrictions = param.getElementsByTagName(ParamElement.restriction.toString());
+								+","+resource.getAttribute(ResourceAttribute.path.toString())+ "|" + response.getAttribute(DataAttribute.name.toString())+"-"+response.getAttribute(DataAttribute.dataType.toString()) + "-");
+						
+						NodeList responseParams = response.getElementsByTagName(Param.param.toString());
+						for (int j = 0; j < responseParams.getLength(); j++) {
+							Element responseParam = (Element) responseParams.item(j);
+							xInteInterface.append(responseParam.getAttribute(ParamAttribute.name.toString()) + ","
+									+ responseParam.getAttribute(ParamAttribute.type.toString())+","+responseParam.getAttribute(ParamAttribute.attribute.toString()));
+							if (j < requestParams.getLength() - 1) {
+								xInteInterface.append("_");
+							}
+						}
+						xInteInterface.append("->");
+						for (int j = 0; j < requestParams.getLength(); j++) {
+							Element requestParam = (Element) requestParams.item(j);
+							xInteInterface.append(requestParam.getAttribute(ParamAttribute.name.toString()) + ","
+									+ requestParam.getAttribute(ParamAttribute.type.toString())+","+requestParam.getAttribute(ParamAttribute.attribute.toString())+","+requestParam.getAttribute(ParamAttribute.location.toString()));
+							NodeList restrictions = requestParam.getElementsByTagName(ParamElement.restriction.toString());
 							if (restrictions.getLength() == 1) {
 								Node restriction = restrictions.item(0);
 								ParameterConstrain constrain = new ParameterConstrain(
 										resource.getAttribute(ResourcesAttribute.id.toString()),
-										param.getAttribute(ParamAttribute.name.toString()), restriction);
+										requestParam.getAttribute(ParamAttribute.name.toString()), restriction);
 								String parameterConstrains = constrain.getResult();
-								System.err.println(parameterConstrains);
 								parameterConstrainsSet.add(parameterConstrains);
 							}
-							if (j < params.getLength() - 1) {
+							if (j < requestParams.getLength() - 1) {
 								xInteInterface.append("_");
 							}
 						}
 						Element root = (Element) node.getParentNode();
 						documentPrepcessing.getParameterConstrainsMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 								parameterConstrainsSet);
+						System.out.println(xInteInterface);
 						xInteInterfaceSet.add(xInteInterface.toString());
 					}
 				}
@@ -256,6 +266,10 @@ public class DocumentPrepcessing {
 		}
 }
 
+enum DependencyAttribute {
+	//依赖属性
+	resourcesid,resourceid
+}
 enum ResourcesAttribute {
 	// 每一个实体的属性
 	id, name, base, premise
@@ -273,7 +287,7 @@ enum ResourceAttribute {
 
 enum DataAttribute {
 	// 返回数据类型
-	name, type
+	name, type, dataType
 }
 
 enum Param {
@@ -283,11 +297,13 @@ enum Param {
 
 enum ParamAttribute {
 	// 参数属性
-	name, attribute, type, required
+	name, attribute, type, required, location
 }
 
 enum ParamElement {
 	// param的子节点
-	restriction, element
+	restriction, element,
 }
-
+enum ElementAttribute{
+	name,level,type
+}

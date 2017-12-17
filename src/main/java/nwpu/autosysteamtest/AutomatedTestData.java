@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * 
+ * @author Dengtong
+ *@version 0.41
+ */
 public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
 	private ConcurrentHashMap<String, String> operaterTypesMap;
@@ -119,11 +123,11 @@ public class AutomatedTestData {
 				String paramName = param.split(",")[0];
 				String paramConstrains = null;
 				for (String s : parameterConstrains) {
-					if (s.startsWith(resourceid + "-" + paramName))
+					if (s.startsWith(resourceid + "-" + paramName)){
 						paramConstrains = s;
+					}
 				}
 				analyticParameterComposition(path,param,paramName,paramConstrains);
-				
 			}
 		}
 
@@ -131,75 +135,90 @@ public class AutomatedTestData {
 	private void  analyticParameterComposition(String path,String param,String paramName,String paramConstrains){
 		String paramType = param.split(",")[1];
 		String paramAtributte = param.split(",")[2];
-		ArrayList<String> values = new ArrayList<>();
-		String[] constraints = null;
-		if(paramConstrains != null&&paramConstrains.contains("#")){
-			constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
-		}else if(paramConstrains != null){
-			constraints = paramConstrains.split("<")[1].split(">");
-		}
-		switch (paramType) {
-		case "byte":
-		case"decimal":
-		case "int":
-		case "integer":
-		case "long":
-		case "negativeInteger":
-		case "nonNegativeInteger":
-		case "nonPositiveInteger":
-		case "positiveInteger":	
-		case "short":
-		case "unsignedLong":
-		case "unsignedInt":
-		case "unsignedShort":
-		case "unsignedByte":
-		case "float":
-		case "double":
-			values = numericalType(constraints,paramType);
-			break;
-		case "string":
-		case "token":
-			values = stringType(constraints,paramType);
-			break;
-		case "date":
-		case "dateTime":
-		case "duration":		
-		case "gDay":
-		case "gMonth":
-		case "gMonthDay":
-		case "gYear":	
-		case "gYearMonth":
-		case "time":
-			values = dateType(constraints,paramType);
-			break;
-		case "boolean":
-			values = boolType();
-			break;
-		case "anyURI":
-			values = fileType(constraints,paramType);
-			break;
-		default:
-			break;
-		}
-		try {
-			
-			PrintWriter out = new PrintWriter(path + paramName + ".xml");
-			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			out.flush();
-			out.println("<param name=\""+paramName+"\" attribute=\""+paramAtributte+"\" >");
-			out.flush();
-			for(String value:values){
-				out.println("	<value>"+value+"</value>");
-				out.flush();
+		String paramStatus = param.split(",")[3];
+		if("false".equals(paramStatus)){
+			ArrayList<String> values = new ArrayList<>();
+			String[] constraints = null;
+			if(paramConstrains != null&&paramConstrains.contains("#")){
+				constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
+			}else if(paramConstrains != null){
+				constraints = paramConstrains.split("<")[1].split(">");
 			}
-			out.println("</param>");
-			out.flush();
-			out.close();
-			System.err.println("!!!");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			switch (paramType) {
+			case "byte":
+			case"decimal":
+			case "int":
+			case "integer":
+			case "long":
+			case "negativeInteger":
+			case "nonNegativeInteger":
+			case "nonPositiveInteger":
+			case "positiveInteger":	
+			case "short":
+			case "unsignedLong":
+			case "unsignedInt":
+			case "unsignedShort":
+			case "unsignedByte":
+			case "float":
+			case "double":
+				values = numericalType(constraints,paramType);
+				break;
+			case "string":
+			case "token":
+				values = stringType(constraints,paramType);
+				break;
+			case "date":
+			case "dateTime":
+			case "duration":		
+			case "gDay":
+			case "gMonth":
+			case "gMonthDay":
+			case "gYear":	
+			case "gYearMonth":
+			case "time":
+				values = dateType(constraints,paramType);
+				break;
+			case "boolean":
+				values = boolType();
+				break;
+			case "anyURI":
+				values = fileType(constraints,paramType);
+				break;
+			default:
+				break;
+			}
+			try {
+				
+				PrintWriter out = new PrintWriter(path + paramName + ".xml");
+				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+				out.flush();
+				out.println("<param name=\""+paramName+"\" attribute=\""+paramAtributte+"\" status=\"generate\">");
+				out.flush();
+				for(String value:values){
+					out.println("	<value>"+value+"</value>");
+					out.flush();
+				}
+				out.println("</param>");
+				out.flush();
+				out.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}else if("true".equals(paramStatus)){
+			try {	
+				PrintWriter out = new PrintWriter(path + paramName + ".xml");
+				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+				out.flush();
+				out.println("<param name=\""+paramName+"\" attribute=\""+paramAtributte+"\" status=\"extend\">");
+				out.flush();
+				out.println("</param>");
+				out.flush();
+				out.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
 	private ArrayList<String> fileType(String[] constraints, String paramType) {
 		// TODO Auto-generated method stub
