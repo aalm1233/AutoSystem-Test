@@ -263,6 +263,8 @@ public class AutomatedTestData {
 			switch (paramType) {
 			case "byte":
 			case "int":
+				values = intTypedate(constraint);
+				break;
 			case "integer":
 			case "long":
 				values = longTypedate(constraint);
@@ -287,6 +289,11 @@ public class AutomatedTestData {
 		}
 		return values;
 		
+	}
+
+	private ArrayList<String> intTypedate(ConcurrentHashMap<String, String> constraint) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private ArrayList<String> longTypedate(ConcurrentHashMap<String, String> constraint) {
