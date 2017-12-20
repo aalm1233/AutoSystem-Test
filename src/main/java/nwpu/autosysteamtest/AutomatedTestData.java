@@ -3,7 +3,10 @@ package nwpu.autosysteamtest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -184,7 +187,11 @@ public class AutomatedTestData {
 			case "gYear":
 			case "gYearMonth":
 			case "time":
-				values = DateType(constraints, paramType);
+				try {
+					values = DateType(constraints, paramType);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				break;
 			case "boolean":
 				values = boolType();
@@ -245,7 +252,7 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> DateType(String[] constraints, String paramType) {
+	private ArrayList<String> DateType(String[] constraints, String paramType) throws ParseException {
 
 		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
@@ -276,48 +283,77 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> DateType(ConcurrentHashMap<String, String> constraint) {
+	private ArrayList<String> DateType(ConcurrentHashMap<String, String> constraint) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		ArrayList<String> values = new ArrayList<>();
 		if (constraint.containsKey("minExclusive")) {
 			if (constraint.containsKey("maxExclusive")) {
-				values = ;
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(sdf.parse(constraint.get("minExclusive")));
+				calendar.add(Calendar.DAY_OF_MONTH, -1);
+				Date minDate = calendar.getTime();
+				calendar.setTime(sdf.parse(constraint.get("maxExclusive")));
+				calendar.add(Calendar.DAY_OF_MONTH, +1);
+				Date maxDate = calendar.getTime();
+				values = dateTypeData(minDate,maxDate);
 			} else if (constraint.containsKey("maxIxclusive")) {
-				values = ;
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(sdf.parse(constraint.get("minExclusive")));
+				calendar.add(Calendar.DAY_OF_MONTH, -1);
+				Date minDate = calendar.getTime();
+				Date maxDate = sdf.parse(constraint.get("maxIxclusive"));
+				values = dateTypeData(minDate,maxDate);
 			} else {
-				values = ;
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(sdf.parse(constraint.get("minExclusive")));
+				calendar.add(Calendar.DAY_OF_MONTH, -1);
+				Date minDate = calendar.getTime();
+				values = dateTypeData(minDate,sdf.parse("9999-12-30"));
 			}
 		} else if (constraint.containsKey("minInclusive")) {
 			if (constraint.containsKey("maxExclusive")) {
-				values = ;
+				//values = ;
 			} else if (constraint.containsKey("maxIxclusive")) {
-				values = ;
+				//values = ;
 			} else {
-				values = ;
+				//values = ;
 			}
 		} else if (constraint.containsKey("maxExclusive")) {
 			if (constraint.containsKey("minExclusive")) {
-				values = ;
+				//values = ;
 			} else if (constraint.containsKey("minInclusive")) {
-				values = ;
+				//values = ;
 			} else {
-				values = ;
+				//values = ;
 			}
 		} else if (constraint.containsKey("maxIxclusive")) {
 			if (constraint.containsKey("minExclusive")) {
-				values = ;
+				//values = ;
 			} else if (constraint.containsKey("minInclusive")) {
-				values = ;
+				//values = ;
 			} else {
-				values = ;
+				//values = ;
 			}
 		} else {
-			values = dateTypeData("0000-01-01","9999-12-31");
+			values = dateTypeData(sdf.parse("0001-01-02"),sdf.parse("9999-12-30"));
 		}
 		return values;
 	}
 
-	private ArrayList<String> dateTypeData(String string, String string2) {
-		return null;
+	private ArrayList<String> dateTypeData(Date lowtime, Date hightime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		ArrayList<String> t = new ArrayList<>();
+		t.add(sdf.format(lowtime));
+		calendar.setTime(lowtime);
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+		t.add(sdf.format(calendar.getTime()));
+		t.add(sdf.format(hightime));
+		calendar.setTime(hightime);
+		calendar.add(Calendar.DAY_OF_MONTH, +1);
+		t.add(sdf.format(calendar.getTime()));
+		calendar.clear();
+		return t;
 	}
 
 	private ArrayList<String> stringType(String[] constraints, String paramType) {
