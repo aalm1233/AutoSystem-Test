@@ -263,8 +263,9 @@ public class ScriptGeneration {
 			for(String line :output){
 				String operation = line.split(" ")[0];
 				String step = line.split(" ")[1];
-				String path = step.split("\\|")[0].split(",")[1];//这里还没改
-				out.println("	<step operation=\""+operation+"\" path=\""+path+"\">");
+				String name = step.split("\\|")[0].split(",")[0];
+				String path = step.split("\\|")[0].split(",")[1];
+				out.println("	<step operation=\""+operation+"\" path=\""+path+"\" name=\""+name+"\" >");
 				out.flush();
 				if(line.split("\\|")[1].split("->").length > 1){
 					String params = line.split("\\|")[1].split("->")[1];

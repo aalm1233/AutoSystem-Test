@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script resourcesID="materialinformation_Service" sequence="">
-	<step operation="add" path="addMaterials">
+	<step operation="add" path="addMaterials" name="Material_New" >
 		<param name="imgTitle1" attribute="Materialinformation.imgTitle1" value=""/>
 		<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" value=""/>
 		<param name="imgDetail1" attribute="Materialinformation.imgDetail1" value=""/>
 		<param name="CommonsMultipartFile" attribute="Materialinformation.CommonsMultipartFile" value=""/>
 	</step>
-	<step operation="delete" path="deleteMaterials">
+	<step operation="delete" path="deleteMaterials" name="Delete_Materials" >
 		<param name="materialId" attribute="Materialinformation.materialId" value=""/>
 	</step>
-	<step operation="find" path="displaySellerInfo">
+	<step operation="find" path="displaySellerInfo" name="FIND_SellerInfo" >
 <response name="" />
 	</step>
 </script>
