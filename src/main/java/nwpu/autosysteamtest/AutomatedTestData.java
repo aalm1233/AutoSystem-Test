@@ -12,10 +12,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.primitives.UnsignedInteger;
-import com.google.common.primitives.UnsignedInts;
-import com.google.common.primitives.UnsignedLong;
-import com.google.common.primitives.UnsignedLongs;
+import com.sun.org.apache.bcel.internal.generic.RET;
 
 /**
  * 
@@ -199,6 +196,9 @@ public class AutomatedTestData {
 			case "anyURI":
 				values = fileType(constraints, paramType);
 				break;
+			case "setType":
+				values = setTypeType(constraints, paramType);
+				break;
 			default:
 				break;
 			}
@@ -238,13 +238,17 @@ public class AutomatedTestData {
 
 	}
 
+	private ArrayList<String> setTypeType(String[] constraints, String paramType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private ArrayList<String> fileType(String[] constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
 		return values;
 	}
 
 	private ArrayList<String> boolType() {
-
 		ArrayList<String> values = new ArrayList<>();
 		values.add("true");
 		values.add("false");
@@ -252,7 +256,6 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> DateType(String[] constraints, String paramType) throws ParseException {
-
 		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
 		if (constraintses.contains("enumeration")) {
@@ -575,7 +578,6 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> durationType(ConcurrentHashMap<String, String> constraint) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -721,8 +723,40 @@ public class AutomatedTestData {
 
 	private ArrayList<String> stringType(String[] constraints, String paramType) {
 
+		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
+		if (constraintses.contains("enumeration")) {
+			for (String enumerations : constraints) {
+				values.add(enumerations.split(":")[1]);
+			}
+		} else {
+			ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+			for (String t : constraints) {
+				String[] tt = t.split(",");
+				constraint.put(tt[0], tt[1]);
+			}
+			switch (paramType) {
+			case "string":
+				values = stringType(constraint);
+				break;
+			case "token":
+				values = tokenType(constraint);
+				break;
+			default:
+				break;
+			}
+		}
 		return values;
+	}
+
+	private ArrayList<String> tokenType(ConcurrentHashMap<String, String> constraint) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private ArrayList<String> stringType(ConcurrentHashMap<String, String> constraint) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private ArrayList<String> numericalType(String[] constraints, String paramType) {

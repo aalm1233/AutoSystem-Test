@@ -96,7 +96,6 @@
 			<xs:element name="maxDate" type="xs:date" />
 			<xs:element name="pattern" type="xs:string" />
 			<xs:element name="format" type="xs:string" />
-			<xs:element name="size" type="xs:decimal" />
 			<xs:element name="minSize" type="xs:decimal" />
 			<xs:element name="maxSize" type="xs:decimal" />
 			<xs:element name="whiteSpace" type="xs:string" />
