@@ -4,15 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.sun.org.apache.bcel.internal.generic.RET;
+
+import nwpu.autosysteamtest.data.*;
 
 /**
  * 
@@ -270,599 +268,47 @@ public class AutomatedTestData {
 			}
 			switch (paramType) {
 			case "Date":
-				values = dateType(constraint);
+				DatesData dd = new DatesData(constraint);
+				values = dd.constraintAnalysis();
 				break;
 			case "DateTime":
-				values = dateTimeType(constraint);
+				DateTimeData dtd = new DateTimeData(constraint);
+				values = dtd.constraintAnalysis();
 				break;
 			case "duration":
 				values = durationType(constraint);
 				break;
 			case "gDay":
-				values = gDayType(constraint);
+				GDayData gdd = new GDayData(constraint);
+				values = gdd.constraintAnalysis();
 				break;
 			case "gMonth":
-				values = gMonthType(constraint);
+				GMonthData gmd = new GMonthData(constraint);
+				values = gmd.constraintAnalysis();
 				break;
 			case "gMonthDay":
-				values = gMonthDayType(constraint);
+				GMonthDayData gmdd = new GMonthDayData(constraint);
+				values = gmdd.constraintAnalysis();
 				break;
 			case "gYear":
-				values = gYearType(constraint);
+				GYearData gyd = new GYearData(constraint);
+				values = gyd.constraintAnalysis();
 				break;
 			case "gYearMonth":
-				values = gYearMonthType(constraint);
+				GYearMonthData gymd = new GYearMonthData(constraint);
+				values = gymd.constraintAnalysis();
 				break;
 			case "time":
-				values = timeType(constraint);
+				TimeData td = new TimeData(constraint);
+				values = td.constraintAnalysis();
 				break;
 			}
 		}
 		return values;
-	}
-
-	private ArrayList<String> timeType(ConcurrentHashMap<String, String> constraint) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = timeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = timeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				values = timeData(minDate,sdf.parse("23:59:59"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = timeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = timeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = timeData(minDate,sdf.parse("23:59:59"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.SECOND, +1);
-			Date maxDate = calendar.getTime();
-			values = timeData(sdf.parse("00:00:01"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = timeData(sdf.parse("00:00:01"),maxDate);
-		} else {
-			values = timeData(sdf.parse("00::00:01"),sdf.parse("23:59:59"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> timeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.SECOND, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.SECOND, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> gYearMonthType(ConcurrentHashMap<String, String> constraint) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gYearMonthTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = gYearMonthTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				values = gYearMonthTypeData(minDate,sdf.parse("9999-11"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gYearMonthTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = gYearMonthTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = gYearMonthTypeData(minDate,sdf.parse("9999-11"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.MONTH, +1);
-			Date maxDate = calendar.getTime();
-			values = gYearMonthTypeData(sdf.parse("0001-02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = gYearMonthTypeData(sdf.parse("0001-02"),maxDate);
-		} else {
-			values = gYearMonthTypeData(sdf.parse("0001-02"),sdf.parse("9999-11"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> gYearMonthTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.MONTH, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.MONTH, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> gYearType(ConcurrentHashMap<String, String> constraint) throws ParseException{
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.YEAR, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.YEAR, +1);
-				Date maxDate = calendar.getTime();
-				values = gYearTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.YEAR, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = gYearTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.YEAR, -1);
-				Date minDate = calendar.getTime();
-				values = gYearTypeData(minDate,sdf.parse("9998"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.YEAR, +1);
-				Date maxDate = calendar.getTime();
-				values = gYearTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = gYearTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = gYearTypeData(minDate,sdf.parse("9998"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.YEAR, +1);
-			Date maxDate = calendar.getTime();
-			values = gYearTypeData(sdf.parse("0002"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = gYearTypeData(sdf.parse("0002"),maxDate);
-		} else {
-			values = gYearTypeData(sdf.parse("0002"),sdf.parse("9998"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> gYearTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.YEAR, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.YEAR, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> gMonthDayType(ConcurrentHashMap<String, String> constraint) throws ParseException{
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gMonthDayTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = gMonthDayTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				values = gMonthDayTypeData(minDate,sdf.parse("12-30"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gMonthDayTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = gMonthDayTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = gMonthDayTypeData(minDate,sdf.parse("12-30"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.DAY_OF_MONTH, +1);
-			Date maxDate = calendar.getTime();
-			values = gMonthDayTypeData(sdf.parse("01-02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = gMonthDayTypeData(sdf.parse("01-02"),maxDate);
-		} else {
-			values = gMonthDayTypeData(sdf.parse("01-02"),sdf.parse("12-30"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> gMonthDayTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.DAY_OF_MONTH, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> gMonthType(ConcurrentHashMap<String, String> constraint) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gMonthTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = gMonthTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.MONTH, -1);
-				Date minDate = calendar.getTime();
-				values = gMonthTypeData(minDate,sdf.parse("11"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gMonthTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = gMonthTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = gMonthTypeData(minDate,sdf.parse("11"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.MONTH, +1);
-			Date maxDate = calendar.getTime();
-			values = gMonthTypeData(sdf.parse("02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = gMonthTypeData(sdf.parse("02"),maxDate);
-		} else {
-			values = gMonthTypeData(sdf.parse("02"),sdf.parse("11"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> gMonthTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.MONTH, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.MONTH, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> gDayType(ConcurrentHashMap<String, String> constraint) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gDayTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = gDayTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				values = gDayTypeData(minDate,sdf.parse("30"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = gDayTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = gDayTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = gDayTypeData(minDate,sdf.parse("30"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.DAY_OF_MONTH, +1);
-			Date maxDate = calendar.getTime();
-			values = gDayTypeData(sdf.parse("02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = gDayTypeData(sdf.parse("02"),maxDate);
-		} else {
-			values = gDayTypeData(sdf.parse("02"),sdf.parse("30"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> gDayTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.DAY_OF_MONTH, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
 	}
 
 	private ArrayList<String> durationType(ConcurrentHashMap<String, String> constraint) {
 		return null;
-	}
-
-	private ArrayList<String> dateTimeType(ConcurrentHashMap<String, String> constraint)  throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = dateTimeTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = dateTimeTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				values = dateTimeTypeData(minDate,sdf.parse("9999-12-31T23:59:58"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = dateTimeTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = dateTimeTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = dateTimeTypeData(minDate,sdf.parse("9999-12-31T23:59:58"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.SECOND, +1);
-			Date maxDate = calendar.getTime();
-			values = dateTimeTypeData(sdf.parse("0001-01-01T00:00:02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = dateTimeTypeData(sdf.parse("0001-01-01T00:00:02"),maxDate);
-		} else {
-			values = dateTimeTypeData(sdf.parse("0001-01-01T00:00:02"),sdf.parse("9999-12-31T23:59:58"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> dateTimeTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.SECOND, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.SECOND, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
-	}
-
-	private ArrayList<String> dateType(ConcurrentHashMap<String, String> constraint) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = dateTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = dateTypeData(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, -1);
-				Date minDate = calendar.getTime();
-				values = dateTypeData(minDate,sdf.parse("9999-12-30"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.DAY_OF_MONTH, +1);
-				Date maxDate = calendar.getTime();
-				values = dateTypeData(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = dateTypeData(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = dateTypeData(minDate,sdf.parse("9999-12-30"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.DAY_OF_MONTH, +1);
-			Date maxDate = calendar.getTime();
-			values = dateTypeData(sdf.parse("0001-01-02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = dateTypeData(sdf.parse("0001-01-02"),maxDate);
-		} else {
-			values = dateTypeData(sdf.parse("0001-01-02"),sdf.parse("9999-12-30"));
-		}
-		return values;
-	}
-
-	private ArrayList<String> dateTypeData(Date lowtime, Date hightime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		ArrayList<String> t = new ArrayList<>();
-		t.add(sdf.format(lowtime));
-		calendar.setTime(lowtime);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		t.add(sdf.format(calendar.getTime()));
-		t.add(sdf.format(hightime));
-		calendar.setTime(hightime);
-		calendar.add(Calendar.DAY_OF_MONTH, +1);
-		t.add(sdf.format(calendar.getTime()));
-		calendar.clear();
-		return t;
 	}
 
 	private ArrayList<String> stringType(String[] constraints, String paramType) {
@@ -904,7 +350,6 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> numericalType(String[] constraints, String paramType) {
-
 		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
 		if (constraintses.contains("enumeration")) {
@@ -919,29 +364,37 @@ public class AutomatedTestData {
 			}
 			switch (paramType) {
 			case "byte":
-				values = byteType(constraint);
+				ByteData bd = new ByteData(constraint);
+				values = bd.constraintAnalysis();
 				break;
 			case "int":
 			case "integer":
-				values = intType(constraint);
+				IntData id = new IntData(constraint);
+				values = id.constraintAnalysis();
 				break;
 			case "long":
-				values = longType(constraint);
+				LongData ld = new LongData(constraint);
+				values = ld.constraintAnalysis();
 				break;
 			case "negativeInteger":
-				values = negativeIntType(constraint);
+				NegativeIntData nid = new NegativeIntData(constraint);
+				values = nid.constraintAnalysis();
 				break;
 			case "nonNegativeInteger":
-				values = nonNegativeIntType(constraint);
+				NonNegativeIntData nnid = new NonNegativeIntData(constraint);
+				values = nnid.constraintAnalysis();
 				break;
 			case "nonPositiveInteger":
-				values = nonPositivIntType(constraint);
+				NonPositiveIntegerData nptd = new NonPositiveIntegerData(constraint);
+				values = nptd.constraintAnalysis();
 				break;
 			case "positiveInteger":
-				values = PositivIntType(constraint);
+				PositiveIntegerData pid = new PositiveIntegerData(constraint);
+				values = pid.constraintAnalysis();
 				break;
 			case "short":
-				values = shortType(constraint);
+				ShortData sd = new ShortData(constraint);
+				values = sd.constraintAnalysis();
 				break;
 			case "unsignedLong":
 				values = unsignedLongType(constraint);
@@ -992,317 +445,6 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> shortType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1, Short.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
-						Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
-						Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = shortTypeData(Short.parseShort(constraint.get(Constraints.minInclusive.toString())), Short.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			values = shortTypeData(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			values = shortTypeData(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = shortTypeData(Short.MIN_VALUE + 1, Short.MAX_VALUE - 1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> shortTypeData(int minValue, int maxValue) {
-		ArrayList<String> t = new ArrayList<>();
-		t.add(String.valueOf(minValue));
-		t.add(String.valueOf(minValue - 1));
-		t.add(String.valueOf(maxValue));
-		t.add(String.valueOf(maxValue + 1));
-		t.add(String.valueOf((minValue + maxValue) / 2));
-		return t;
-	}
-
-	private ArrayList<String> PositivIntType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1, Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())), Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(1, Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(1, Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = intTypeData(1, Integer.MAX_VALUE - 1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> nonPositivIntType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1, 0);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())), 0);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.MIN_VALUE + 1, 
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.MIN_VALUE + 1, 
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = intTypeData(Integer.MIN_VALUE + 1, 0);
-		}
-		return values;
-	}
-
-	private ArrayList<String> nonNegativeIntType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1, 
-						Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())), 
-						Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(0, Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(0, Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = intTypeData(0, Integer.MAX_VALUE - 1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> negativeIntType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1, -1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())), -1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.MIN_VALUE + 1, 
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.MIN_VALUE + 1, 
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = intTypeData(Integer.MIN_VALUE + 1, -1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> byteType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Byte.parseByte(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Byte.parseByte(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minExclusive.toString())) + 1, Byte.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minInclusive.toString())),
-						Byte.parseByte(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minInclusive.toString())),
-						Byte.parseByte(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = byteTypeData(Byte.parseByte(constraint.get(Constraints.minInclusive.toString())), Byte.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			values = byteTypeData(Byte.MIN_VALUE + 1, Byte.parseByte(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			values = byteTypeData(Byte.MIN_VALUE + 1, Byte.parseByte(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = byteTypeData(Byte.MIN_VALUE + 1, Byte.MAX_VALUE - 1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> byteTypeData(int minValue, int maxValue) {
-
-		ArrayList<String> t = new ArrayList<>();
-		t.add(String.valueOf(minValue));
-		t.add(String.valueOf(minValue - 1));
-		t.add(String.valueOf(maxValue));
-		t.add(String.valueOf(maxValue + 1));
-		t.add(String.valueOf((minValue + maxValue) / 2));
-		return t;
-	}
-
-	private ArrayList<String> intType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minExclusive.toString())) + 1, Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())),
-						Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = intTypeData(Integer.parseInt(constraint.get(Constraints.minInclusive.toString())), Integer.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			values = intTypeData(Integer.MIN_VALUE + 1, Integer.parseInt(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			values = intTypeData(Integer.MIN_VALUE + 1, Integer.parseInt(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = intTypeData(Integer.MIN_VALUE + 1, Integer.MAX_VALUE - 1);
-		}
-		return values;
-	}
-
-	private ArrayList<String> intTypeData(int minValue, int maxValue) {
-
-		ArrayList<String> t = new ArrayList<>();
-		t.add(String.valueOf(minValue));
-		t.add(String.valueOf(minValue - 1));
-		t.add(String.valueOf(maxValue));
-		t.add(String.valueOf(maxValue + 1));
-		t.add(String.valueOf((minValue + maxValue) / 2));
-		return t;
-	}
-
-	private ArrayList<String> longType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minExclusive.toString())) + 1L,
-						Long.parseLong(constraint.get(Constraints.maxExclusive.toString())) - 1L);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minExclusive.toString())) + 1L,
-						Long.parseLong(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minExclusive.toString())) + 1L, Long.MAX_VALUE - 1L);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minInclusive.toString())),
-						Long.parseLong(constraint.get(Constraints.maxExclusive.toString())) - 1L);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minInclusive.toString())),
-						Long.parseLong(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = longTypeData(Long.parseLong(constraint.get(Constraints.minInclusive.toString())), Long.MAX_VALUE - 1L);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			values = longTypeData(Long.MIN_VALUE + 1L, Long.parseLong(constraint.get(Constraints.maxExclusive.toString())) - 1L);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			values = longTypeData(Long.MIN_VALUE + 1L, Long.parseLong(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
-			values = longTypeData(Long.MIN_VALUE + 1L, Long.MAX_VALUE - 1L);
-		}
-		return values;
-	}
-
-	/**
-	 * 生成边界值，以及边界值外，和中间值共5个
-	 * 
-	 * @param l
-	 * @param m
-	 * @return
-	 */
-	private ArrayList<String> longTypeData(long l, long m) {
-
-		ArrayList<String> t = new ArrayList<>();
-		t.add(String.valueOf(l));
-		t.add(String.valueOf(l - 1));
-		t.add(String.valueOf(m));
-		t.add(String.valueOf(m + 1));
-		t.add(String.valueOf((m + l) / 2));
-		return t;
-	}
 
 }
 enum Constraints{
