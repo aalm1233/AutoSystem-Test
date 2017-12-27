@@ -7,38 +7,45 @@ public class ShortData extends NumericalData {
 
 	public ShortData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);
-		// TODO Auto-generated constructor stub
+	}
+
+	public ShortData() {
+		super();
 	}
 
 	@Override
 	public ArrayList<String> constraintAnalysis() {
 		ArrayList<String> values = new ArrayList<>();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
-						Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1, Short.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
-						Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
-						Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-			} else {
-				values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())), Short.MAX_VALUE - 1);
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			values = dataGeneration(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			values = dataGeneration(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
-		} else {
+		if(constraint == null){
 			values = dataGeneration(Short.MIN_VALUE + 1, Short.MAX_VALUE - 1);
+		}else{
+			if (constraint.containsKey(Constraints.minExclusive.toString())) {
+				if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
+							Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
+				} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1,
+							Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
+				} else {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minExclusive.toString())) + 1, Short.MAX_VALUE - 1);
+				}
+			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
+				if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
+							Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
+				} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())),
+							Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
+				} else {
+					values = dataGeneration(Short.parseShort(constraint.get(Constraints.minInclusive.toString())), Short.MAX_VALUE - 1);
+				}
+			} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+				values = dataGeneration(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxExclusive.toString())) - 1);
+			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
+				values = dataGeneration(Short.MIN_VALUE + 1, Short.parseShort(constraint.get(Constraints.maxInclusive.toString())));
+			} else {
+				values = dataGeneration(Short.MIN_VALUE + 1, Short.MAX_VALUE - 1);
+			}
 		}
 		return values;
 	}

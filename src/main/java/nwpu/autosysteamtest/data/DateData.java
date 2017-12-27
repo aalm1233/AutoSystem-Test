@@ -9,7 +9,9 @@ public abstract class DateData extends Data{
 
 	public DateData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);
-		// TODO Auto-generated constructor stub
+	}
+	public DateData() {
+		super();
 	}
 	abstract ArrayList<String> dataGeneration(Date lowtime, Date hightime);
 }

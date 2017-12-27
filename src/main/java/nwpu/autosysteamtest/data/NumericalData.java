@@ -9,5 +9,9 @@ public abstract class NumericalData extends Data{
 		super(constraint);
 		// TODO Auto-generated constructor stub
 	}
+	public NumericalData() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	abstract ArrayList<String> dataGeneration(long minValue, long maxValue);
 }

@@ -9,6 +9,8 @@ public abstract class Data {
 	public Data(ConcurrentHashMap<String, String> constraint){
 		this.constraint = constraint;
 	}
+	public Data(){
+	}
 	abstract public ArrayList<String> constraintAnalysis() throws ParseException;
 	
 }

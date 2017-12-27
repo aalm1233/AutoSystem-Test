@@ -11,7 +11,10 @@ public class DateTimeData extends DateData{
 
 	public DateTimeData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);
-		// TODO Auto-generated constructor stub
+	}
+
+	public DateTimeData() {
+		super();
 	}
 
 	@Override
@@ -35,53 +38,57 @@ public class DateTimeData extends DateData{
 	public ArrayList<String> constraintAnalysis() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss");
 		ArrayList<String> values = new ArrayList<>();
-		Calendar calendar = Calendar.getInstance();
-		if (constraint.containsKey(Constraints.minExclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = dataGeneration(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
-				values = dataGeneration(minDate,maxDate);
-			} else {
-				calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
-				calendar.add(Calendar.SECOND, -1);
-				Date minDate = calendar.getTime();
-				values = dataGeneration(minDate,sdf.parse("9999-12-31T23:59:58"));
-			}
-		} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
-			if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-				calendar.add(Calendar.SECOND, +1);
-				Date maxDate = calendar.getTime();
-				values = dataGeneration(minDate,maxDate);
-			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-				values = dataGeneration(minDate,maxDate);
-			} else {
-				Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
-				values = dataGeneration(minDate,sdf.parse("9999-12-31T23:59:58"));
-			}
-		} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
-			calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
-			calendar.add(Calendar.SECOND, +1);
-			Date maxDate = calendar.getTime();
-			values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),maxDate);
-		} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
-			Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
-			values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),maxDate);
-		} else {
+		if(constraint == null){
 			values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),sdf.parse("9999-12-31T23:59:58"));
+		}else{
+			Calendar calendar = Calendar.getInstance();
+			if (constraint.containsKey(Constraints.minExclusive.toString())) {
+				if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+					calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
+					calendar.add(Calendar.SECOND, -1);
+					Date minDate = calendar.getTime();
+					calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
+					calendar.add(Calendar.SECOND, +1);
+					Date maxDate = calendar.getTime();
+					values = dataGeneration(minDate,maxDate);
+				} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
+					calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
+					calendar.add(Calendar.SECOND, -1);
+					Date minDate = calendar.getTime();
+					Date maxDate = sdf.parse(constraint.get(Constraints.minInclusive.toString()));
+					values = dataGeneration(minDate,maxDate);
+				} else {
+					calendar.setTime(sdf.parse(constraint.get(Constraints.minExclusive.toString())));
+					calendar.add(Calendar.SECOND, -1);
+					Date minDate = calendar.getTime();
+					values = dataGeneration(minDate,sdf.parse("9999-12-31T23:59:58"));
+				}
+			} else if (constraint.containsKey(Constraints.minInclusive.toString())) {
+				if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+					Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
+					calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
+					calendar.add(Calendar.SECOND, +1);
+					Date maxDate = calendar.getTime();
+					values = dataGeneration(minDate,maxDate);
+				} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
+					Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
+					Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
+					values = dataGeneration(minDate,maxDate);
+				} else {
+					Date minDate = sdf.parse(constraint.get(Constraints.minExclusive.toString()));
+					values = dataGeneration(minDate,sdf.parse("9999-12-31T23:59:58"));
+				}
+			} else if (constraint.containsKey(Constraints.maxExclusive.toString())) {
+				calendar.setTime(sdf.parse(constraint.get(Constraints.maxExclusive.toString())));
+				calendar.add(Calendar.SECOND, +1);
+				Date maxDate = calendar.getTime();
+				values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),maxDate);
+			} else if (constraint.containsKey(Constraints.maxInclusive.toString())) {
+				Date maxDate = sdf.parse(constraint.get(Constraints.maxExclusive.toString()));
+				values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),maxDate);
+			} else {
+				values = dataGeneration(sdf.parse("0001-01-01T00:00:02"),sdf.parse("9999-12-31T23:59:58"));
+			}
 		}
 		return values;
 	}

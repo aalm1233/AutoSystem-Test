@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 import nwpu.autosysteamtest.data.*;
 
 /**
@@ -28,8 +27,6 @@ public class AutomatedTestData {
 	protected String resourcesid;
 	protected String resourceid;
 	protected String path;
-	static final long MAX_POINT_DIGIT = 15;// 小数点后最大位数
-	static final long MAX_TOTAL_DIGIT = 15;// 小数最大位数
 
 	public AutomatedTestData(String path) throws InterruptedException {
 		this.path = path;
@@ -237,7 +234,6 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> setTypeType(String[] constraints, String paramType) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -254,52 +250,93 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> DateType(String[] constraints, String paramType) throws ParseException {
-		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
-		if (constraintses.contains("enumeration")) {
-			for (String enumerations : constraints) {
-				values.add(enumerations.split(":")[1]);
+		if (constraints != null) {
+			String constraintses = constraints.toString();
+			if (constraintses.contains("enumeration")) {
+				for (String enumerations : constraints) {
+					values.add(enumerations.split(":")[1]);
+				}
+			} else {
+				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+				for (String t : constraints) {
+					String[] tt = t.split(",");
+					constraint.put(tt[0], tt[1]);
+				}
+				switch (paramType) {
+				case "Date":
+					DatesData dd = new DatesData(constraint);
+					values = dd.constraintAnalysis();
+					break;
+				case "DateTime":
+					DateTimeData dtd = new DateTimeData(constraint);
+					values = dtd.constraintAnalysis();
+					break;
+				case "duration":
+					values = durationType(constraint);
+					break;
+				case "gDay":
+					GDayData gdd = new GDayData(constraint);
+					values = gdd.constraintAnalysis();
+					break;
+				case "gMonth":
+					GMonthData gmd = new GMonthData(constraint);
+					values = gmd.constraintAnalysis();
+					break;
+				case "gMonthDay":
+					GMonthDayData gmdd = new GMonthDayData(constraint);
+					values = gmdd.constraintAnalysis();
+					break;
+				case "gYear":
+					GYearData gyd = new GYearData(constraint);
+					values = gyd.constraintAnalysis();
+					break;
+				case "gYearMonth":
+					GYearMonthData gymd = new GYearMonthData(constraint);
+					values = gymd.constraintAnalysis();
+					break;
+				case "time":
+					TimeData td = new TimeData(constraint);
+					values = td.constraintAnalysis();
+					break;
+				}
 			}
-		} else {
-			ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
-			for (String t : constraints) {
-				String[] tt = t.split(",");
-				constraint.put(tt[0], tt[1]);
-			}
+
+		}else{
 			switch (paramType) {
 			case "Date":
-				DatesData dd = new DatesData(constraint);
+				DatesData dd = new DatesData();
 				values = dd.constraintAnalysis();
 				break;
 			case "DateTime":
-				DateTimeData dtd = new DateTimeData(constraint);
+				DateTimeData dtd = new DateTimeData();
 				values = dtd.constraintAnalysis();
 				break;
 			case "duration":
-				values = durationType(constraint);
+				//values = durationType();
 				break;
 			case "gDay":
-				GDayData gdd = new GDayData(constraint);
+				GDayData gdd = new GDayData();
 				values = gdd.constraintAnalysis();
 				break;
 			case "gMonth":
-				GMonthData gmd = new GMonthData(constraint);
+				GMonthData gmd = new GMonthData();
 				values = gmd.constraintAnalysis();
 				break;
 			case "gMonthDay":
-				GMonthDayData gmdd = new GMonthDayData(constraint);
+				GMonthDayData gmdd = new GMonthDayData();
 				values = gmdd.constraintAnalysis();
 				break;
 			case "gYear":
-				GYearData gyd = new GYearData(constraint);
+				GYearData gyd = new GYearData();
 				values = gyd.constraintAnalysis();
 				break;
 			case "gYearMonth":
-				GYearMonthData gymd = new GYearMonthData(constraint);
+				GYearMonthData gymd = new GYearMonthData();
 				values = gymd.constraintAnalysis();
 				break;
 			case "time":
-				TimeData td = new TimeData(constraint);
+				TimeData td = new TimeData();
 				values = td.constraintAnalysis();
 				break;
 			}
@@ -312,25 +349,37 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> stringType(String[] constraints, String paramType) {
-
-		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
-		if (constraintses.contains("enumeration")) {
-			for (String enumerations : constraints) {
-				values.add(enumerations.split(":")[1]);
+		if (constraints != null) {
+			String constraintses = constraints.toString();
+			if (constraintses.contains("enumeration")) {
+				for (String enumerations : constraints) {
+					values.add(enumerations.split(":")[1]);
+				}
+			} else {
+				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+				for (String t : constraints) {
+					String[] tt = t.split(",");
+					constraint.put(tt[0], tt[1]);
+				}
+				switch (paramType) {
+				case "string":
+					values = stringType(constraint);
+					break;
+				case "token":
+					values = tokenType(constraint);
+					break;
+				default:
+					break;
+				}
 			}
 		} else {
-			ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
-			for (String t : constraints) {
-				String[] tt = t.split(",");
-				constraint.put(tt[0], tt[1]);
-			}
 			switch (paramType) {
 			case "string":
-				values = stringType(constraint);
+				// values = stringType();
 				break;
 			case "token":
-				values = tokenType(constraint);
+				// values = tokenType();
 				break;
 			default:
 				break;
@@ -340,73 +389,132 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> tokenType(ConcurrentHashMap<String, String> constraint) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	private ArrayList<String> stringType(ConcurrentHashMap<String, String> constraint) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	private ArrayList<String> numericalType(String[] constraints, String paramType) {
-		String constraintses = constraints.toString();
 		ArrayList<String> values = new ArrayList<>();
-		if (constraintses.contains("enumeration")) {
-			for (String enumerations : constraints) {
-				values.add(enumerations.split(":")[1]);
+		if (constraints != null) {
+			String constraintses = constraints.toString();
+			if (constraintses.contains("enumeration")) {
+				for (String enumerations : constraints) {
+					values.add(enumerations.split(":")[1]);
+				}
+			} else {
+				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+				for (String t : constraints) {
+					String[] tt = t.split(",");
+					constraint.put(tt[0], tt[1]);
+				}
+				switch (paramType) {
+				case "byte":
+					ByteData bd = new ByteData(constraint);
+					values = bd.constraintAnalysis();
+					break;
+				case "int":
+				case "integer":
+					IntData id = new IntData(constraint);
+					values = id.constraintAnalysis();
+					break;
+				case "long":
+					LongData ld = new LongData(constraint);
+					values = ld.constraintAnalysis();
+					break;
+				case "negativeInteger":
+					NegativeIntData nid = new NegativeIntData(constraint);
+					values = nid.constraintAnalysis();
+					break;
+				case "nonNegativeInteger":
+					NonNegativeIntData nnid = new NonNegativeIntData(constraint);
+					values = nnid.constraintAnalysis();
+					break;
+				case "nonPositiveInteger":
+					NonPositiveIntegerData nptd = new NonPositiveIntegerData(constraint);
+					values = nptd.constraintAnalysis();
+					break;
+				case "positiveInteger":
+					PositiveIntegerData pid = new PositiveIntegerData(constraint);
+					values = pid.constraintAnalysis();
+					break;
+				case "short":
+					ShortData sd = new ShortData(constraint);
+					values = sd.constraintAnalysis();
+					break;
+				case "unsignedLong":
+					values = unsignedLongType(constraint);
+					break;
+				case "unsignedInt":
+					values = unsignedIntType(constraint);
+					break;
+				case "unsignedShort":
+					values = unsignedShortType(constraint);
+					break;
+				case "unsignedByte":
+					values = unsignedByteType(constraint);
+					break;
+				case "decimal":
+					//
+					break;
+				case "float":
+					//
+					break;
+				case "double":
+					//
+					break;
+				default:
+					break;
+				}
 			}
 		} else {
-			ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
-			for (String t : constraints) {
-				String[] tt = t.split(",");
-				constraint.put(tt[0], tt[1]);
-			}
 			switch (paramType) {
 			case "byte":
-				ByteData bd = new ByteData(constraint);
+				ByteData bd = new ByteData();
 				values = bd.constraintAnalysis();
 				break;
 			case "int":
 			case "integer":
-				IntData id = new IntData(constraint);
+				IntData id = new IntData();
 				values = id.constraintAnalysis();
 				break;
 			case "long":
-				LongData ld = new LongData(constraint);
+				LongData ld = new LongData();
 				values = ld.constraintAnalysis();
 				break;
 			case "negativeInteger":
-				NegativeIntData nid = new NegativeIntData(constraint);
+				NegativeIntData nid = new NegativeIntData();
 				values = nid.constraintAnalysis();
 				break;
 			case "nonNegativeInteger":
-				NonNegativeIntData nnid = new NonNegativeIntData(constraint);
+				NonNegativeIntData nnid = new NonNegativeIntData();
 				values = nnid.constraintAnalysis();
 				break;
 			case "nonPositiveInteger":
-				NonPositiveIntegerData nptd = new NonPositiveIntegerData(constraint);
+				NonPositiveIntegerData nptd = new NonPositiveIntegerData();
 				values = nptd.constraintAnalysis();
 				break;
 			case "positiveInteger":
-				PositiveIntegerData pid = new PositiveIntegerData(constraint);
+				PositiveIntegerData pid = new PositiveIntegerData();
 				values = pid.constraintAnalysis();
 				break;
 			case "short":
-				ShortData sd = new ShortData(constraint);
+				ShortData sd = new ShortData();
 				values = sd.constraintAnalysis();
 				break;
 			case "unsignedLong":
-				values = unsignedLongType(constraint);
+				// values = unsignedLongType();
 				break;
 			case "unsignedInt":
-				values = unsignedIntType(constraint);
+				// values = unsignedIntType();
 				break;
 			case "unsignedShort":
-				values = unsignedShortType(constraint);
+				// values = unsignedShortType();
 				break;
 			case "unsignedByte":
-				values = unsignedByteType(constraint);
+				// values = unsignedByteType();
 				break;
 			case "decimal":
 				//
@@ -422,21 +530,17 @@ public class AutomatedTestData {
 			}
 		}
 		return values;
-
 	}
 
 	private ArrayList<String> unsignedByteType(ConcurrentHashMap<String, String> constraint) {
-
 		return null;
 	}
 
 	private ArrayList<String> unsignedShortType(ConcurrentHashMap<String, String> constraint) {
-
 		return null;
 	}
 
 	private ArrayList<String> unsignedIntType(ConcurrentHashMap<String, String> constraint) {
-
 		return null;
 	}
 
@@ -445,23 +549,8 @@ public class AutomatedTestData {
 		return values;
 	}
 
-
 }
-enum Constraints{
-	enumeration
-	,totalDigits
-	,fractionDigit
-	,minExclusive
-	,maxExclusive
-	,minInclusive
-	,maxInclusive
-	,length
-	,minLength
-	,maxLength
-	,pattern
-	,format
-	,size
-	,minSize
-	,maxSize
-	,whiteSpace
+
+enum Constraints {
+	enumeration, totalDigits, fractionDigit, minExclusive, maxExclusive, minInclusive, maxInclusive, length, minLength, maxLength, pattern, format, size, minSize, maxSize, whiteSpace
 }
