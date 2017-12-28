@@ -78,11 +78,7 @@ public class AutomatedTestData {
 		xAutomated("add", this.addInterfaceSetMap);
 		xAutomated("upData", this.UpdateInterfaceSetMap);
 		xAutomated("delete", this.deleteInterfaceSetMap);
-		// findDataAutomated();
-	}
-
-	private void findDataAutomated() {
-
+		xAutomated("find", this.findInterfaceSetMap);
 	}
 
 	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap)

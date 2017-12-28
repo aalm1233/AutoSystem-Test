@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<script resourcesID="materialinformation_Service" sequence="">
+<script resourcesID="materialinformation_Service" sequence="" completed="false" >
 	<step operation="add" path="addMaterials" name="Material_New" >
 		<param name="imgTitle1" attribute="Materialinformation.imgTitle1" value=""/>
 		<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" value=""/>

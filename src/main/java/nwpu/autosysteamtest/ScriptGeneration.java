@@ -258,7 +258,7 @@ public class ScriptGeneration {
 			PrintWriter out = new PrintWriter(path + "outputxml\\"+filename+"\\"+xnum+"\\"+filenum+".xml");
 			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			out.flush();
-			out.println("<script resourcesID=\""+resourcesId+"\""+" sequence=\"\">");
+			out.println("<script resourcesID=\""+resourcesId+"\""+" sequence=\"\" completed=\"false\" >");
 			out.flush();
 			for(String line :output){
 				String operation = line.split(" ")[0];
