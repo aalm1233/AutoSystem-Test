@@ -3,6 +3,8 @@ package nwpu.autosysteamtest.data;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import nwpu.autosysteamtest.tools.PatternAnalysis;
+
 
 public class IntData extends NumericalData{
 
@@ -53,11 +55,14 @@ public class IntData extends NumericalData{
 	@Override
 	ArrayList<String> dataGeneration(long minValue, long maxValue) {
 		ArrayList<String> t = new ArrayList<>();
+		PatternAnalysis pa = new PatternAnalysis("-{0,1}[0-9]{8}");
+		t = pa.getValues();
 		t.add(String.valueOf(minValue));
 		t.add(String.valueOf(minValue - 1));
 		t.add(String.valueOf(maxValue));
 		t.add(String.valueOf(maxValue + 1));
 		t.add(String.valueOf((minValue + maxValue) / 2));
+		System.out.println(t.toString());
 		return t;
 	}
 

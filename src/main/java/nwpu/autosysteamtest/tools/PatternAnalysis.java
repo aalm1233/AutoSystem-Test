@@ -77,6 +77,15 @@ public class PatternAnalysis {
         values.add(result);
         return values;
 	}
+	public ArrayList<String> getValues(int 	minLength,int maxLength){
+		ArrayList<String> values = new ArrayList<>();
+		String regex = patten+"{"+minLength+","+maxLength+"}";
+        Xeger generator = new Xeger(regex);
+        String result = generator.generate();
+        assert result.matches(regex);
+        values.add(result);
+        return values;
+	}
 	public static void main(String[] args){
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Dengtong\\Desktop\\Travledate.txt"));
