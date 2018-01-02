@@ -22,7 +22,14 @@ public class PatternAnalysis {
 			char t = patten.charAt(i);
 			if(t == '^'){
 				continue frist;
-			}if(t == '\\'){
+			}if(t == '['){
+				stack.push(t);
+			}if(t == ']'){
+				if(!stack.isEmpty()&&stack.peek() == '['){
+					stack.pop();
+				}
+			}
+			if(t == '\\'){
 				stack.push(t);
 				continue frist;
 			}if(!stack.isEmpty()&&stack.peek() == '\\'){
@@ -48,10 +55,23 @@ public class PatternAnalysis {
 					break gg;
 				}
 				continue frist;
-			}if(t == '$'){
-				continue;
+			}else {
+				if(t == '*'){
+					sb.append("{0,}");
+				}else if(t == '?'){
+					sb.append("{0,1}");
+				}else if(t == '+'){
+					if(!stack.isEmpty()&&stack.peek() == '['){
+						sb.append(t);
+					}else{
+						sb.append("{1,}");
+					}
+				}else if(t == '$'){
+					continue;
+				}else {
+					sb.append(t);
+				}
 			}
-			sb.append(t);
 		}
 		System.out.println(sb.toString());
 		return sb.toString();
@@ -89,8 +109,9 @@ public class PatternAnalysis {
 	public static void main(String[] args){
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Dengtong\\Desktop\\Travledate.txt"));
-			PatternAnalysis pa = new PatternAnalysis(in.readLine());
-			System.out.println(pa.getValues().toString());
+			PatternAnalysis pa = new PatternAnalysis("s@");
+			in.close();
+			System.out.println(pa.getValues().get(0));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
