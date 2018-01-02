@@ -14,7 +14,7 @@ import nwpu.autosysteamtest.data.*;
 /**
  * 
  * @author Dengtong
- * @version 0.51
+ * @version 0.86
  */
 public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
@@ -70,11 +70,13 @@ public class AutomatedTestData {
 				run2();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
-	protected void run2() throws FileNotFoundException {
+	protected void run2() throws FileNotFoundException, ParseException {
 		xAutomated("add", this.addInterfaceSetMap);
 		xAutomated("upData", this.UpdateInterfaceSetMap);
 		xAutomated("delete", this.deleteInterfaceSetMap);
@@ -82,7 +84,7 @@ public class AutomatedTestData {
 	}
 
 	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap)
-			throws FileNotFoundException {
+			throws FileNotFoundException, ParseException {
 		ArrayList<String> xInterfaceSets = xInterfaceSetMap.get(this.resourcesid);
 		ArrayList<String> parameterConstrains = null;
 		if (this.parameterConstrainsMap.containsKey(resourcesid)) {
@@ -113,7 +115,7 @@ public class AutomatedTestData {
 
 	}
 
-	private void analyticParameter(String path, String xInterface, ArrayList<String> parameterConstrains) {
+	private void analyticParameter(String path, String xInterface, ArrayList<String> parameterConstrains) throws ParseException {
 		String[] paramsplt = xInterface.split("->");
 		if (paramsplt.length > 1) {
 			String[] params = paramsplt[1].split("_");
@@ -131,7 +133,7 @@ public class AutomatedTestData {
 
 	}
 
-	private void analyticParameterComposition(String path, String param, String paramName, String paramConstrains) {
+	private void analyticParameterComposition(String path, String param, String paramName, String paramConstrains) throws ParseException {
 		String paramType = param.split(",")[1];
 		String paramAtributte = param.split(",")[2];
 		String paramStatus = param.split(",")[3];
@@ -344,7 +346,7 @@ public class AutomatedTestData {
 		return null;
 	}
 
-	private ArrayList<String> stringType(String[] constraints, String paramType) {
+	private ArrayList<String> stringType(String[] constraints, String paramType) throws ParseException {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = constraints.toString();
@@ -360,10 +362,12 @@ public class AutomatedTestData {
 				}
 				switch (paramType) {
 				case "string":
-					values = stringType(constraint);
+					StringData sd = new StringData(constraint);
+					values = sd.constraintAnalysis();
 					break;
 				case "token":
-					values = tokenType(constraint);
+					TokenData td = new TokenData(constraint);
+					values = td.constraintAnalysis();
 					break;
 				default:
 					break;
@@ -372,10 +376,12 @@ public class AutomatedTestData {
 		} else {
 			switch (paramType) {
 			case "string":
-				// values = stringType();
+				StringData sd = new StringData();
+				values = sd.constraintAnalysis();
 				break;
 			case "token":
-				// values = tokenType();
+				TokenData td = new TokenData();
+				values = td.constraintAnalysis();
 				break;
 			default:
 				break;
@@ -384,13 +390,6 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> tokenType(ConcurrentHashMap<String, String> constraint) {
-		return null;
-	}
-
-	private ArrayList<String> stringType(ConcurrentHashMap<String, String> constraint) {
-		return null;
-	}
 
 	private ArrayList<String> numericalType(String[] constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();

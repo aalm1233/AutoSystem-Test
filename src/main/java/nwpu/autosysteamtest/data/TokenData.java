@@ -6,13 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysis;
 
-public class StringData extends Data{
-	
-	public StringData(){
+public class TokenData extends Data{
+	public TokenData(){
 		
 	}
 
-	public StringData(ConcurrentHashMap<String, String> constraint) {
+	public TokenData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);
 	}
 
@@ -34,5 +33,4 @@ public class StringData extends Data{
 		}
 		return values;
 	}
-
 }
