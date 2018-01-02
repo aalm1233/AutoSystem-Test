@@ -10,7 +10,6 @@ public class IntData extends NumericalData{
 
 	public IntData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);
-		// TODO Auto-generated constructor stub
 	}
 	public IntData() {
 		super();
@@ -54,9 +53,21 @@ public class IntData extends NumericalData{
 
 	@Override
 	ArrayList<String> dataGeneration(long minValue, long maxValue) {
+		int minlenth =minValue < 0 ?1 : String.valueOf(Math.abs(minValue)).length();
+		int maxlenth =String.valueOf(Math.abs(minValue)).length() > String.valueOf(Math.abs(maxValue)).length() ?String.valueOf(Math.abs(minValue)).length() : String.valueOf(Math.abs(maxValue)).length();
 		ArrayList<String> t = new ArrayList<>();
-		PatternAnalysis pa = new PatternAnalysis("-{0,1}[0-9]{8}");
-		t = pa.getValues();
+		PatternAnalysis pa = new PatternAnalysis("-{0,1}[0-9]{"+minlenth+","+maxlenth+"}");
+		ArrayList<String> t1  = pa.getValues();
+		for(int i = 0;i<t1.size();i++){
+			try{
+				int temp = Integer.parseInt(t1.get(i));
+				if(temp < minValue||temp >maxValue){
+					continue;
+				}
+				t.add(String.valueOf(temp));
+			}catch (NumberFormatException e) {
+			}
+		}
 		t.add(String.valueOf(minValue));
 		t.add(String.valueOf(minValue - 1));
 		t.add(String.valueOf(maxValue));

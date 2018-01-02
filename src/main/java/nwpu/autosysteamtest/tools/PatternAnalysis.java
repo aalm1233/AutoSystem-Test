@@ -92,10 +92,8 @@ public class PatternAnalysis {
 			PatternAnalysis pa = new PatternAnalysis(in.readLine());
 			System.out.println(pa.getValues().toString());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
