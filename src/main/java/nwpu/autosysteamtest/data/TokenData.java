@@ -20,7 +20,7 @@ public class TokenData extends Data{
 		ArrayList<String> values = new ArrayList<>();
 		PatternAnalysis pa = null;
 		if(constraint == null){
-			pa = new PatternAnalysis("\\d{1,60}");
+			pa = new PatternAnalysis("\\w{1,60}");
 			values = pa.getValues();
 		}else{
 			if(constraint.containsKey(Constraints.pattern.toString())){

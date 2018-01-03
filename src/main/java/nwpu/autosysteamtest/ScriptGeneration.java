@@ -269,14 +269,26 @@ public class ScriptGeneration {
 				out.flush();
 				if(line.split("\\|")[1].split("->").length > 1){
 					String params = line.split("\\|")[1].split("->")[1];
+					String response = line.split("\\|")[1].split("->")[0];
 					String[] param = params.split("_");
+					String[] responseParam = null;
+					try{
+						responseParam =response.split("-")[2].split("_");
+					}catch(Exception e){
+					}
 					for(String p :param){
 						out.println("		<param name=\""+p.split(",")[0]+"\" attribute=\""+p.split(",")[2]+"\" value=\"\"/>");
 						out.flush();
 					}
-				}
-				if("find".equals(operation)){
-					out.println("<response name=\"\" />");
+					out.println("	<response name=\""+response.split("-")[0]+"\" type=\""+response.split("-")[1]+"\" >");
+					out.flush();
+					if(responseParam != null&&responseParam.length > 1){
+						for(String p :responseParam){
+							out.println("		<param name=\""+p.split(",")[0]+"\" attribute=\""+p.split(",")[2]+"\" />");
+							out.flush();
+						}
+					}
+					out.println("	</response>");
 					out.flush();
 				}
 				out.println("	</step>");

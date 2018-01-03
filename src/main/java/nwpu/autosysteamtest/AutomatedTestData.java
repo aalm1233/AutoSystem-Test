@@ -164,7 +164,7 @@ public class AutomatedTestData {
 			case "double":
 				values = numericalType(constraints, paramType);
 				break;
-			case "string":
+			case "String":
 			case "token":
 				values = stringType(constraints, paramType);
 				break;
@@ -349,7 +349,10 @@ public class AutomatedTestData {
 	private ArrayList<String> stringType(String[] constraints, String paramType) throws ParseException {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
-			String constraintses = constraints.toString();
+			String constraintses = null;
+			for(String p :constraints){
+				constraintses += p;
+			}
 			if (constraintses.contains("enumeration")) {
 				for (String enumerations : constraints) {
 					values.add(enumerations.split(":")[1]);
@@ -361,7 +364,7 @@ public class AutomatedTestData {
 					constraint.put(tt[0], tt[1]);
 				}
 				switch (paramType) {
-				case "string":
+				case "String":
 					StringData sd = new StringData(constraint);
 					values = sd.constraintAnalysis();
 					break;
@@ -375,7 +378,7 @@ public class AutomatedTestData {
 			}
 		} else {
 			switch (paramType) {
-			case "string":
+			case "String":
 				StringData sd = new StringData();
 				values = sd.constraintAnalysis();
 				break;
@@ -452,10 +455,14 @@ public class AutomatedTestData {
 					values = unsignedByteType(constraint);
 					break;
 				case "decimal":
-					//
-					break;
 				case "float":
-					//
+					DecimalTypeData dtd = new DecimalTypeData(constraint);
+					try {
+						values = dtd.constraintAnalysis();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				case "double":
 					//
@@ -512,10 +519,14 @@ public class AutomatedTestData {
 				// values = unsignedByteType();
 				break;
 			case "decimal":
-				//
-				break;
 			case "float":
-				//
+				DecimalTypeData dtd = new DecimalTypeData();
+				try {
+					values = dtd.constraintAnalysis();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case "double":
 				//

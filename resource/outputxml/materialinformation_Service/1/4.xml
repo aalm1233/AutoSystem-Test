@@ -5,6 +5,8 @@
 		<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" value=""/>
 		<param name="imgDetail1" attribute="Materialinformation.imgDetail1" value=""/>
 		<param name="CommonsMultipartFile" attribute="Materialinformation.CommonsMultipartFile" value=""/>
+	<response name="" type="JSON" >
+	</response>
 	</step>
 	<step operation="update" path="editMaterialInfo" name="UPDATE_MaterialInfo" >
 		<param name="materialId" attribute="Materialinformation.materialId" value=""/>
@@ -12,6 +14,8 @@
 		<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" value=""/>
 		<param name="imgDetail1" attribute="Materialinformation.imgDetail1" value=""/>
 		<param name="CommonsMultipartFile" attribute="Materialinformation.CommonsMultipartFile" value=""/>
+	<response name="" type="JSON" >
+	</response>
 	</step>
 	<step operation="find" path="searchMaterial" name="Materialinformation_Find_Condition" >
 		<param name="accessState" attribute="Materialinformation.state" value=""/>
@@ -19,6 +23,7 @@
 		<param name="title" attribute="Materialinformation.title" value=""/>
 		<param name="starttime" attribute="Materialinformation.starttime" value=""/>
 		<param name="endtime" attribute="Materialinformation.endtime" value=""/>
-<response name="" />
+	<response name="" type="JSON" >
+	</response>
 	</step>
 </script>

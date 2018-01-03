@@ -2,21 +2,30 @@ package nwpu.autosysteamtest.data;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysis;
 
 public class DecimalTypeData extends DecimalData{
 
+	public DecimalTypeData(){
+		super();
+	}
+	public DecimalTypeData(ConcurrentHashMap<String, String> constraint) {
+		super(constraint);
+	}
 	@Override
 	ArrayList<String> dataGeneration(double minValue, double maxValue) {
-		int minlenth =minValue < 0 ?1 : String.valueOf(Math.abs(minValue)).split("\\.")[0].length();
-		int maxlenth =String.valueOf(Math.abs(minValue)).split("\\.")[0].length() > String.valueOf(Math.abs(maxValue)).split("\\.")[0].length() ?String.valueOf(Math.abs(minValue)).split("\\.")[0].length() : String.valueOf(Math.abs(maxValue)).split("\\.")[0].length();
+		int mint = (int)minValue;
+		int maxt = (int)maxValue;
+		int minlenth =minValue < 0 ?1 : String.valueOf(Math.abs(mint)).split("\\.")[0].length();
+		int maxlenth =String.valueOf(Math.abs(mint)).split("\\.")[0].length() > String.valueOf(Math.abs(maxt)).split("\\.")[0].length() ?String.valueOf(Math.abs(mint)).split("\\.")[0].length() : String.valueOf(Math.abs(maxt)).split("\\.")[0].length();
 		ArrayList<String> t = new ArrayList<>();
 		PatternAnalysis pa = new PatternAnalysis("-{0,1}[0-9]{"+minlenth+","+maxlenth+"}\\.[0-9]{8}");
 		ArrayList<String> t1  = pa.getValues();
 		for(int i = 0;i<t1.size();i++){
 			try{
-				Byte temp = Byte.parseByte(t1.get(i));
+				Float temp = Float.parseFloat(t1.get(i));
 				if(temp < minValue||temp >maxValue){
 					continue;
 				}

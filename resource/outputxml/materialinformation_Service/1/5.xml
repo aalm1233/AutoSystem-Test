@@ -5,11 +5,14 @@
 		<param name="imgAuthor1" attribute="Materialinformation.imgAuthor1" value=""/>
 		<param name="imgDetail1" attribute="Materialinformation.imgDetail1" value=""/>
 		<param name="CommonsMultipartFile" attribute="Materialinformation.CommonsMultipartFile" value=""/>
+	<response name="" type="JSON" >
+	</response>
 	</step>
 	<step operation="delete" path="deleteMultipleMaterials" name="Delete_MultipleMaterials" >
 		<param name="pictureName" attribute="Materialinformation.pictureName" value=""/>
+	<response name="" type="JSON" >
+	</response>
 	</step>
 	<step operation="find" path="displaySellerInfo" name="FIND_SellerInfo" >
-<response name="" />
 	</step>
 </script>
