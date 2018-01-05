@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import nl.flotsam.xeger.Xeger;
-
+/**
+ * BUG在关于[]的部分
+ * @author Dengtong
+ *
+ */
 public class PatternAnalysis {
 	String patten;
 	public PatternAnalysis(String patten){
@@ -73,15 +77,15 @@ public class PatternAnalysis {
 				}
 			}
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 		
 	}
 	public ArrayList<String> getValues(){
 		ArrayList<String> values = new ArrayList<>();
+		System.out.println(patten);
 		String regex = patten;
         Xeger generator = new Xeger(regex);    
-        for(int i = 0;i<5;i++){
+        for(;values.size() < 5;){
         	String result = generator.generate();
             assert result.matches(regex);
             values.add(result);
@@ -90,26 +94,35 @@ public class PatternAnalysis {
 	}
 	public ArrayList<String> getValues(int length){
 		ArrayList<String> values = new ArrayList<>();
-		String regex = patten+"{"+length+"}";
+		String regex = patten;
         Xeger generator = new Xeger(regex);
-        String result = generator.generate();
-        assert result.matches(regex);
-        values.add(result);
+        for(;values.size() < 5;){
+        	 String result = generator.generate();
+        	 assert result.matches(regex);
+        	 if(result.length() == length){
+            	 values.add(result);      		 
+        	 }
+        }
+       
         return values;
 	}
 	public ArrayList<String> getValues(int 	minLength,int maxLength){
 		ArrayList<String> values = new ArrayList<>();
-		String regex = patten+"{"+minLength+","+maxLength+"}";
+		String regex = patten;
         Xeger generator = new Xeger(regex);
-        String result = generator.generate();
-        assert result.matches(regex);
-        values.add(result);
+        for(;values.size() < 5;){
+        	 String result = generator.generate();
+        	 assert result.matches(regex);
+        	 if(minLength <= result.length()&&maxLength >= result.length()){
+            	 values.add(result);
+        	 }
+        }
         return values;
 	}
 	public static void main(String[] args){
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Dengtong\\Desktop\\Travledate.txt"));
-			PatternAnalysis pa = new PatternAnalysis("s@");
+			PatternAnalysis pa = new PatternAnalysis("[[]{0}]");
 			in.close();
 			System.out.println(pa.getValues().get(0));
 		} catch (FileNotFoundException e) {

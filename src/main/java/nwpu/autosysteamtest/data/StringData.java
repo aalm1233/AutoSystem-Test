@@ -29,7 +29,19 @@ public class StringData extends Data{
 				pa = new PatternAnalysis(pattern);
 				values = pa.getValues();
 			}else{
-				
+				if(constraint.containsKey(Constraints.length.toString())){
+					pa = new PatternAnalysis("\\w{"+constraint.get(Constraints.length.toString())+"}");
+				}else{
+					if(constraint.containsKey(Constraints.maxLength.toString())){
+						if(constraint.containsKey(Constraints.minLength.toString())){
+							
+						}else{
+							
+						}
+					}else if(constraint.containsKey(Constraints.minLength.toString())){
+						
+					}
+				}
 			}
 		}
 		return values;

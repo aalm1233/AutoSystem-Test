@@ -237,6 +237,36 @@ public class AutomatedTestData {
 
 	private ArrayList<String> fileType(String[] constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
+		if (constraints != null) {
+			String constraintses = constraints.toString();
+			if (constraintses.contains("enumeration")) {
+				for (String enumerations : constraints) {
+					values.add(enumerations.split(":")[1]);
+				}
+			} else {
+				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
+				for (String t : constraints) {
+					String[] tt = t.split(",");
+					constraint.put(tt[0], tt[1]);
+				}
+				FileData fd = new FileData(constraint);
+				try {
+					values = fd.constraintAnalysis();
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
+			}
+
+		}else{
+			FileData fd = new FileData();
+			try {
+				values = fd.constraintAnalysis();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return values;
 	}
 
@@ -460,7 +490,7 @@ public class AutomatedTestData {
 					try {
 						values = dtd.constraintAnalysis();
 					} catch (ParseException e) {
-						// TODO Auto-generated catch block
+	
 						e.printStackTrace();
 					}
 					break;
@@ -524,7 +554,6 @@ public class AutomatedTestData {
 				try {
 					values = dtd.constraintAnalysis();
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
