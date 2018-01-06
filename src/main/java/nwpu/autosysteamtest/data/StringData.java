@@ -21,25 +21,43 @@ public class StringData extends Data{
 		ArrayList<String> values = new ArrayList<>();
 		PatternAnalysis pa = null;
 		if(constraint == null){
-			pa = new PatternAnalysis("\\w{1,60}");
+			pa = new PatternAnalysis("\\w{1,}");
 			values = pa.getValues();
 		}else{
 			if(constraint.containsKey(Constraints.pattern.toString())){
 				String pattern = constraint.get(Constraints.pattern.toString());
 				pa = new PatternAnalysis(pattern);
-				values = pa.getValues();
-			}else{
 				if(constraint.containsKey(Constraints.length.toString())){
-					pa = new PatternAnalysis("\\w{"+constraint.get(Constraints.length.toString())+"}");
+					values = pa.getValues(Integer.parseInt(constraint.get(Constraints.length.toString())));
 				}else{
 					if(constraint.containsKey(Constraints.maxLength.toString())){
 						if(constraint.containsKey(Constraints.minLength.toString())){
-							
+							values = pa.getValues(Integer.parseInt(constraint.get(Constraints.minLength.toString())),Integer.parseInt(constraint.get(Constraints.maxLength.toString())));
 						}else{
-							
+							values = pa.getValues(0,Integer.parseInt(constraint.get(Constraints.maxLength.toString())));
 						}
 					}else if(constraint.containsKey(Constraints.minLength.toString())){
-						
+						values = pa.getValues(Integer.parseInt(constraint.get(Constraints.minLength.toString())),999999999);
+					}else{
+						values = pa.getValues();
+					}
+				}
+			}else{
+				if(constraint.containsKey(Constraints.length.toString())){
+					pa = new PatternAnalysis("\\w{"+constraint.get(Constraints.length.toString())+"}");
+					values = pa.getValues();
+				}else{
+					if(constraint.containsKey(Constraints.maxLength.toString())){
+						if(constraint.containsKey(Constraints.minLength.toString())){
+							pa = new PatternAnalysis("\\w{"+constraint.get(Constraints.minLength.toString())+","+constraint.get(Constraints.maxLength.toString())+"}");
+							values = pa.getValues();
+						}else{
+							pa = new PatternAnalysis("\\w{1,"+constraint.get(Constraints.maxLength.toString())+"}");
+							values = pa.getValues();
+						}
+					}else if(constraint.containsKey(Constraints.minLength.toString())){
+						pa = new PatternAnalysis("\\w{"+constraint.get(Constraints.minLength.toString())+",}");
+						values = pa.getValues();
 					}
 				}
 			}

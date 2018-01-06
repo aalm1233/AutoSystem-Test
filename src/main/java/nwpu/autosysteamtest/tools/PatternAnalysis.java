@@ -43,13 +43,21 @@ public class PatternAnalysis {
 					sb.append("\\.");
 					break gg;
 				case 'd':
-					sb.append("[0-9]");
+					if(!stack.isEmpty()&&stack.peek() == '['){
+						sb.append("0-9");
+					}else{
+						sb.append("[0-9]");
+					}
 					break gg;
 				case 'D':
 					sb.append("[^0-9]");
 					break gg;
 				case 'w':
-					sb.append("[A-Za-z_0-9]");
+					if(!stack.isEmpty()&&stack.peek() == '['){
+						sb.append("A-Za-z_0-9");
+					}else{
+						sb.append("[A-Za-z_0-9]");
+					}
 					break gg;
 				case 'W':
 					sb.append("[^A-Za-z_0-9]");
@@ -103,7 +111,6 @@ public class PatternAnalysis {
             	 values.add(result);      		 
         	 }
         }
-       
         return values;
 	}
 	public ArrayList<String> getValues(int 	minLength,int maxLength){
@@ -122,7 +129,7 @@ public class PatternAnalysis {
 	public static void main(String[] args){
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Dengtong\\Desktop\\Travledate.txt"));
-			PatternAnalysis pa = new PatternAnalysis("[[]{0}]");
+			PatternAnalysis pa = new PatternAnalysis("[\\w\n]{3,7}");
 			in.close();
 			System.out.println(pa.getValues().get(0));
 		} catch (FileNotFoundException e) {
