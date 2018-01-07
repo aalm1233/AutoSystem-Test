@@ -14,7 +14,7 @@ import nwpu.autosysteamtest.data.*;
 /**
  * 
  * @author Dengtong
- * @version 0.86
+ * @version 0.90,07/01/2018
  */
 public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
@@ -37,10 +37,9 @@ public class AutomatedTestData {
 		this.UpdateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
 		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
 		this.parameterConstrainsMap = documentPrepcessing.getParameterConstrainsMap();
-		this.run1();
 	}
 
-	protected void run1() {
+	public void run1() {
 		Set<String> key = operaterTypesMap.keySet();
 		File file = null;
 		try {
@@ -263,7 +262,6 @@ public class AutomatedTestData {
 			try {
 				values = fd.constraintAnalysis();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -274,6 +272,8 @@ public class AutomatedTestData {
 		ArrayList<String> values = new ArrayList<>();
 		values.add("true");
 		values.add("false");
+		values.add("1");
+		values.add("0");
 		return values;
 	}
 

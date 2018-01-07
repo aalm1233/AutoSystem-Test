@@ -20,6 +20,7 @@ public class RunThread {
 			ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\", tpg.getMode());
 			sg.run();
 			AutomatedTestData atd = new AutomatedTestData(path+"\\resource\\");
+			atd.run1();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

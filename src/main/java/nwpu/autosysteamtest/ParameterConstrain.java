@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
 /**
  * 
  * @author Dengtong
- *
+ * @version 1.0,17/12/2017
  */
 public class ParameterConstrain {
 	private String resourceId;

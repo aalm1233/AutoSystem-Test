@@ -11,7 +11,7 @@ import nl.flotsam.xeger.Xeger;
 /**
  * BUG在关于[]的部分
  * @author Dengtong
- *
+ * @version 1.0,07/01/2018
  */
 public class PatternAnalysis {
 	String patten;
@@ -19,6 +19,10 @@ public class PatternAnalysis {
 		this.patten = patten;
 		this.patten = patternAnalysis();
 	}
+	/**
+	 * 分析输入的正则表达式，转换成能够被解析的格式
+	 * @return
+	 */
 	private String patternAnalysis() {
 		Stack<Character> stack = new Stack<>();
 		StringBuffer sb = new StringBuffer();
@@ -88,6 +92,10 @@ public class PatternAnalysis {
 		return sb.toString();
 		
 	}
+	/**
+	 * 无条件获值
+	 * @return
+	 */
 	public ArrayList<String> getValues(){
 		ArrayList<String> values = new ArrayList<>();
 		System.out.println(patten);
@@ -100,6 +108,11 @@ public class PatternAnalysis {
         }
         return values;
 	}
+	/**
+	 * 生成定长字符串
+	 * @param length 字符串长度
+	 * @return
+	 */
 	public ArrayList<String> getValues(int length){
 		ArrayList<String> values = new ArrayList<>();
 		String regex = patten;
@@ -113,6 +126,12 @@ public class PatternAnalysis {
         }
         return values;
 	}
+	/**
+	 * 生成一定长度的字符串
+	 * @param minLength 最小长度
+	 * @param maxLength 最大长度
+	 * @return
+	 */
 	public ArrayList<String> getValues(int 	minLength,int maxLength){
 		ArrayList<String> values = new ArrayList<>();
 		String regex = patten;

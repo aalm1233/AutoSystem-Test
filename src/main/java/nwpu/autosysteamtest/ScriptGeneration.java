@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 
  * @author Dengtong
- * @version 3.0,30/11/2017
+ * @version 3.1,05/01/2018
  */
 public class ScriptGeneration {
 	DocumentPrepcessing  documentPrepcessing;

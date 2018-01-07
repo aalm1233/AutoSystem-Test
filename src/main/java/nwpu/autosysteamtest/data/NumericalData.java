@@ -11,5 +11,5 @@ public abstract class NumericalData extends Data{
 	public NumericalData() {
 		super();
 	}
-	abstract ArrayList<String> dataGeneration(long minValue, long maxValue);
+	abstract ArrayList<String> dataGeneration(String pattern,long minValue, long maxValue);
 }
