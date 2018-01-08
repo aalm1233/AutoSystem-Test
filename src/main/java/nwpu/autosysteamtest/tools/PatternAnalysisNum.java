@@ -6,7 +6,7 @@ import nl.flotsam.xeger.Xeger;
 /**
  * 根据正则表达式生成数字
  * @author Dengtong
- * @version 0.1,07/01/2018
+ * @version 0.2,08/01/2018
  */
 public class PatternAnalysisNum extends PatternAnalysis{
 
@@ -22,6 +22,23 @@ public class PatternAnalysisNum extends PatternAnalysis{
         	 assert result.matches(regex);
         	 try{
         		 long resultNum = Long.parseLong(result);
+        		 if(min <= resultNum&&max >= resultNum){
+        			 values.add(result);
+        		 }
+        	 }catch (Exception e) {
+			}       	
+        }
+        return values;
+	}
+	public ArrayList<String> getValues(double min,double max){
+		ArrayList<String> values = new ArrayList<>();
+		String regex = patten;
+        Xeger generator = new Xeger(regex);
+        for(;values.size() < 5;){
+        	 String result = generator.generate();
+        	 assert result.matches(regex);
+        	 try{
+        		 double resultNum = Double.parseDouble(result);
         		 if(min <= resultNum&&max >= resultNum){
         			 values.add(result);
         		 }

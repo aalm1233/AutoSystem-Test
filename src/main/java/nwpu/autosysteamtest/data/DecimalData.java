@@ -11,6 +11,6 @@ public abstract class DecimalData extends Data{
 	public DecimalData() {
 		super();
 	}
-	abstract ArrayList<String> dataGeneration(double minValue, double maxValue);
+	abstract ArrayList<String> dataGeneration(String pattern,double minValue, double maxValue);
 
 }
