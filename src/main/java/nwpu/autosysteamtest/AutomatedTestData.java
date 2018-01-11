@@ -473,16 +473,19 @@ public class AutomatedTestData {
 					values = sd.constraintAnalysis();
 					break;
 				case "unsignedLong":
-					values = unsignedLongType(constraint);
+					//values = unsignedLongType(constraint);
 					break;
 				case "unsignedInt":
-					values = unsignedIntType(constraint);
+					UnsignedIntData uid = new UnsignedIntData(constraint);
+					values = uid.constraintAnalysis();
 					break;
 				case "unsignedShort":
-					values = unsignedShortType(constraint);
+					UnsignedShortData usd = new UnsignedShortData(constraint);
+					values = usd.constraintAnalysis();
 					break;
 				case "unsignedByte":
-					values = unsignedByteType(constraint);
+					UnsignedByteData ubd = new UnsignedByteData(constraint);
+					values = ubd.constraintAnalysis();
 					break;
 				case "decimal":
 				case "float":
@@ -540,13 +543,16 @@ public class AutomatedTestData {
 				// values = unsignedLongType();
 				break;
 			case "unsignedInt":
-				// values = unsignedIntType();
+				UnsignedIntData uid = new UnsignedIntData();
+				values = uid.constraintAnalysis();
 				break;
 			case "unsignedShort":
-				// values = unsignedShortType();
+				UnsignedShortData usd = new UnsignedShortData();
+				values = usd.constraintAnalysis();
 				break;
 			case "unsignedByte":
-				// values = unsignedByteType();
+				UnsignedByteData ubd = new UnsignedByteData();
+				values = ubd.constraintAnalysis();
 				break;
 			case "decimal":
 			case "float":

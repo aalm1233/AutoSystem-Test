@@ -1,6 +1,8 @@
 package nwpu.autosysteamtest.tools;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import nl.flotsam.xeger.Xeger;
 /**
@@ -40,6 +42,23 @@ public class PatternAnalysisNum extends PatternAnalysis{
         	 try{
         		 double resultNum = Double.parseDouble(result);
         		 if(min <= resultNum&&max >= resultNum){
+        			 values.add(result);
+        		 }
+        	 }catch (Exception e) {
+			}       	
+        }
+        return values;
+	}
+	public ArrayList<String> getValues(BigInteger min, BigInteger max) {
+		ArrayList<String> values = new ArrayList<>();
+		String regex = patten;
+        Xeger generator = new Xeger(regex);
+        for(;values.size() < 5;){
+        	 String result = generator.generate();
+        	 assert result.matches(regex);
+        	 try{
+        		 BigInteger resultNum = new BigInteger(result);
+        		 if(min.compareTo(resultNum) != -1&&resultNum.compareTo(max) != 1){
         			 values.add(result);
         		 }
         	 }catch (Exception e) {
