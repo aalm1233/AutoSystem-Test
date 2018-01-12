@@ -21,7 +21,7 @@ public class AutomatedTestData {
 	private ConcurrentHashMap<String, String> operaterTypesMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> addInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> deleteInterfaceSetMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> UpdateInterfaceSetMap;
+	protected ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
 	protected String resourcesid;
@@ -34,7 +34,7 @@ public class AutomatedTestData {
 		this.operaterTypesMap = documentPrepcessing.getOperaterTypesMap();
 		this.addInterfaceSetMap = documentPrepcessing.getAddInterfaceSetMap();
 		this.deleteInterfaceSetMap = documentPrepcessing.getDeleteInterfaceSetMap();
-		this.UpdateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
+		this.updateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
 		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
 		this.parameterConstrainsMap = documentPrepcessing.getParameterConstrainsMap();
 	}
@@ -77,7 +77,7 @@ public class AutomatedTestData {
 
 	protected void run2() throws FileNotFoundException, ParseException {
 		xAutomated("add", this.addInterfaceSetMap);
-		xAutomated("upData", this.UpdateInterfaceSetMap);
+		xAutomated("upData", this.updateInterfaceSetMap);
 		xAutomated("delete", this.deleteInterfaceSetMap);
 		xAutomated("find", this.findInterfaceSetMap);
 	}
@@ -177,7 +177,7 @@ public class AutomatedTestData {
 			case "gYearMonth":
 			case "time":
 				try {
-					values = DateType(constraints, paramType);
+					values = dateType(constraints, paramType);
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
@@ -277,7 +277,7 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> DateType(String[] constraints, String paramType) throws ParseException {
+	private ArrayList<String> dateType(String[] constraints, String paramType) throws ParseException {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = constraints.toString();
@@ -327,6 +327,9 @@ public class AutomatedTestData {
 					TimeData td = new TimeData(constraint);
 					values = td.constraintAnalysis();
 					break;
+				default:
+					System.err.println("do not have type");
+					break;
 				}
 			}
 
@@ -366,6 +369,9 @@ public class AutomatedTestData {
 			case "time":
 				TimeData td = new TimeData();
 				values = td.constraintAnalysis();
+				break;
+			default:
+				System.err.println("do not have data type");
 				break;
 			}
 		}
@@ -593,5 +599,6 @@ public class AutomatedTestData {
 }
 
 enum Constraints {
+	//约束
 	enumeration, totalDigits, fractionDigit, minExclusive, maxExclusive, minInclusive, maxInclusive, length, minLength, maxLength, pattern, format, size, minSize, maxSize, whiteSpace
 }

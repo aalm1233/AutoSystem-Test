@@ -3,18 +3,28 @@ package nwpu.autosysteamtest.data;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
-public abstract class Data {
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public abstract class BaseData {
 	ConcurrentHashMap<String, String> constraint;
-	public Data(ConcurrentHashMap<String, String> constraint){
+	public BaseData(ConcurrentHashMap<String, String> constraint){
 		this.constraint = constraint;
 	}
-	public Data(){
+	public BaseData(){
 	}
+	/**
+	 * 
+	 * @return 生成的数据
+	 * @throws ParseException
+	 */
 	abstract public ArrayList<String> constraintAnalysis() throws ParseException;
 	
 }
 enum Constraints{
+	//约束
 	enumeration
 	,totalDigits
 	,fractionDigit

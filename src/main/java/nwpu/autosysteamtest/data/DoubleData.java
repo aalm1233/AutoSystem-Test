@@ -11,7 +11,7 @@ import nwpu.autosysteamtest.tools.PatternAnalysisNum;
  * @author Dengtong
  * @version 1.0,08/01/2018
  */
-public class DoubleData extends DecimalData{
+public class DoubleData extends BaseDecimalData{
 	public DoubleData(){
 		super();
 	}

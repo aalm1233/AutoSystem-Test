@@ -12,7 +12,7 @@ import nwpu.autosysteamtest.tools.PatternAnalysisNum;
  * @author Dengtong
  * @version 1.0,07/01/2018
  */
-public class LongData extends NumericalData {
+public class LongData extends BaseNumericalData {
 
 	public LongData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);

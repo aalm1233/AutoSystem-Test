@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysis;
-
-public class TokenData extends Data{
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class TokenData extends BaseData{
 	public TokenData(){
 		
 	}

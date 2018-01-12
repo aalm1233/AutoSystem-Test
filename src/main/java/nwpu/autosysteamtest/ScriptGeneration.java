@@ -371,16 +371,16 @@ public class ScriptGeneration {
 	 */
 	private boolean operationSequenceConstraint2(String result) {
 		boolean output = true;
-		int Anum = 0;// add操作数量
-		int Dnum = 0;// delete操作数量
+		int aNum = 0;// add操作数量
+		int dNum = 0;// delete操作数量
 		for (int i = 0; i < result.length(); i++) {
 			if (result.charAt(i) == 'A') {
-				Anum++;
+				aNum++;
 			} else if (result.charAt(i) == 'D') {
-				Dnum++;
+				dNum++;
 			}
 		}
-		if (Anum < Dnum) {
+		if (aNum < dNum) {
 			output = false;
 		}
 		return output;
@@ -394,16 +394,16 @@ public class ScriptGeneration {
 	 */
 	private boolean operationSequenceConstraint1(String result) {
 		boolean output = true;
-		int Anum = 0;// add操作数量
-		int Dnum = 0;// delete操作数量
+		int aNum = 0;// add操作数量
+		int dNum = 0;// delete操作数量
 		for (int i = 0; i < result.length(); i++) {
 			if (result.charAt(i) == 'A') {
-				Anum++;
+				aNum++;
 			} else if (result.charAt(i) == 'F') {
-				Dnum++;
+				dNum++;
 			}
 		}
-		if (Anum < Dnum) {
+		if (aNum < dNum) {
 			output = false;
 		}
 		return output;

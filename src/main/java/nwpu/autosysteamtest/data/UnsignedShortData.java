@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysisNum;
-
-public class UnsignedShortData extends NumericalData{
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class UnsignedShortData extends BaseNumericalData{
 	public static final Long MAX_UNSIGNEDSHORT = (long) ((Short.MAX_VALUE + 1)*2 - 1);
 	public UnsignedShortData(ConcurrentHashMap<String, String> constraint){
 		super(constraint);

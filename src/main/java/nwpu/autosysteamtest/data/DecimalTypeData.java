@@ -10,7 +10,7 @@ import nwpu.autosysteamtest.tools.PatternAnalysisNum;
  * @author Dengtong
  * @version 1.0,08/01/2018
  */
-public class DecimalTypeData extends DecimalData{
+public class DecimalTypeData extends BaseDecimalData{
 
 	public DecimalTypeData(){
 		super();

@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
-
-public class GYearMonthData extends DateData {
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class GYearMonthData extends AbstractDateData {
 
 	public GYearMonthData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);

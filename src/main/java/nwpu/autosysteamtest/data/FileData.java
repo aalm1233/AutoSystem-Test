@@ -3,8 +3,12 @@ package nwpu.autosysteamtest.data;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
-public class FileData extends Data{
+/**
+ * 
+ * @author Dengtong
+ * @version 0.1,12/01/2018
+ */
+public class FileData extends BaseData{
 
 	public FileData(ConcurrentHashMap<String, String> constraint){
 		super(constraint);

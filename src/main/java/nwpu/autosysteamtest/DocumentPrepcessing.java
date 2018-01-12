@@ -305,5 +305,6 @@ enum ParamElement {
 	restriction, element,
 }
 enum ElementAttribute{
+	//子项包含
 	name,level,type
 }

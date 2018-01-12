@@ -7,8 +7,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
-
-public class GDayData extends DateData{
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class GDayData extends AbstractDateData{
 
 	public GDayData(ConcurrentHashMap<String, String> constraint) {
 		super(constraint);

@@ -5,8 +5,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import nwpu.autosysteamtest.tools.PatternAnalysisNum;
-
-public class UnsignedLongData extends Data{
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class UnsignedLongData extends BaseData{
 	
 	public static final BigInteger MAX_UNSIGNEDLONG = (new BigInteger(String.valueOf(Long.MAX_VALUE)).add(new BigInteger(String.valueOf(Long.MAX_VALUE)))).add(new BigInteger("1"));
 

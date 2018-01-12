@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysisNum;
-
-public class UnsignedIntData extends NumericalData{
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,05/01/2018
+ */
+public class UnsignedIntData extends BaseNumericalData{
 	
 	public static final Long MAX_UNSIGNEDINT = (long) ((Integer.MAX_VALUE ))  + (long) ((Integer.MAX_VALUE )) +1;
 	public UnsignedIntData(ConcurrentHashMap<String, String> constraint) {
