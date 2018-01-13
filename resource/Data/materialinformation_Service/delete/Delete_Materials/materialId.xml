@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <param name="materialId" attribute="Materialinformation.materialId" status="generate">
-	<value>886</value>
+	<value>-406</value>
+	<value>-0</value>
+	<value>3888</value>
+	<value>45</value>
+	<value>-718</value>
+	<value>-2147483647</value>
+	<value>-2147483648</value>
+	<value>2147483646</value>
+	<value>2147483647</value>
 	<value>0</value>
-	<value>-51655</value>
-	<value>9</value>
-	<value>2</value>
 </param>

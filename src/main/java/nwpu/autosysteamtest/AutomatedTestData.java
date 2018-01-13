@@ -195,7 +195,6 @@ public class AutomatedTestData {
 				break;
 			}
 			try {
-
 				PrintWriter out = new PrintWriter(path + paramName + ".xml");
 				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				out.flush();
@@ -212,7 +211,7 @@ public class AutomatedTestData {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		} else if ("true".equals(paramStatus)) {
+		} else{
 			try {
 				PrintWriter out = new PrintWriter(path + paramName + ".xml");
 				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -479,7 +478,12 @@ public class AutomatedTestData {
 					values = sd.constraintAnalysis();
 					break;
 				case "unsignedLong":
-					//values = unsignedLongType(constraint);
+					UnsignedLongData uld = new UnsignedLongData(constraint);
+					try {
+						values = uld.constraintAnalysis();
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
 					break;
 				case "unsignedInt":
 					UnsignedIntData uid = new UnsignedIntData(constraint);
@@ -504,7 +508,12 @@ public class AutomatedTestData {
 					}
 					break;
 				case "double":
-					//
+					DoubleData dd = new DoubleData(constraint);
+					try {
+						values = dd.constraintAnalysis();
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 					break;
 				default:
 					break;
@@ -546,7 +555,12 @@ public class AutomatedTestData {
 				values = sd.constraintAnalysis();
 				break;
 			case "unsignedLong":
-				// values = unsignedLongType();
+				UnsignedLongData uld = new UnsignedLongData();
+				try {
+					values = uld.constraintAnalysis();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				break;
 			case "unsignedInt":
 				UnsignedIntData uid = new UnsignedIntData();
@@ -570,29 +584,17 @@ public class AutomatedTestData {
 				}
 				break;
 			case "double":
-				//
+				DoubleData dd = new DoubleData();
+				try {
+					values = dd.constraintAnalysis();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
 			}
 		}
-		return values;
-	}
-
-	private ArrayList<String> unsignedByteType(ConcurrentHashMap<String, String> constraint) {
-		return null;
-	}
-
-	private ArrayList<String> unsignedShortType(ConcurrentHashMap<String, String> constraint) {
-		return null;
-	}
-
-	private ArrayList<String> unsignedIntType(ConcurrentHashMap<String, String> constraint) {
-		return null;
-	}
-
-	private ArrayList<String> unsignedLongType(ConcurrentHashMap<String, String> constraint) {
-		ArrayList<String> values = new ArrayList<>();
 		return values;
 	}
 

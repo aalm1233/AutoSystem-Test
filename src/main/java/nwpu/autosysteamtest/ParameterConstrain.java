@@ -27,7 +27,7 @@ public class ParameterConstrain {
 		for(int i = 0;i<constraints.getLength();i++){		
 			Element constraint = (Element)constraints.item(i);
 			String constraintname = constraint.getNodeName();
-			String constraintt = constraint.getTextContent();
+			String constraintt =  constraint.getTextContent();
 			result.append(constraintname+":"+constraintt+"#");
 		}
 		result.deleteCharAt(result.length()-1);

@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-import nwpu.autosysteamtest.tools.PatternAnalysis;
 import nwpu.autosysteamtest.tools.PatternAnalysisNum;
 /**
  * Double型数据生成

@@ -2,7 +2,6 @@ package nwpu.autosysteamtest.tools;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import nl.flotsam.xeger.Xeger;
 /**

@@ -3,6 +3,7 @@ package nwpu.autosysteamtest.data;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.tools.PatternAnalysisNum;
 /**
@@ -14,6 +15,14 @@ public class UnsignedLongData extends BaseData{
 	
 	public static final BigInteger MAX_UNSIGNEDLONG = (new BigInteger(String.valueOf(Long.MAX_VALUE)).add(new BigInteger(String.valueOf(Long.MAX_VALUE)))).add(new BigInteger("1"));
 
+	public UnsignedLongData(ConcurrentHashMap<String, String> constraint){
+		super(constraint);
+	}
+	
+	public UnsignedLongData(){
+		super();
+	}
+	
 	ArrayList<String> dataGeneration(String pattern, BigInteger minValue, BigInteger maxValue) {
 		if (pattern == null) {
 			pattern = "[0-9]{1,}";
