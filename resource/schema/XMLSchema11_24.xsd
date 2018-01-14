@@ -20,10 +20,12 @@
 			<xs:element name="resource">
 				<xs:complexType mixed="true">
 					<xs:sequence>
-					    <xs:element name="dependency">
+						<xs:element name="dependency">
 							<xs:complexType>
-								<xs:attribute name="resourcesId" type="xs:string" use="required"/>
-								<xs:attribute name="resourceId" type="xs:string" use="required"/>
+								<xs:attribute name="resourcesId" type="xs:string"
+									use="required" />
+								<xs:attribute name="resourceId" type="xs:string"
+									use="required" />
 							</xs:complexType>
 						</xs:element>
 						<xs:element name="request">
@@ -37,15 +39,15 @@
 													<xs:complexType>
 														<xs:all minOccurs="0">
 															<xs:element name="restriction" type="constraint"></xs:element>
-															<xs:element name="element"></xs:element><!--元素嵌套元素-->
+															<xs:element name="element"></xs:element><!--元素嵌套元素 -->
 														</xs:all>
-															<xs:attribute name="name" type="xs:string"/>
-															<xs:attribute name="attribute" type="xs:string"
-												                          use="required"/>
-															<xs:attribute name="type" type="xs:string"
-																		  use="required"/>
-															<xs:attribute name="location" type="xs:string"/>
-                              <xs:attribute name="level" type="xs:string"/>																												
+														<xs:attribute name="name" type="xs:string" />
+														<xs:attribute name="attribute" type="xs:string"
+															use="required" />
+														<xs:attribute name="type" type="xs:string"
+															use="required" />
+														<xs:attribute name="location" type="xs:string" />
+														<xs:attribute name="level" type="xs:string" />
 													</xs:complexType>
 												</xs:element>
 											</xs:all>
@@ -53,9 +55,9 @@
 											<xs:attribute name="attribute" type="xs:string"
 												use="required" />
 											<xs:attribute name="type" type="xs:string" use="required" />
-											<xs:attribute name="location" type="xs:string"/>
+											<xs:attribute name="location" type="xs:string" />
 											<xs:attribute name="required" type="xs:boolean"
-												          default="true" />
+												default="true" />
 										</xs:complexType>
 									</xs:element><!--param元素 -->
 								</xs:sequence>
@@ -67,22 +69,22 @@
 									<xs:element name="param">
 										<xs:complexType>
 											<xs:all minOccurs="0">
-												<xs:element name="element" >
+												<xs:element name="element">
 													<xs:complexType>
 														<xs:all minOccurs="0">
 															<xs:element name="enumeration"></xs:element>
-															<xs:element name="element" type="xs:string"></xs:element><!--元素嵌套元素-->
+															<xs:element name="element" type="xs:string"></xs:element><!--元素嵌套元素 -->
 														</xs:all>
-															<xs:attribute name="name" type="xs:string"/>
-															<xs:attribute name="attribute" type="xs:string"
-												                          use="required"/>
-                                                            <xs:attribute name="level" type="xs:string"/>																												
+														<xs:attribute name="name" type="xs:string" />
+														<xs:attribute name="attribute" type="xs:string"
+															use="required" />
+														<xs:attribute name="level" type="xs:string" />
 													</xs:complexType>
 												</xs:element>
 											</xs:all>
-											<xs:attribute name="name" type="xs:string" use="required"/>
+											<xs:attribute name="name" type="xs:string" use="required" />
 											<xs:attribute name="attribute" type="xs:string"
-												          use="required"/>
+												use="required" />
 										</xs:complexType>
 									</xs:element><!--param元素 -->
 								</xs:sequence>
@@ -90,9 +92,9 @@
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
-					<xs:attribute name="id" type="xs:string" use="required"/>
-					<xs:attribute name="name" type="xs:string" use="required"/>
-					<xs:attribute name="path" type="xs:string" use="required"/>
+					<xs:attribute name="id" type="xs:string" use="required" />
+					<xs:attribute name="name" type="xs:string" use="required" />
+					<xs:attribute name="path" type="xs:string" use="required" />
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

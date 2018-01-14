@@ -98,7 +98,6 @@ public class PatternAnalysis {
 	 */
 	public ArrayList<String> getValues(){
 		ArrayList<String> values = new ArrayList<>();
-		System.out.println(patten);
 		String regex = patten;
         Xeger generator = new Xeger(regex);    
         for(;values.size() < 5;){
@@ -144,18 +143,6 @@ public class PatternAnalysis {
         	 }
         }
         return values;
-	}
-	public static void main(String[] args){
-		try {
-			BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Dengtong\\Desktop\\Travledate.txt"));
-			PatternAnalysis pa = new PatternAnalysis("[\\w\n]{3,7}");
-			in.close();
-			System.out.println(pa.getValues().get(0));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

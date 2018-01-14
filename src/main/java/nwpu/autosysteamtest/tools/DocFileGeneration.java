@@ -13,7 +13,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 /**
  * 
  * @author Dengtong
- * @version 0.0,12/01/2018
+ * @version 0.1,14/01/2018
  */
 public class DocFileGeneration {
 	File wordocx;

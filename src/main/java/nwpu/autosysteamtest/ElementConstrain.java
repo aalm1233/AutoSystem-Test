@@ -3,25 +3,24 @@ package nwpu.autosysteamtest;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-/**
- * 
- * @author Dengtong
- * @version 1.0,17/12/2017
- */
-public class ParameterConstrain {
-	private String resourceId;
-	private String name;
-	private NodeList constraints;
 
-	public ParameterConstrain(String resourceId, String paramName, Node restriction) {
+public class ElementConstrain {
+	private String resourceId;
+	private String paramName;
+	private String elementName;
+	private NodeList constraints;
+	
+	public ElementConstrain(String resourceId,String paramName, String elementName, Node restriction) {
 		this.resourceId = resourceId;
-		this.name = paramName;
+		this.paramName = paramName;
+		this.elementName = elementName;
 		this.constraints = restriction.getChildNodes();
 	}
-
+	
 	public String getResult() {
-		return this.resourceId+"-"+this.name+"<"+constrainAnalysis()+">";
+		return this.resourceId+"-"+this.paramName+"-"+this.elementName+"<"+constrainAnalysis()+">";
 	}
+	
 	private String constrainAnalysis(){
 		StringBuffer result = new StringBuffer();
 		for(int i = 0;i<constraints.getLength();i++){		
@@ -33,9 +32,4 @@ public class ParameterConstrain {
 		result.deleteCharAt(result.length()-1);
 		return result.toString();
 	}
-
-}
-enum Constraint{
-	//所有的约束
-	enumeration,totalDigits,fractionDigit,minExclusive,maxExclusive,minInclusive,maxInclusive,length,minLength,maxLength,minDate,maxDate,pattern,format,minSize,maxSize,whiteSpace
 }

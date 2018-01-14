@@ -1,0 +1,162 @@
+——————————————Sun Jan 14 12:02:52 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 12:07:37 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 12:40:48 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 17:56:10 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:11:20 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:11:51 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:12:43 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:12:43 CST 2018——————————————
+service name:User_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:13:20 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:13:20 CST 2018——————————————
+service name:User_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:13:38 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+——————————————Sun Jan 14 18:13:38 CST 2018——————————————
+service name:User_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:14:37 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:14:37 CST 2018——————————————
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+service name:User_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:16:27 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:16:27 CST 2018——————————————
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+service name:User_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:17:00 CST 2018——————————————
+service name:materialinformation_Service
+add InterfaceSet:
+——————————————Sun Jan 14 18:17:00 CST 2018——————————————
+Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+delete InterfaceSet:
+Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
+Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+update InterfaceSet:
+UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+find InterfaceSet:
+FIND_SellerInfo,displaySellerInfo|-JSON-->
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+service name:User_Service
+add InterfaceSet:

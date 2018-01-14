@@ -451,7 +451,6 @@ public class ScriptGeneration {
 		}
 		for (Iterator<String> it = key.iterator(); it.hasNext();) {
 			resourcesId = (String) it.next();
-			System.out.println(resourcesId);
 			String fileName = resourcesId;
 			filenum = 1;
 			generatingTestModelFiles(fileName);//生成操作模型

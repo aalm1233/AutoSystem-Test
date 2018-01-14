@@ -1,8 +1,13 @@
 package nwpu.autosysteamtest;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,7 +23,7 @@ import org.xml.sax.SAXException;
 /**
  * 
  * @author Dengtong
- * @version 2.1,25/11/2017
+ * @version 3.1,14/01/2018
  *
  */
 public class DocumentPrepcessing {
@@ -29,6 +34,7 @@ public class DocumentPrepcessing {
 	private ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
 	private ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
 	private ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
+	private ConcurrentHashMap<String, ArrayList<String>> elementConstrainsMap;
 	File[] fileSet;
 	public static DocumentPrepcessing getInstance() throws InterruptedException{
 		if(documentPrepcessing == null){
@@ -40,7 +46,7 @@ public class DocumentPrepcessing {
 		}
 		return documentPrepcessing;
 	}
-	public static DocumentPrepcessing getInstance(File[] fileSet) throws InterruptedException{
+	public static DocumentPrepcessing getInstance(File[] fileSet) throws InterruptedException, FileNotFoundException{
 		if(documentPrepcessing == null){
 			synchronized(DocumentPrepcessing.class){
 				if(documentPrepcessing == null){
@@ -53,7 +59,7 @@ public class DocumentPrepcessing {
 	private DocumentPrepcessing(){
 		
 	}
-	public DocumentPrepcessing(File[] fileSet) throws InterruptedException {
+	public DocumentPrepcessing(File[] fileSet) throws InterruptedException, FileNotFoundException {
 		super();
 		this.fileSet = fileSet;
 		operaterTypesMap = new ConcurrentHashMap<String, String>();
@@ -65,10 +71,12 @@ public class DocumentPrepcessing {
 		run();
 	}
 
-	private void run() throws InterruptedException {
+	private void run() throws InterruptedException, FileNotFoundException {
 		for(File file:fileSet){
-			DocumentPrepcssingThread thread = new DocumentPrepcssingThread(file);
-			new Thread(thread).start();
+			if(!file.isDirectory()){
+				DocumentPrepcssingThread thread = new DocumentPrepcssingThread(file);
+				new Thread(thread).start();
+			}
 		}
 	}
 
@@ -78,6 +86,10 @@ public class DocumentPrepcessing {
 
 	public ConcurrentHashMap<String, ArrayList<String>> getAddInterfaceSetMap() {
 		return addInterfaceSetMap;
+	}
+	
+	public ConcurrentHashMap<String, ArrayList<String>> getElementConstrainsMap() {
+		return elementConstrainsMap;
 	}
 
 	public ConcurrentHashMap<String, ArrayList<String>> getDeleteInterfaceSetMap() {
@@ -116,12 +128,25 @@ public class DocumentPrepcessing {
 			private ArrayList<String> parameterConstrainsSet;
 			protected Document doc;
 			File file;
+			private PrintWriter out;
 
 			public DocumentPrepcssingThread(File file) throws InterruptedException {
 				this.file = file;
 			}
 			@Override
 			public void run() {
+				try {
+					File dir = new File(file.getParentFile().getAbsolutePath()+"//log");
+					if(!dir.exists()){
+						dir.mkdirs();
+					}
+					out =new PrintWriter(new BufferedWriter(new FileWriter(dir.getAbsolutePath()+"//log.txt",true)));
+					out.println("——————————————"+new Date()+"——————————————");
+				} catch (FileNotFoundException e2) {
+					e2.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				DocumentPrepcessing documentPrepcessing = null;
 				try {
 					documentPrepcessing = DocumentPrepcessing.getInstance();
@@ -147,34 +172,97 @@ public class DocumentPrepcessing {
 					e.printStackTrace();
 				}
 				Element root = doc.getDocumentElement();
+				out.flush();
+				out.println("service name:"+root.getAttribute(ResourcesAttribute.id.toString()));
 				NodeList addNodeList = root.getElementsByTagName(Operation.add.toString());
 				NodeList deleteNodeList = root.getElementsByTagName(Operation.delete.toString());
 				NodeList updateNodeList = root.getElementsByTagName(Operation.update.toString());
 				NodeList findNodeList = root.getElementsByTagName(Operation.find.toString());
 				if (addNodeList.getLength() == 1) {
+					out.println("add InterfaceSet:");
+					out.flush();
 					initInterfaceSetMap("add",addNodeList.item(0), addInterfaceSet);
-					documentPrepcessing.getAddInterfaceSetMap().put(root.getAttribute("id"),
+					documentPrepcessing.getAddInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 							addInterfaceSet);
 				}
 				if (deleteNodeList.getLength() == 1) {
+					out.println("delete InterfaceSet:");
+					out.flush();
 					initInterfaceSetMap("delete",deleteNodeList.item(0), deleteInterfaceSet);
 					documentPrepcessing.getDeleteInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 							deleteInterfaceSet);
 				}
 				if (updateNodeList.getLength() == 1) {
+					out.println("update InterfaceSet:");
+					out.flush();
 					initInterfaceSetMap("update",updateNodeList.item(0), updateInterfaceSet);
 					documentPrepcessing.getUpdateInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 							updateInterfaceSet);
 				}
 				if (findNodeList.getLength() == 1) {
+					out.println("find InterfaceSet:");
+					out.flush();
 					initInterfaceSetMap("find",findNodeList.item(0), findInterfaceSet);
 					documentPrepcessing.getFindInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 							findInterfaceSet);
 				}
 				documentPrepcessing.getOperaterTypesMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 						operaterTypes.toString());
+				out.close();
 			}
-
+			
+			private String paramAnalysis(Element resource,Element requestParam){
+				StringBuffer reslut = new StringBuffer();
+				NodeList elements = requestParam.getChildNodes();
+				if(elements.getLength() > 0){
+					reslut.append(requestParam.getAttribute(ParamAttribute.name.toString()) 
+							+ ","+ requestParam.getAttribute(ParamAttribute.type.toString())
+							+","+requestParam.getAttribute(ParamAttribute.attribute.toString())
+							+","+requestParam.getAttribute(ParamAttribute.location.toString()));
+					reslut.append(",(");
+					for(int i = 0;i<elements.getLength();i++){
+						reslut.append(elementAnalysis(resource,requestParam,(Element) elements.item(i)));
+					}
+					reslut.append(")");
+				}else{
+					reslut.append(requestParam.getAttribute(ParamAttribute.name.toString()) 
+							+ ","+ requestParam.getAttribute(ParamAttribute.type.toString())
+							+","+requestParam.getAttribute(ParamAttribute.attribute.toString())
+							+","+requestParam.getAttribute(ParamAttribute.location.toString()));
+					NodeList restrictions = requestParam.getElementsByTagName(ParamElement.restriction.toString());
+					if (restrictions.getLength() == 1) {
+						Node restriction = restrictions.item(0);
+						ParameterConstrain constrain = new ParameterConstrain(
+								resource.getAttribute(ResourcesAttribute.id.toString()),
+								requestParam.getAttribute(ParamAttribute.name.toString()), restriction);
+						String parameterConstrains = constrain.getResult();
+						parameterConstrainsSet.add(parameterConstrains);
+					}
+				}
+				return reslut.toString();
+			}
+			
+			private String elementAnalysis(Element resource,Element requestParam,Element element){
+				StringBuffer reslut = new StringBuffer();
+				reslut.append(element.getAttribute(ElementAttribute.name.toString()) 
+						+ ","+ element.getAttribute(ElementAttribute.type.toString())
+						+","+element.getAttribute(ElementAttribute.attribute.toString())
+						+","+element.getAttribute(ElementAttribute.location.toString())
+						+","+element.getAttribute(ElementAttribute.level.toString()));
+				NodeList restrictions = element.getElementsByTagName(ParamElement.restriction.toString());
+				if (restrictions.getLength() == 1) {
+					Node restriction = restrictions.item(0);
+					ElementConstrain constrain = new ElementConstrain(
+							resource.getAttribute(ResourcesAttribute.id.toString()),
+							requestParam.getAttribute(ParamAttribute.name.toString()),
+							element.getAttribute(ElementAttribute.name.toString()), 
+							restriction);
+					String parameterConstrains = constrain.getResult();
+					parameterConstrainsSet.add(parameterConstrains);
+				}
+				return reslut.toString();
+			}
+			
 			private void initInterfaceSetMap(String type,Node node, ArrayList<String> xInteInterfaceSet) {
 				DocumentPrepcessing documentPrepcessing = null;
 				try {
@@ -219,7 +307,6 @@ public class DocumentPrepcessing {
 										parameterConstrainsSet.add(s);//将被依赖接口的约束添加进该接口约束域内
 									}
 								}
-								
 							}	
 						}
 						StringBuffer xInteInterface = new StringBuffer(resource.getAttribute(ResourceAttribute.id.toString())
@@ -236,18 +323,7 @@ public class DocumentPrepcessing {
 						}
 						xInteInterface.append("->");
 						for (int j = 0; j < requestParams.getLength(); j++) {
-							Element requestParam = (Element) requestParams.item(j);
-							xInteInterface.append(requestParam.getAttribute(ParamAttribute.name.toString()) + ","
-									+ requestParam.getAttribute(ParamAttribute.type.toString())+","+requestParam.getAttribute(ParamAttribute.attribute.toString())+","+requestParam.getAttribute(ParamAttribute.location.toString()));
-							NodeList restrictions = requestParam.getElementsByTagName(ParamElement.restriction.toString());
-							if (restrictions.getLength() == 1) {
-								Node restriction = restrictions.item(0);
-								ParameterConstrain constrain = new ParameterConstrain(
-										resource.getAttribute(ResourcesAttribute.id.toString()),
-										requestParam.getAttribute(ParamAttribute.name.toString()), restriction);
-								String parameterConstrains = constrain.getResult();
-								parameterConstrainsSet.add(parameterConstrains);
-							}
+							xInteInterface.append(paramAnalysis(resource,(Element) requestParams.item(j)));
 							if (j < requestParams.getLength() - 1) {
 								xInteInterface.append("_");
 							}
@@ -255,7 +331,8 @@ public class DocumentPrepcessing {
 						Element root = (Element) node.getParentNode();
 						documentPrepcessing.getParameterConstrainsMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 								parameterConstrainsSet);
-						System.out.println(xInteInterface);
+						out.println(xInteInterface.toString());
+						out.flush();
 						xInteInterfaceSet.add(xInteInterface.toString());
 					}
 				}
@@ -306,5 +383,5 @@ enum ParamElement {
 }
 enum ElementAttribute{
 	//子项包含
-	name,level,type
+	name,level,type,attribute,location
 }

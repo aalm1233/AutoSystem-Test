@@ -123,7 +123,6 @@ public class IntData extends BaseNumericalData {
 		t.add(String.valueOf(maxValue));
 		t.add(String.valueOf(maxValue + 1));
 		t.add(String.valueOf((minValue + maxValue) / 2));
-		System.out.println(t.toString());
 		return t;
 	}
 
