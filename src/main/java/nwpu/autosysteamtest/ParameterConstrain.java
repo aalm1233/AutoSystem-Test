@@ -24,11 +24,15 @@ public class ParameterConstrain {
 	}
 	private String constrainAnalysis(){
 		StringBuffer result = new StringBuffer();
-		for(int i = 0;i<constraints.getLength();i++){		
-			Element constraint = (Element)constraints.item(i);
-			String constraintname = constraint.getNodeName();
-			String constraintt =  constraint.getTextContent();
-			result.append(constraintname+":"+constraintt+"#");
+		for(int i = 0;i<constraints.getLength();i++){
+			try{
+				Element constraint = (Element)constraints.item(i);
+				String constraintname = constraint.getNodeName();
+				String constraintt =  constraint.getTextContent();
+				result.append(constraintname+":"+constraintt+"#");
+			}catch (Exception e) {
+				System.err.println(e.getMessage());
+			}			
 		}
 		result.deleteCharAt(result.length()-1);
 		return result.toString();

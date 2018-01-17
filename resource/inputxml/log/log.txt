@@ -81,82 +81,93 @@ update InterfaceSet:
 UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
 find InterfaceSet:
 FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
-——————————————Sun Jan 14 18:12:43 CST 2018——————————————
+Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false——————————————Mon Jan 15 14:47:20 CST 2018——————————————
 service name:User_Service
 add InterfaceSet:
-——————————————Sun Jan 14 18:13:20 CST 2018——————————————
-service name:materialinformation_Service
-add InterfaceSet:
-Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
-delete InterfaceSet:
-Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
-Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+User_New_Phone,createByPhone|-JSON-rst,,->param,UserCreateParam,UserCreateParam,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Get_Phone,createOrGetByPhone|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Email,createByEmail|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
 update InterfaceSet:
-UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+Password_Change,changePassword|--,,->param,UserPasswordChangeParam,,,(userId,Long,User.viaUserId,true,1_loginName,Long,User.name,true,1_oldPassword,String,User.password,true,1_password,String,User.password,,1)
+Password_Update,updatePassword|--,,->param,UserPasswordUpdateParam,,,(userId,Long,User.viaUserId,true,1_password,String,User.password,,1)
+Email_Bind,bindEmail|--,,->param,UserBindEmailParam,,,(userId,Long,User.viaUserId,true,1_email,String,User.email,true,1)
+Phone_Bind,bindPhone|--,,->param,UserBindPhoneParam,,,(userId,Long,User.viaUserId,true,1_phone,String,User.phone,true,1)
+User_Update_ID,update|--,,->param,UserUpdateParam,,,(id,Long,User.viaUserId,true,1_name,String,User.name,,1_gender,Gender,User.gender,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_portrait,String,User.portrait,,1)
+User_Active_ID,active|--,,->param,IDParam,,,(,,,,)
+User_Disable_ID,disable|--,,->param,IDParam,,,(,,,,)
 find InterfaceSet:
-FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
-——————————————Sun Jan 14 18:13:20 CST 2018——————————————
+User_Detail_ID,detail|--,,->param,IDParam,,,(,Long,,true,1)
+User_Detail_Batch_ID,batchDetail|--,,->param,IDListParam,,,(,Long,,true,1)
+User_List,list|--,,->param,UserListParam,,,(search,UserListSearchCriteria,,,1_name,String,User.name,,2_gender,Gender,User.gender,,2_,,,,2_phone,String,User.phone,,2_email,String,User.email,,2_birthdayMax,Date,User.birthday,,2_birthdayMin,Date,User.birthday,,2_portrait,String,User.portrait,,2_status,UserStatus,User.status,,2_creationDateMax,Date,User.creationDate,,2_creationDateMin,Date,User.creationDate,,2_updateDateMax,Date,User.updateDate,,2_updateDateMin,Date,User.updateDate,,2_permission,String,User.permission,,2)
+——————————————Mon Jan 15 14:52:30 CST 2018——————————————
 service name:User_Service
 add InterfaceSet:
-——————————————Sun Jan 14 18:13:38 CST 2018——————————————
-service name:materialinformation_Service
-add InterfaceSet:
-Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
-delete InterfaceSet:
-Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
-Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+User_New_Phone,createByPhone|-JSON-rst,,->param,UserCreateParam,UserCreateParam,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Get_Phone,createOrGetByPhone|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Email,createByEmail|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
 update InterfaceSet:
-UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+Password_Change,changePassword|--,,->param,UserPasswordChangeParam,,,(userId,Long,User.viaUserId,true,1_loginName,Long,User.name,true,1_oldPassword,String,User.password,true,1_password,String,User.password,,1)
+Password_Update,updatePassword|--,,->param,UserPasswordUpdateParam,,,(userId,Long,User.viaUserId,true,1_password,String,User.password,,1)
+Email_Bind,bindEmail|--,,->param,UserBindEmailParam,,,(userId,Long,User.viaUserId,true,1_email,String,User.email,true,1)
+Phone_Bind,bindPhone|--,,->param,UserBindPhoneParam,,,(userId,Long,User.viaUserId,true,1_phone,String,User.phone,true,1)
+User_Update_ID,update|--,,->param,UserUpdateParam,,,(id,Long,User.viaUserId,true,1_name,String,User.name,,1_gender,Gender,User.gender,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_portrait,String,User.portrait,,1)
+User_Active_ID,active|--,,->param,IDParam,,,(,,,,)
+User_Disable_ID,disable|--,,->param,IDParam,,,(,,,,)
 find InterfaceSet:
-FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
-——————————————Sun Jan 14 18:13:38 CST 2018——————————————
+User_Detail_ID,detail|--,,->param,IDParam,,,(,Long,,true,1)
+User_Detail_Batch_ID,batchDetail|--,,->param,IDListParam,,,(,Long,,true,1)
+User_List,list|--,,->param,UserListParam,,,(search,UserListSearchCriteria,,,1_name,String,User.name,,2_gender,Gender,User.gender,,2_,,,,2_phone,String,User.phone,,2_email,String,User.email,,2_birthdayMax,Date,User.birthday,,2_birthdayMin,Date,User.birthday,,2_portrait,String,User.portrait,,2_status,UserStatus,User.status,,2_creationDateMax,Date,User.creationDate,,2_creationDateMin,Date,User.creationDate,,2_updateDateMax,Date,User.updateDate,,2_updateDateMin,Date,User.updateDate,,2_permission,String,User.permission,,2)
+——————————————Mon Jan 15 14:53:48 CST 2018——————————————
 service name:User_Service
 add InterfaceSet:
-——————————————Sun Jan 14 18:14:37 CST 2018——————————————
-service name:materialinformation_Service
-add InterfaceSet:
-——————————————Sun Jan 14 18:14:37 CST 2018——————————————
-Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
-delete InterfaceSet:
-Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
-Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+User_New_Phone,createByPhone|-JSON-rst,,->param,UserCreateParam,UserCreateParam,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Get_Phone,createOrGetByPhone|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Email,createByEmail|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
 update InterfaceSet:
-UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+Password_Change,changePassword|--,,->param,UserPasswordChangeParam,,,(userId,Long,User.viaUserId,true,1_loginName,Long,User.name,true,1_oldPassword,String,User.password,true,1_password,String,User.password,,1)
+Password_Update,updatePassword|--,,->param,UserPasswordUpdateParam,,,(userId,Long,User.viaUserId,true,1_password,String,User.password,,1)
+Email_Bind,bindEmail|--,,->param,UserBindEmailParam,,,(userId,Long,User.viaUserId,true,1_email,String,User.email,true,1)
+Phone_Bind,bindPhone|--,,->param,UserBindPhoneParam,,,(userId,Long,User.viaUserId,true,1_phone,String,User.phone,true,1)
+User_Update_ID,update|--,,->param,UserUpdateParam,,,(id,Long,User.viaUserId,true,1_name,String,User.name,,1_gender,Gender,User.gender,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_portrait,String,User.portrait,,1)
+User_Active_ID,active|--,,->param,IDParam,,,(,,,,)
+User_Disable_ID,disable|--,,->param,IDParam,,,(,,,,)
 find InterfaceSet:
-FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+User_Detail_ID,detail|--,,->param,IDParam,,,(,Long,,true,1)
+User_Detail_Batch_ID,batchDetail|--,,->param,IDListParam,,,(,Long,,true,1)
+User_List,list|--,,->param,UserListParam,,,(search,UserListSearchCriteria,,,1_name,String,User.name,,2_gender,Gender,User.gender,,2_,,,,2_phone,String,User.phone,,2_email,String,User.email,,2_birthdayMax,Date,User.birthday,,2_birthdayMin,Date,User.birthday,,2_portrait,String,User.portrait,,2_status,UserStatus,User.status,,2_creationDateMax,Date,User.creationDate,,2_creationDateMin,Date,User.creationDate,,2_updateDateMax,Date,User.updateDate,,2_updateDateMin,Date,User.updateDate,,2_permission,String,User.permission,,2)
+——————————————Mon Jan 15 14:55:00 CST 2018——————————————
 service name:User_Service
 add InterfaceSet:
-——————————————Sun Jan 14 18:16:27 CST 2018——————————————
-service name:materialinformation_Service
-add InterfaceSet:
-——————————————Sun Jan 14 18:16:27 CST 2018——————————————
-Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
-delete InterfaceSet:
-Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
-Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+User_New_Phone,createByPhone|-JSON-rst,,->param,UserCreateParam,UserCreateParam,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Get_Phone,createOrGetByPhone|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Email,createByEmail|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
 update InterfaceSet:
-UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+Password_Change,changePassword|--,,->param,UserPasswordChangeParam,,,(userId,Long,User.viaUserId,true,1_loginName,Long,User.name,true,1_oldPassword,String,User.password,true,1_password,String,User.password,,1)
+Password_Update,updatePassword|--,,->param,UserPasswordUpdateParam,,,(userId,Long,User.viaUserId,true,1_password,String,User.password,,1)
+Email_Bind,bindEmail|--,,->param,UserBindEmailParam,,,(userId,Long,User.viaUserId,true,1_email,String,User.email,true,1)
+Phone_Bind,bindPhone|--,,->param,UserBindPhoneParam,,,(userId,Long,User.viaUserId,true,1_phone,String,User.phone,true,1)
+User_Update_ID,update|--,,->param,UserUpdateParam,,,(id,Long,User.viaUserId,true,1_name,String,User.name,,1_gender,Gender,User.gender,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_portrait,String,User.portrait,,1)
+User_Active_ID,active|--,,->param,IDParam,,,(,,,,)
+User_Disable_ID,disable|--,,->param,IDParam,,,(,,,,)
 find InterfaceSet:
-FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
+User_Detail_ID,detail|--,,->param,IDParam,,,(,Long,,true,1)
+User_Detail_Batch_ID,batchDetail|--,,->param,IDListParam,,,(,Long,,true,1)
+User_List,list|--,,->param,UserListParam,,,(search,UserListSearchCriteria,,,1_name,String,User.name,,2_gender,Gender,User.gender,,2_,,,,2_phone,String,User.phone,,2_email,String,User.email,,2_birthdayMax,Date,User.birthday,,2_birthdayMin,Date,User.birthday,,2_portrait,String,User.portrait,,2_status,UserStatus,User.status,,2_creationDateMax,Date,User.creationDate,,2_creationDateMin,Date,User.creationDate,,2_updateDateMax,Date,User.updateDate,,2_updateDateMin,Date,User.updateDate,,2_permission,String,User.permission,,2)
+——————————————Mon Jan 15 14:57:51 CST 2018——————————————
 service name:User_Service
 add InterfaceSet:
-——————————————Sun Jan 14 18:17:00 CST 2018——————————————
-service name:materialinformation_Service
-add InterfaceSet:
-——————————————Sun Jan 14 18:17:00 CST 2018——————————————
-Material_New,addMaterials|-JSON-->imgTitle1,float,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
-delete InterfaceSet:
-Delete_MultipleMaterials,deleteMultipleMaterials|-JSON-->pictureName,String[],Materialinformation.pictureName,false
-Delete_Materials,deleteMaterials|-JSON-->materialId,int,Materialinformation.materialId,false
+User_New_Phone,createByPhone|-JSON-rst,,->param,UserCreateParam,UserCreateParam,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Get_Phone,createOrGetByPhone|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
+User_New_Email,createByEmail|-JSON-rst,,->param,UserCreateParam,,,(name,String,User.name,,1_gender,Gender,User.gender,,1_,,,,2_phone,String,User.phone,,_email,String,User.email,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_status,UserStatus,User.status,,1_creationDate,Date,User.creationDate,,1_updateDate,Date,User.updateDate,,1_password,String,User.password,,1_toActive,boolean,UserStatus.toActive,,1_flag,long,User.flag,,1)
 update InterfaceSet:
-UPDATE_MaterialInfo,editMaterialInfo|-JSON-->materialId,String,Materialinformation.materialId,false_imgTitle1,String,Materialinformation.imgTitle1,false_imgAuthor1,String,Materialinformation.imgAuthor1,false,(,,,,)_imgDetail1,String,Materialinformation.imgDetail1,false_CommonsMultipartFile,imgFiles,Materialinformation.CommonsMultipartFile,false
+Password_Change,changePassword|--,,->param,UserPasswordChangeParam,,,(userId,Long,User.viaUserId,true,1_loginName,Long,User.name,true,1_oldPassword,String,User.password,true,1_password,String,User.password,,1)
+Password_Update,updatePassword|--,,->param,UserPasswordUpdateParam,,,(userId,Long,User.viaUserId,true,1_password,String,User.password,,1)
+Email_Bind,bindEmail|--,,->param,UserBindEmailParam,,,(userId,Long,User.viaUserId,true,1_email,String,User.email,true,1)
+Phone_Bind,bindPhone|--,,->param,UserBindPhoneParam,,,(userId,Long,User.viaUserId,true,1_phone,String,User.phone,true,1)
+User_Update_ID,update|--,,->param,UserUpdateParam,,,(id,Long,User.viaUserId,true,1_name,String,User.name,,1_gender,Gender,User.gender,,1_birthday,Date,User.birthday,,1_portrait,String,User.portrait,,1_portrait,String,User.portrait,,1)
+User_Active_ID,active|--,,->param,IDParam,,,(,,,,)
+User_Disable_ID,disable|--,,->param,IDParam,,,(,,,,)
 find InterfaceSet:
-FIND_SellerInfo,displaySellerInfo|-JSON-->
-Materialinformation_Find_Condition,searchMaterial|-JSON-->accessState,String,Materialinformation.state,false_phototype,String,Materialinformation.type,false_title,String,Materialinformation.title,false_starttime,String,Materialinformation.starttime,false_endtime,String,Materialinformation.endtime,false
-service name:User_Service
-add InterfaceSet:
+User_Detail_ID,detail|--,,->param,IDParam,,,(,Long,,true,1)
+User_Detail_Batch_ID,batchDetail|--,,->param,IDListParam,,,(,Long,,true,1)
+User_List,list|--,,->param,UserListParam,,,(search,UserListSearchCriteria,,,1_name,String,User.name,,2_gender,Gender,User.gender,,2_,,,,2_phone,String,User.phone,,2_email,String,User.email,,2_birthdayMax,Date,User.birthday,,2_birthdayMin,Date,User.birthday,,2_portrait,String,User.portrait,,2_status,UserStatus,User.status,,2_creationDateMax,Date,User.creationDate,,2_creationDateMin,Date,User.creationDate,,2_updateDateMax,Date,User.updateDate,,2_updateDateMin,Date,User.updateDate,,2_permission,String,User.permission,,2)

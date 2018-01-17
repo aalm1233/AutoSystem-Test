@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class App 
 {
-    public static void main( String[] args ) throws IOException, InterruptedException
+    public static void main(String[] args) throws IOException, InterruptedException
     {
     	switch (args.length) {
 		case 0:

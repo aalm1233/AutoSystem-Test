@@ -5,31 +5,43 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class ElementConstrain {
-	private String resourceId;
-	private String paramName;
-	private String elementName;
-	private NodeList constraints;
-	
-	public ElementConstrain(String resourceId,String paramName, String elementName, Node restriction) {
+	private String resourceId = null;
+	private String paramName = null;
+	private String elementName = null;
+	private NodeList constraints = null;
+
+	public ElementConstrain(String resourceId, String paramName, String elementName, Node restriction) {
 		this.resourceId = resourceId;
 		this.paramName = paramName;
 		this.elementName = elementName;
 		this.constraints = restriction.getChildNodes();
 	}
-	
+
 	public String getResult() {
-		return this.resourceId+"-"+this.paramName+"-"+this.elementName+"<"+constrainAnalysis()+">";
-	}
-	
-	private String constrainAnalysis(){
-		StringBuffer result = new StringBuffer();
-		for(int i = 0;i<constraints.getLength();i++){		
-			Element constraint = (Element)constraints.item(i);
-			String constraintname = constraint.getNodeName();
-			String constraintt =  constraint.getTextContent();
-			result.append(constraintname+":"+constraintt+"#");
+		String reslut = null;
+		try {
+			reslut = this.resourceId + "-" + this.paramName + "-" + this.elementName + "<"
+					+ this.constrainAnalysis() + ">";
+			return reslut;
+		} catch (NullPointerException e) {
+			System.err.println(e.getMessage());
 		}
-		result.deleteCharAt(result.length()-1);
+		return reslut;
+	}
+
+	private String constrainAnalysis() {
+		StringBuffer result = new StringBuffer();
+		for (int i = 0; i < constraints.getLength(); i++) {
+			try{
+				Element constraint = (Element) constraints.item(i);
+				String constraintname = constraint.getNodeName();
+				String constraintt = constraint.getTextContent();
+				result.append(constraintname + ":" + constraintt + "#");
+			}catch (Exception e) {
+				//System.err.println(e.getMessage());
+			}
+		}
+		result.deleteCharAt(result.length() - 1);
 		return result.toString();
 	}
 }
