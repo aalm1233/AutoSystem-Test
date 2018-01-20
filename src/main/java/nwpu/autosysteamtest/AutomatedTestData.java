@@ -24,6 +24,7 @@ public class AutomatedTestData {
 	protected ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
+	protected ConcurrentHashMap<String, ArrayList<String>> elementConstrainsMap;
 	protected String resourcesid;
 	protected String resourceid;
 	protected String path;
@@ -37,6 +38,7 @@ public class AutomatedTestData {
 		this.updateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
 		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
 		this.parameterConstrainsMap = documentPrepcessing.getParameterConstrainsMap();
+		this.elementConstrainsMap = documentPrepcessing.getElementConstrainsMap();
 	}
 
 	public void run1() {

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Stack;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,6 +22,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import nwpu.autosysteamtest.enity.RequestElement;
+import nwpu.autosysteamtest.enity.RequestParam;
+import nwpu.autosysteamtest.enity.ResponseElement;
+import nwpu.autosysteamtest.enity.ResponseParam;
+import nwpu.autosysteamtest.enity.Service;
+
 /**
  * 
  * @author Dengtong
@@ -29,12 +37,7 @@ import org.xml.sax.SAXException;
 public class DocumentPrepcessing {
 	private volatile static DocumentPrepcessing documentPrepcessing;
 	private ConcurrentHashMap<String, String> operaterTypesMap;
-	private ConcurrentHashMap<String, ArrayList<String>> addInterfaceSetMap;
-	private ConcurrentHashMap<String, ArrayList<String>> deleteInterfaceSetMap;
-	private ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
-	private ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
-	private ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
-	private ConcurrentHashMap<String, ArrayList<String>> elementConstrainsMap;
+	private ArrayList<Service> services;
 	File[] fileSet;
 
 	public static DocumentPrepcessing getInstance() throws InterruptedException {
@@ -62,17 +65,23 @@ public class DocumentPrepcessing {
 	private DocumentPrepcessing() {
 
 	}
+	public Service searchServiceById(String id){
+		Service reslut = null;
+		for(Service s: services){
+			String sid = s.getName();
+			if(sid.equals(id)){
+				reslut = s;
+				break;
+			}
+		}
+		return reslut;
+	}
 
 	public DocumentPrepcessing(File[] fileSet) throws InterruptedException, FileNotFoundException {
 		super();
 		this.fileSet = fileSet;
 		operaterTypesMap = new ConcurrentHashMap<String, String>();
-		addInterfaceSetMap = new ConcurrentHashMap<String, ArrayList<String>>();
-		deleteInterfaceSetMap = new ConcurrentHashMap<String, ArrayList<String>>();
-		updateInterfaceSetMap = new ConcurrentHashMap<String, ArrayList<String>>();
-		findInterfaceSetMap = new ConcurrentHashMap<String, ArrayList<String>>();
-		parameterConstrainsMap = new ConcurrentHashMap<String, ArrayList<String>>();
-		elementConstrainsMap = new ConcurrentHashMap<String, ArrayList<String>>();
+		services = new ArrayList<>();
 		run();
 	}
 
@@ -85,54 +94,18 @@ public class DocumentPrepcessing {
 		}
 	}
 
+	public void addService(Service service) {
+		services.add(service);
+	}
+
 	public ConcurrentHashMap<String, String> getOperaterTypesMap() {
 		return operaterTypesMap;
 	}
 
-	public ConcurrentHashMap<String, ArrayList<String>> getAddInterfaceSetMap() {
-		return addInterfaceSetMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getElementConstrainsMap() {
-		return elementConstrainsMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getDeleteInterfaceSetMap() {
-		return deleteInterfaceSetMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getUpdateInterfaceSetMap() {
-		return updateInterfaceSetMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getFindInterfaceSetMap() {
-		return findInterfaceSetMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getParameterConstrainsMap() {
-		return parameterConstrainsMap;
-	}
-
-	public ConcurrentHashMap<String, ArrayList<String>> getXInteInterfaceSetMap(String type) {
-		switch (type) {
-		case "add":
-			return addInterfaceSetMap;
-		case "delete":
-			return deleteInterfaceSetMap;
-		case "update":
-			return updateInterfaceSetMap;
-		case "find":
-			return findInterfaceSetMap;
-		default:
-			return null;
-		}
-	}
-
 	class DocumentPrepcssingThread implements Runnable {
 		private StringBuffer operaterTypes;
-		private ArrayList<String> parameterConstrainsSet;
-		private ArrayList<String> elementConstrainsSet;
 		protected Document doc;
+		Service service;
 		File file;
 		private PrintWriter out;
 
@@ -148,7 +121,7 @@ public class DocumentPrepcessing {
 					dir.mkdirs();
 				}
 				out = new PrintWriter(new BufferedWriter(new FileWriter(dir.getAbsolutePath() + "//log.txt", true)));
-				out.println("——————————————" + new Date() + "——————————————");
+				out.println("---------------------------" + new Date() + "---------------------------");
 			} catch (FileNotFoundException e2) {
 				e2.printStackTrace();
 			} catch (IOException e) {
@@ -162,12 +135,6 @@ public class DocumentPrepcessing {
 			}
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder bulider;
-			ArrayList<String> addInterfaceSet = new ArrayList<String>();
-			ArrayList<String> deleteInterfaceSet = new ArrayList<String>();
-			ArrayList<String> updateInterfaceSet = new ArrayList<String>();
-			ArrayList<String> findInterfaceSet = new ArrayList<String>();
-			parameterConstrainsSet = new ArrayList<String>();
-			elementConstrainsSet = new ArrayList<>();
 			operaterTypes = new StringBuffer();
 			try {
 				bulider = factory.newDocumentBuilder();
@@ -180,6 +147,8 @@ public class DocumentPrepcessing {
 				e.printStackTrace();
 			}
 			Element root = doc.getDocumentElement();
+			service = new Service(root.getAttribute(ResourcesAttribute.name.toString()),
+					ResourcesAttribute.id.toString(), ResourcesAttribute.base.toString());
 			out.flush();
 			out.println("service name:" + root.getAttribute(ResourcesAttribute.id.toString()));
 			NodeList addNodeList = root.getElementsByTagName(Operation.add.toString());
@@ -189,101 +158,239 @@ public class DocumentPrepcessing {
 			if (addNodeList.getLength() == 1) {
 				out.println("add InterfaceSet:");
 				out.flush();
-				initInterfaceSetMap("add", addNodeList.item(0), addInterfaceSet);
-				documentPrepcessing.getAddInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
-						addInterfaceSet);
+				ArrayList<nwpu.autosysteamtest.enity.Operation> adds = new ArrayList<>();
+				service.setAdds(adds);
+				initInterfaceSetMap( addNodeList.item(0), adds);
 			}
 			if (deleteNodeList.getLength() == 1) {
 				out.println("delete InterfaceSet:");
 				out.flush();
-				initInterfaceSetMap("delete", deleteNodeList.item(0), deleteInterfaceSet);
-				documentPrepcessing.getDeleteInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
-						deleteInterfaceSet);
+				ArrayList<nwpu.autosysteamtest.enity.Operation> deletes = new ArrayList<>();
+				service.setDeletes(deletes);
+				initInterfaceSetMap(deleteNodeList.item(0), deletes);
 			}
 			if (updateNodeList.getLength() == 1) {
 				out.println("update InterfaceSet:");
 				out.flush();
-				initInterfaceSetMap("update", updateNodeList.item(0), updateInterfaceSet);
-				documentPrepcessing.getUpdateInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
-						updateInterfaceSet);
+				ArrayList<nwpu.autosysteamtest.enity.Operation> updates = new ArrayList<>();
+				service.setUpdates(updates);
+				initInterfaceSetMap(updateNodeList.item(0), updates);
+
 			}
 			if (findNodeList.getLength() == 1) {
 				out.println("find InterfaceSet:");
 				out.flush();
-				initInterfaceSetMap("find", findNodeList.item(0), findInterfaceSet);
-				documentPrepcessing.getFindInterfaceSetMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
-						findInterfaceSet);
+				ArrayList<nwpu.autosysteamtest.enity.Operation> finds = new ArrayList<>();
+				service.setFinds(finds);
+				initInterfaceSetMap(findNodeList.item(0), finds);
+
 			}
+			documentPrepcessing.addService(service);
 			documentPrepcessing.getOperaterTypesMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 					operaterTypes.toString());
 			out.close();
 		}
 
-		private String paramAnalysis(Element resource, Element requestParam) {
-			StringBuffer reslut = new StringBuffer();
-			try{
+		private RequestParam requestParamAnalysis(Element resource, Element requestParam) {
+			RequestParam param = null;
+			try {
 				NodeList elements = requestParam.getElementsByTagName(TagName.element.toString());
 				if (elements.getLength() > 0) {
-					reslut.append(requestParam.getAttribute(ParamAttribute.name.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.type.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.attribute.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.location.toString()));
-					reslut.append(",(");
+					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
+							requestParam.getAttribute(ParamAttribute.attribute.toString()), 
+							requestParam.getAttribute(ParamAttribute.type.toString()), 
+							requestParam.getAttribute(ParamAttribute.location.toString()));
 					int elementsNum = elements.getLength();
+					ArrayList<RequestElement> elementes = new ArrayList<>();
 					for (int i = 0; i < elementsNum; i++) {
-						reslut.append(elementAnalysis(resource, requestParam, (Element) elements.item(i)));
-						if(i < elementsNum-1){
-							reslut.append("_");
+						Stack<RequestElement> stack = new Stack<>();
+						RequestElement requestElement = requestElementAnalysis(
+								resource, 
+								requestParam, 
+								(Element) elements.item(i));
+						if(stack.isEmpty()){
+							stack.push(requestElement);
+							elementes.add(requestElement);
+						}else{
+							int parentLevel = stack.peek().getLevel();
+							if(parentLevel == requestElement.getLevel()){
+								stack.pop();
+								stack.push(requestElement);
+							}else if(parentLevel > requestElement.getLevel()){
+								stack.pop();
+								for(;;){
+									if(stack.empty()){
+										stack.push(requestElement);
+										break;
+									}else{
+										parentLevel = stack.peek().getLevel();
+										if(stack.empty()){
+											stack.push(requestElement);
+											break;
+										}else{
+											if(parentLevel == requestElement.getLevel()){
+												stack.pop();
+												stack.push(requestElement);
+												break;
+											}else if(parentLevel > requestElement.getLevel()){
+												stack.pop();
+												continue;
+											}
+										}
+									}
+								}
+							}else if(parentLevel < requestElement.getLevel()){
+								RequestElement parentElement = stack.peek();
+								parentElement.addElement(requestElement);
+								stack.push(requestElement);
+							}
 						}
 					}
-					reslut.append(")");
 				} else {
-					reslut.append(requestParam.getAttribute(ParamAttribute.name.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.type.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.attribute.toString()) + ","
-							+ requestParam.getAttribute(ParamAttribute.location.toString()));
+					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
+							requestParam.getAttribute(ParamAttribute.attribute.toString()), 
+							requestParam.getAttribute(ParamAttribute.type.toString()), 
+							requestParam.getAttribute(ParamAttribute.location.toString()));
 					NodeList restrictions = requestParam.getElementsByTagName(ParamElement.restriction.toString());
 					if (restrictions.getLength() == 1) {
 						Node restriction = restrictions.item(0);
-						ParameterConstrain constrain = new ParameterConstrain(
-								resource.getAttribute(ResourcesAttribute.id.toString()),
-								requestParam.getAttribute(ParamAttribute.name.toString()), restriction);
-						String parameterConstrains = constrain.getResult();
-						parameterConstrainsSet.add(parameterConstrains);
+						ParameterConstrain constrain = new ParameterConstrain(restriction);
+						ArrayList<String> parameterConstrains = constrain.getResult();
+						param.setConstraint(parameterConstrains);
+						out.println("    "
+								+resource.getAttribute(
+								ResourcesAttribute.id.toString())
+								+"-"+
+								requestParam.getAttribute(ParamAttribute.name.toString())
+								+parameterConstrains.toString());
 					}
 				}
-				return reslut.toString();
-			}catch (Exception e) {
+				return param;
+			} catch (Exception e) {
 				System.err.println("param error");
 			}
-			return reslut.toString();
+			return param;
 		}
-
-		private String elementAnalysis(Element resource, Element requestParam, Element element) {
-			StringBuffer reslut = new StringBuffer();
-			try{
-				reslut.append(element.getAttribute(ElementAttribute.name.toString()) + ","
-						+ element.getAttribute(ElementAttribute.type.toString()) + ","
-						+ element.getAttribute(ElementAttribute.attribute.toString()) + ","
-						+ element.getAttribute(ElementAttribute.location.toString()) + ","
-						+ element.getAttribute(ElementAttribute.level.toString()));
+		private RequestElement requestElementAnalysis(Element resource, Element requestParam, Element element) {
+			RequestElement element2 = null;
+			try {
+				String levelstring = element.getAttribute(ElementAttribute.level.toString());
+				int level = 1;
+				if(!"".equals(levelstring)){
+					level =Integer.parseInt(levelstring);
+				}
+				element2 = new RequestElement(
+						element.getAttribute(ElementAttribute.name.toString()),
+						element.getAttribute(ElementAttribute.attribute.toString()), 
+						element.getAttribute(ElementAttribute.type.toString()),
+						element.getAttribute(ElementAttribute.location.toString()),
+						level);
 				NodeList restrictions = element.getElementsByTagName(ParamElement.restriction.toString());
 				if (restrictions.getLength() == 1) {
 					Node restriction = restrictions.item(0);
-					ElementConstrain constrain = new ElementConstrain(
-							resource.getAttribute(ResourcesAttribute.id.toString()),
-							requestParam.getAttribute(ParamAttribute.name.toString()),
-							element.getAttribute(ElementAttribute.name.toString()), restriction);
-					String parameterConstrains = constrain.getResult();
-					elementConstrainsSet.add(parameterConstrains);
+					ElementConstrain constrain = new ElementConstrain(restriction);
+					ArrayList<String> elementConstrains = constrain.getResult();
+					element2.setConstraints(elementConstrains);
+					out.println("          "
+							+resource.getAttribute(ResourcesAttribute.id.toString()) 
+							+ "-" 
+							+ requestParam.getAttribute(ParamAttribute.name.toString()) 
+							+ "-" 
+							+ element.getAttribute(ElementAttribute.name.toString()) 
+							+ elementConstrains.toString());
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
+				e.printStackTrace();
 				System.err.println("element error");
 			}
-			return reslut.toString();
+			return element2;
 		}
 
-		private void initInterfaceSetMap(String type, Node node, ArrayList<String> xInteInterfaceSet) {
+		private ResponseParam responseParamAnalysis(Element resource, Element responseParam) {
+			ResponseParam param = null;
+			try {
+				NodeList elements = responseParam.getElementsByTagName(TagName.element.toString());
+				if (elements.getLength() > 0) {
+					param = new ResponseParam(responseParam.getAttribute(ParamAttribute.name.toString()),
+							responseParam.getAttribute(ParamAttribute.attribute.toString()));
+					int elementsNum = elements.getLength();
+					ArrayList<ResponseElement> elementes = new ArrayList<>();
+					for (int i = 0; i < elementsNum; i++) {
+						Stack<ResponseElement> stack = new Stack<>();
+						ResponseElement responseElement = responseElementAnalysis(
+								resource, 
+								responseParam, 
+								(Element) elements.item(i));
+						if(stack.isEmpty()){
+							stack.push(responseElement);
+							elementes.add(responseElement);
+						}else{
+							int parentLevel = stack.peek().getLevel();
+							if(parentLevel == responseElement.getLevel()){
+								stack.pop();
+								stack.push(responseElement);
+							}else if(parentLevel > responseElement.getLevel()){
+								stack.pop();
+								for(;;){
+									if(stack.empty()){
+										stack.push(responseElement);
+										break;
+									}else{
+										parentLevel = stack.peek().getLevel();
+										if(stack.empty()){
+											stack.push(responseElement);
+											break;
+										}else{
+											if(parentLevel == responseElement.getLevel()){
+												stack.pop();
+												stack.push(responseElement);
+												break;
+											}else if(parentLevel > responseElement.getLevel()){
+												stack.pop();
+												continue;
+											}
+										}
+									}
+								}
+							}else if(parentLevel < responseElement.getLevel()){
+								ResponseElement parentElement = stack.peek();
+								parentElement.addElement(responseElement);
+								stack.push(responseElement);
+							}
+						}
+					}
+				} else {
+					param = new ResponseParam(responseParam.getAttribute(ParamAttribute.name.toString()),
+							responseParam.getAttribute(ParamAttribute.attribute.toString()));
+				}
+				return param;
+			} catch (Exception e) {
+				System.err.println("param error");
+			}
+			return param;
+		}
+		
+		private ResponseElement responseElementAnalysis(Element resource, Element responseParam, Element element) {
+			ResponseElement element2 = null;
+			try {
+				String levelstring = element.getAttribute(ElementAttribute.level.toString());
+				int level = 1;
+				if(!"".equals(levelstring)){
+					level =Integer.parseInt(levelstring);
+				}
+				element2 = new ResponseElement(element.getAttribute(ElementAttribute.name.toString()),
+						element.getAttribute(ElementAttribute.attribute.toString()), 
+						element.getAttribute(ElementAttribute.type.toString()), 
+						level);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("element error");
+			}
+			return element2;
+		}
+		
+		private void initInterfaceSetMap(Node node,
+				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
 			DocumentPrepcessing documentPrepcessing = null;
 			try {
 				documentPrepcessing = DocumentPrepcessing.getInstance();
@@ -299,14 +406,20 @@ public class DocumentPrepcessing {
 						Element element = (Element) resourceList.item(i);
 						if (TagName.resource.toString().equals(element.getNodeName())) {
 							Element resource = element;
+							nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
+									resource.getAttribute(ResourceAttribute.name.toString()),
+									resource.getAttribute(ResourceAttribute.id.toString()),
+									resource.getAttribute(ResourceAttribute.path.toString()));
+							out.println("  "+operation.toString());
+							out.flush();
 							NodeList requestAndResponse = resource.getChildNodes();
 							Element request = null;
 							Element response = null;
 							for (int k = 0; k < requestAndResponse.getLength(); k++) {
 								try {
-									Element elementTemp = (Element) requestAndResponse.item(k);						
+									Element elementTemp = (Element) requestAndResponse.item(k);
 									if (TagName.request.toString().equals(elementTemp.getNodeName())) {
-										request = elementTemp;						
+										request = elementTemp;
 									}
 									if (TagName.response.toString().equals(elementTemp.getNodeName())) {
 										response = elementTemp;
@@ -316,6 +429,15 @@ public class DocumentPrepcessing {
 							}
 							if (request != null && response != null) {
 								NodeList requestParams = request.getElementsByTagName(Param.param.toString());
+								ArrayList<RequestParam> requestParames = new ArrayList<>();
+								for (int j = 0; j < requestParams.getLength(); j++) {
+									RequestParam requestParam = null;
+									try {
+										requestParam = requestParamAnalysis(resource, (Element) requestParams.item(j));
+										requestParames.add(requestParam);
+									} catch (Exception e) {
+									}
+								}
 								NodeList dependencys = request.getElementsByTagName(Param.dependency.toString());
 								if (dependencys.getLength() != 0) {
 									for (int j = 0; j < dependencys.getLength(); j++) {
@@ -333,63 +455,31 @@ public class DocumentPrepcessing {
 												}
 											}
 										}
-										ArrayList<String> xInteInterfaces = documentPrepcessing
-												.getXInteInterfaceSetMap(type).get(resourcesid);// 获取对应服务分对应操作的所有接口
-										String xInteInterface = null;
-										for (String inteInterface : xInteInterfaces) {// 遍历所有接口
-											if (inteInterface.contains(resourceid)) {// 获得制定接口
-												xInteInterface = inteInterface;// 得到对应接口所有信息
-											}
-										}
-										xInteInterfaceSet.add(xInteInterface.toString());
-										for (String s : documentPrepcessing.getParameterConstrainsMap()
-												.get(resourcesid)) {// 对于被依赖的服务的约束条件表进行遍历
-											if (s.contains(resourceid)) {
-												parameterConstrainsSet.add(s);// 将被依赖接口的约束添加进该接口约束域内
-											}
-										}
+										nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing.searchServiceById(resourcesid).searchAllOperationById(resourceid);
+										operation.addDependency(dependencyInteInterface);
 									}
 								}
-								StringBuffer xInteInterface = new StringBuffer(
-										resource.getAttribute(ResourceAttribute.id.toString()) + ","
-												+ resource.getAttribute(ResourceAttribute.path.toString()) + "|"
-												+ response.getAttribute(DataAttribute.name.toString()) + "-"
-												+ response.getAttribute(DataAttribute.dataType.toString()) + "-");
+								String responses = response.getAttribute(DataAttribute.dataType.toString());
+								operation.setResponse(responses);
 								NodeList responseParams = response.getElementsByTagName(Param.param.toString());
+								ArrayList<ResponseParam> responseParames = new ArrayList<>();
+								operation.setRequestParams(requestParames);
 								for (int j = 0; j < responseParams.getLength(); j++) {
-									Element responseParam = (Element) responseParams.item(j);
-									xInteInterface.append(responseParam.getAttribute(ParamAttribute.name.toString())
-											+ "," + responseParam.getAttribute(ParamAttribute.type.toString()) + ","
-											+ responseParam.getAttribute(ParamAttribute.attribute.toString()));
-									if (j < requestParams.getLength() - 1) {
-										xInteInterface.append("_");
+									ResponseParam responseParam = null;
+									try {
+										responseParam = responseParamAnalysis(resource, (Element) responseParams.item(j));
+										responseParames.add(responseParam);
+									} catch (Exception e) {
 									}
 								}
-								xInteInterface.append("->");
-									for (int j = 0; j < requestParams.getLength(); j++) {
-										String param = null;
-										try{
-											param = paramAnalysis(resource, (Element) requestParams.item(j));
-										}catch (Exception e) {
-											System.err.println(param);
-										}
-										xInteInterface.append(param);	
-									if (j < requestParams.getLength() - 1) {
-										xInteInterface.append("_");
-									}
-								}
-								Element root = (Element) node.getParentNode();
-								documentPrepcessing.getParameterConstrainsMap().put(
-										root.getAttribute(ResourcesAttribute.id.toString()), parameterConstrainsSet);
-								documentPrepcessing.getElementConstrainsMap().put(
-										root.getAttribute(ResourcesAttribute.id.toString()), elementConstrainsSet);
-								out.println(xInteInterface.toString());
 								out.flush();
-								xInteInterfaceSet.add(xInteInterface.toString());
+
 							}
+							operations.add(operation);
 						}
 					} catch (Exception e) {
 					}
+					
 				}
 			}
 			synchronized (this) {
@@ -400,51 +490,41 @@ public class DocumentPrepcessing {
 }
 
 enum DependencyAttribute {
-	// 依赖属性
 	resourcesid, resourceid
 }
 
 enum ResourcesAttribute {
-	// 每一个实体的属性
 	id, name, base, premise
 }
 
 enum Operation {
-	// 操作类型
 	add, delete, update, find
 }
 
 enum ResourceAttribute {
-	// 每一个操作的属性
 	id, name, path, cascade
 }
 
 enum DataAttribute {
-	// 返回数据类型
-	name, type, dataType
+	dataType
 }
 
 enum Param {
-	// 参数
 	param, dependency
 }
 
 enum ParamAttribute {
-	// 参数属性
 	name, attribute, type, required, location
 }
 
 enum ParamElement {
-	// param的子节点
 	restriction, element,
 }
 
 enum ElementAttribute {
-	// 子项包含
 	name, level, type, attribute, location
 }
 
 enum TagName {
-	// 标签名
 	resources, resource, add, find, delete, update, param, element, restricition, request, response
 }
