@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import nwpu.autosysteamtest.enity.Operation;
+import nwpu.autosysteamtest.enity.RequestElement;
 import nwpu.autosysteamtest.enity.RequestParam;
 import nwpu.autosysteamtest.enity.ResponseParam;
 import nwpu.autosysteamtest.enity.Service;
@@ -202,46 +203,62 @@ public class GeneratingInterfaceSequence {
 		out.println("<script resourcesID=\""+service.getId()+"\""+" sequence=\"\" completed=\"false\" >");
 		out.flush();
 		for(Operation operation :output){
-			String operationtype = operation.getType();
-			String name = operation.getName();
-			String path = operation.getPath();
-			out.println("	<step operation=\""+operationtype+"\" path=\""+path+"\" name=\""+name+"\" >");
-			out.flush();
-			ArrayList<ResponseParam> responseParams = operation.getResponseParams();
-			ArrayList<RequestParam> requestParams = operation.getRequestParams();
-			if(requestParams != null){
-				
-			}
-			if(line.split("\\|")[1].split("->").length > 1){
-				String params = line.split("\\|")[1].split("->")[1];
-				String response = line.split("\\|")[1].split("->")[0];
-				String[] param = params.split("_");
-				String[] responseParam = null;
-				try{
-					responseParam =response.split("-")[2].split("_");
-				}catch(Exception e){
-				}
-				for(String p :param){
-					out.println("		<param name=\""+p.split(",")[0]+"\" attribute=\""+p.split(",")[2]+"\" value=\"\"/>");
-					out.flush();
-				}
-				out.println("	<response name=\""+response.split("-")[0]+"\" type=\""+response.split("-")[1]+"\" >");
-				out.flush();
-				if(responseParam != null&&responseParam.length > 1){
-					for(String p :responseParam){
-						out.println("		<param name=\""+p.split(",")[0]+"\" attribute=\""+p.split(",")[2]+"\" />");
-						out.flush();
-					}
-				}
-				out.println("	</response>");
-				out.flush();
-			}
-			out.println("	</step>");
-			out.flush();
+			printlnOperation(operation,out);
 		}
 		out.println("</script>");
 		out.flush();
 		out.close();
+	}
+	private void printlnDependency(ArrayList<Operation> operations, PrintWriter out) {
+		for(Operation operation : operations){
+			printlnOperation(operation,out);
+		}
+	}
+	private void printlnOperation(Operation operation,PrintWriter out){
+		String operationtype = operation.getType();
+		String name = operation.getName();
+		String path = operation.getPath();
+		ArrayList<Operation> dependencys = operation.getDependency();
+		if(dependencys != null&&dependencys.size() != 0){
+			printlnDependency(dependencys,out);
+		}
+		out.println("	<step operation=\""+operationtype+"\" path=\""+path+"\" name=\""+name+"\" >");
+		out.flush();
+		ArrayList<ResponseParam> responseParams = operation.getResponseParams();
+		ArrayList<RequestParam> requestParams = operation.getRequestParams();
+		if(requestParams != null&&requestParams.size() != 0){
+			for(RequestParam requestParam : requestParams){
+				out.println("		<param name=\""+requestParam.getName()+"\" attribute=\""+requestParam.getAttribute()+"\" location=\""+requestParam.getLocation()+">");
+				out.flush();
+				ArrayList<RequestElement> requestElements = requestParam.getElements();
+				if(requestElements != null&&requestElements.size() != 0){
+					for(RequestElement requestElement:requestElements){
+						printlnElement(requestElement,out);
+						break;
+					}
+				}
+				out.println("		</param>");
+				out.flush();
+			}
+		}
+		if(responseParams != null){
+			out.println("	<response type=\""+operation.getResponse()+"\" >");
+			out.flush();
+			if(responseParams.size() != 0){
+				for(ResponseParam responseParam : responseParams){
+					out.println("		<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" />");
+					out.flush();
+				}
+			}
+			out.println("	</response>");
+			out.flush();
+		}
+		out.println("	</step>");
+		out.flush();
+	}
+	private void printlnElement(RequestElement requestElement, PrintWriter out) {
+		out.println("			<element"+requestElement.getLevel()+" name=\""+requestElement.getName()+"\"");
+		
 	}
 	
 }

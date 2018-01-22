@@ -16,4 +16,11 @@ public class ResponseParam {
 	public void setElements(ArrayList<ResponseElement> elements) {
 		this.elements = elements;
 	}
+	public String getName() {
+		return name;
+	}
+	public String getAttribute() {
+		return attribute;
+	}
+	
 }
