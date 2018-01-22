@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Stack;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -65,6 +64,12 @@ public class DocumentPrepcessing {
 	private DocumentPrepcessing() {
 
 	}
+	
+	
+	public ArrayList<Service> getServices() {
+		return services;
+	}
+
 	public Service searchServiceById(String id){
 		Service reslut = null;
 		for(Service s: services){
@@ -397,7 +402,8 @@ public class DocumentPrepcessing {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			operaterTypes.append("<" + node.getNodeName() + ">");
+			String type = node.getNodeName();
+			operaterTypes.append("<" + type + ">");
 			NodeList resourceList = node.getChildNodes();
 			int ntv = resourceList.getLength();
 			for (int i = 0; i < ntv; i++) {
@@ -409,7 +415,8 @@ public class DocumentPrepcessing {
 							nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
 									resource.getAttribute(ResourceAttribute.name.toString()),
 									resource.getAttribute(ResourceAttribute.id.toString()),
-									resource.getAttribute(ResourceAttribute.path.toString()));
+									resource.getAttribute(ResourceAttribute.path.toString()),
+									type);
 							out.println("  "+operation.toString());
 							out.flush();
 							NodeList requestAndResponse = resource.getChildNodes();

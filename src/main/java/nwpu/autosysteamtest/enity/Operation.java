@@ -6,15 +6,17 @@ public class Operation {
 	private String name;
 	private String id;
 	private String path;
+	private String type;
 	private ArrayList<RequestParam> requestParams;
 	private ArrayList<ResponseParam> responseParams;
 	private String response;
 	private ArrayList<Operation> dependencys;
 	
-	public Operation(String name,String id,String path){
+	public Operation(String name,String id,String path,String type){
 		this.name = name;
 		this.id = id;
 		this.path = path;
+		this.type = type;
 		this.requestParams = null;
 		this.responseParams = null;
 	}
@@ -24,6 +26,19 @@ public class Operation {
 	@Override
 	public String toString() {
 		return "Operation [name=" + name + ", id=" + id + ", path=" + path + "]";
+	}
+	public boolean equals(Operation obj) {
+		if(this.id.equals(obj.getId())){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+
+
+
+	public String getType() {
+		return type;
 	}
 
 
