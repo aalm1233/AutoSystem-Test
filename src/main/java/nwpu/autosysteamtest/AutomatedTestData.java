@@ -25,7 +25,7 @@ public class AutomatedTestData {
 	protected ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
 	protected ConcurrentHashMap<String, ArrayList<String>> elementConstrainsMap;
-	protected String resourcesid;
+	protected String resourcesid; 
 	protected String resourceid;
 	protected String path;
 

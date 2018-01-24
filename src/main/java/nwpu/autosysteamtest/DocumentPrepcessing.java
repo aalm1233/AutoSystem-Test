@@ -73,7 +73,7 @@ public class DocumentPrepcessing {
 	public Service searchServiceById(String id){
 		Service reslut = null;
 		for(Service s: services){
-			String sid = s.getName();
+			String sid = s.getId();
 			if(sid.equals(id)){
 				reslut = s;
 				break;
@@ -153,9 +153,10 @@ public class DocumentPrepcessing {
 			}
 			Element root = doc.getDocumentElement();
 			service = new Service(root.getAttribute(ResourcesAttribute.name.toString()),
-					ResourcesAttribute.id.toString(), ResourcesAttribute.base.toString());
+					root.getAttribute(ResourcesAttribute.id.toString()),
+					root.getAttribute(ResourcesAttribute.base.toString()));
 			out.flush();
-			out.println("service name:" + root.getAttribute(ResourcesAttribute.id.toString()));
+			out.println("service name:" + service.getId());
 			NodeList addNodeList = root.getElementsByTagName(Operation.add.toString());
 			NodeList deleteNodeList = root.getElementsByTagName(Operation.delete.toString());
 			NodeList updateNodeList = root.getElementsByTagName(Operation.update.toString());
@@ -268,6 +269,12 @@ public class DocumentPrepcessing {
 								+"-"+
 								requestParam.getAttribute(ParamAttribute.name.toString())
 								+parameterConstrains.toString());
+					}else{
+						out.println("    "
+								+resource.getAttribute(
+								ResourcesAttribute.id.toString())
+								+"-"+
+								requestParam.getAttribute(ParamAttribute.name.toString()));
 					}
 				}
 				return param;
@@ -303,6 +310,13 @@ public class DocumentPrepcessing {
 							+ "-" 
 							+ element.getAttribute(ElementAttribute.name.toString()) 
 							+ elementConstrains.toString());
+				}else{
+					out.println("          "
+							+resource.getAttribute(ResourcesAttribute.id.toString()) 
+							+ "-" 
+							+ requestParam.getAttribute(ParamAttribute.name.toString()) 
+							+ "-" 
+							+ element.getAttribute(ElementAttribute.name.toString()));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

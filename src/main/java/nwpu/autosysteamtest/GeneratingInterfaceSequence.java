@@ -257,7 +257,17 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 	}
 	private void printlnElement(RequestElement requestElement, PrintWriter out) {
-		out.println("			<element"+requestElement.getLevel()+" name=\""+requestElement.getName()+"\"");
+		out.println("			<element"+requestElement.getLevel()+" name=\""+requestElement.getName()+"\" attribute=\""+requestElement.getAttribute()+"\" >");
+		out.flush();
+		ArrayList<RequestElement> requestElements = requestElement.getElements();
+		if(requestElements != null&&requestElements.size() != 0){
+			for(RequestElement re:requestElements){
+				printlnElement(re,out);
+				break;
+			}
+		}
+		out.println("			</element"+requestElement.getLevel()+">");
+		out.flush();
 		
 	}
 	

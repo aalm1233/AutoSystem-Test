@@ -395,3 +395,347 @@ User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
 User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
 User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
 User_List,list|--,,->
+---------------------------Wed Jan 24 16:26:41 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:31:52 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:32:20 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:35:56 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:37:13 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:38:34 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:44:20 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+  Operation [name=update, id=User_Update_ID, path=update]
+  Operation [name=active, id=User_Active_ID, path=active]
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+---------------------------Wed Jan 24 16:45:09 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive
+          User_New_Phone-param-flag
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive
+          User_New_Get_Phone-param-flag
+  Operation [name=createByEmail, id=User_New_Email, path=createByEmail]
+          User_New_Email-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Email-param-gender
+          User_New_Email-param-
+          User_New_Email-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Email-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Email-param-birthday
+          User_New_Email-param-portrait
+          User_New_Email-param-status
+          User_New_Email-param-creationDate
+          User_New_Email-param-updateDate
+          User_New_Email-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Email-param-toActive
+          User_New_Email-param-flag
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=bindEmail, id=Email_Bind, path=bindEmail]
+          Email_Bind-param-userId
+          Email_Bind-param-email
+  Operation [name=bindPhone, id=Phone_Bind, path=bindPhone]
+          Phone_Bind-param-userId
+          Phone_Bind-param-phone
+  Operation [name=update, id=User_Update_ID, path=update]
+          User_Update_ID-param-id
+          User_Update_ID-param-name
+          User_Update_ID-param-gender
+          User_Update_ID-param-birthday
+          User_Update_ID-param-portrait
+          User_Update_ID-param-portrait
+  Operation [name=active, id=User_Active_ID, path=active]
+          User_Active_ID-param-
+  Operation [name=disable, id=User_Disable_ID, path=disable]
+          User_Disable_ID-param-
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
