@@ -10,6 +10,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.data.*;
+import nwpu.autosysteamtest.enity.Operation;
+import nwpu.autosysteamtest.enity.RequestParam;
+import nwpu.autosysteamtest.enity.Service;
 
 /**
  * 
@@ -19,26 +22,14 @@ import nwpu.autosysteamtest.data.*;
 public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
 	private ConcurrentHashMap<String, String> operaterTypesMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> addInterfaceSetMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> deleteInterfaceSetMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> updateInterfaceSetMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> findInterfaceSetMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> parameterConstrainsMap;
-	protected ConcurrentHashMap<String, ArrayList<String>> elementConstrainsMap;
+	protected Service service;
 	protected String resourcesid; 
-	protected String resourceid;
-	protected String path;
+	protected String path;	
 
 	public AutomatedTestData(String path) throws InterruptedException {
 		this.path = path;
 		documentPrepcessing = DocumentPrepcessing.getInstance();
 		this.operaterTypesMap = documentPrepcessing.getOperaterTypesMap();
-		this.addInterfaceSetMap = documentPrepcessing.getAddInterfaceSetMap();
-		this.deleteInterfaceSetMap = documentPrepcessing.getDeleteInterfaceSetMap();
-		this.updateInterfaceSetMap = documentPrepcessing.getUpdateInterfaceSetMap();
-		this.findInterfaceSetMap = documentPrepcessing.getFindInterfaceSetMap();
-		this.parameterConstrainsMap = documentPrepcessing.getParameterConstrainsMap();
-		this.elementConstrainsMap = documentPrepcessing.getElementConstrainsMap();
 	}
 
 	public void run1() {
@@ -57,6 +48,7 @@ public class AutomatedTestData {
 		this.path = path + "Data\\";
 		for (Iterator<String> it = key.iterator(); it.hasNext();) {
 			this.resourcesid = (String) it.next();
+			service = documentPrepcessing.searchServiceById(resourcesid);
 			try {
 				file = new File(path + this.resourcesid);
 				if (!file.exists()) {
@@ -78,24 +70,19 @@ public class AutomatedTestData {
 	}
 
 	protected void run2() throws FileNotFoundException, ParseException {
-		xAutomated("add", this.addInterfaceSetMap);
-		xAutomated("upData", this.updateInterfaceSetMap);
-		xAutomated("delete", this.deleteInterfaceSetMap);
-		xAutomated("find", this.findInterfaceSetMap);
+		xAutomated("add", service.getAdds());
+		xAutomated("upData", service.getUpdates());
+		xAutomated("delete", service.getDeletes());
+		xAutomated("find", service.getFinds());
 	}
 
-	private void xAutomated(String operation, ConcurrentHashMap<String, ArrayList<String>> xInterfaceSetMap)
+	private void xAutomated(String operation, ArrayList<Operation> xInterfaces)
 			throws FileNotFoundException, ParseException {
-		ArrayList<String> xInterfaceSets = xInterfaceSetMap.get(this.resourcesid);
-		ArrayList<String> parameterConstrains = null;
-		if (this.parameterConstrainsMap.containsKey(resourcesid)) {
-			parameterConstrains = this.parameterConstrainsMap.get(this.resourcesid);
-		}
-		for (String xInterface : xInterfaceSets) {
-			this.resourceid = xInterface.split("\\|")[0].split(",")[0];
+		for (Operation xInterface : xInterfaces) {
+			String resourceid = xInterface.getId();
 			File file = null;
 			try {
-				file = new File(path + this.resourcesid + "\\" + operation + "\\" + this.resourceid);
+				file = new File(path + this.resourcesid + "\\" + operation + "\\" + resourceid);
 				if (!file.exists()) {
 					file.mkdirs();
 				}
@@ -104,48 +91,41 @@ public class AutomatedTestData {
 			} finally {
 				file = null;
 			}
-			ArrayList<String> resourceParameterConstrains = new ArrayList<>();
-			for (String parameterConstrain : parameterConstrains) {
-				if (parameterConstrain.startsWith(resourceid)) {
-					resourceParameterConstrains.add(parameterConstrain);
-				}
-			}
-			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + this.resourceid + "\\",
-					xInterface, resourceParameterConstrains);
+			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + resourceid + "\\",
+					xInterface);
 		}
-
 	}
 
-	private void analyticParameter(String path, String xInterface, ArrayList<String> parameterConstrains) throws ParseException {
-		String[] paramsplt = xInterface.split("->");
-		if (paramsplt.length > 1) {
-			String[] params = paramsplt[1].split("_");
-			for (String param : params) {
-				String paramName = param.split(",")[0];
-				String paramConstrains = null;
-				for (String s : parameterConstrains) {
-					if (s.startsWith(resourceid + "-" + paramName)) {
-						paramConstrains = s;
-					}
+	private void analyticParameter(String path, Operation xInterface) throws ParseException {
+			ArrayList<RequestParam> params = xInterface.getRequestParams();
+			PrintWriter out = null;
+			for (RequestParam param : params) {
+				try {
+					out = new PrintWriter(path + param.getName() + ".xml");	
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
-				analyticParameterComposition(path, param, paramName, paramConstrains);
+				String paramAtributte = param.getAttribute();
+				String paramStatus = param.getLocation();
+				String paramName = param.getName();
+				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+				out.flush();
+				if("false".equals(paramStatus)){
+					out.println("<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
+					out.flush();
+				}
+				analyticParameterComposition(path, param,out,paramStatus);
+				out.println("</param>");
+				out.flush();
+				out.close();
 			}
-		}
-
 	}
 
-	private void analyticParameterComposition(String path, String param, String paramName, String paramConstrains) throws ParseException {
-		String paramType = param.split(",")[1];
-		String paramAtributte = param.split(",")[2];
-		String paramStatus = param.split(",")[3];
+	private void analyticParameterComposition(String path, RequestParam param,PrintWriter out,String paramStatus) throws ParseException {
+		String paramType = param.getType();
 		if ("false".equals(paramStatus)) {
 			ArrayList<String> values = new ArrayList<>();
-			String[] constraints = null;
-			if (paramConstrains != null && paramConstrains.contains("#")) {
-				constraints = paramConstrains.split("<")[1].split(">")[0].split("#");
-			} else if (paramConstrains != null) {
-				constraints = paramConstrains.split("<")[1].split(">");
-			}
+			ArrayList<String> constraints = param.getConstraint();
 			switch (paramType) {
 			case "byte":
 			case "decimal":
@@ -196,46 +176,20 @@ public class AutomatedTestData {
 			default:
 				break;
 			}
-			try {
-				PrintWriter out = new PrintWriter(path + paramName + ".xml");
-				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			for (String value : values) {
+				out.println("	<value>" + value + "</value>");
 				out.flush();
-				out.println(
-						"<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
-				out.flush();
-				for (String value : values) {
-					out.println("	<value>" + value + "</value>");
-					out.flush();
-				}
-				out.println("</param>");
-				out.flush();
-				out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
 			}
 		} else{
-			try {
-				PrintWriter out = new PrintWriter(path + paramName + ".xml");
-				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				out.flush();
-				out.println(
-						"<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"extend\">");
-				out.flush();
-				out.println("</param>");
-				out.flush();
-				out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
 		}
 
 	}
 
-	private ArrayList<String> setTypeType(String[] constraints, String paramType) {
+	private ArrayList<String> setTypeType(ArrayList<String> constraints, String paramType) {
 		return null;
 	}
 
-	private ArrayList<String> fileType(String[] constraints, String paramType) {
+	private ArrayList<String> fileType(ArrayList<String> constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = constraints.toString();
@@ -246,7 +200,7 @@ public class AutomatedTestData {
 			} else {
 				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
 				for (String t : constraints) {
-					String[] tt = t.split(",");
+					String[] tt = t.split(":");
 					constraint.put(tt[0], tt[1]);
 				}
 				FileData fd = new FileData(constraint);
@@ -257,7 +211,6 @@ public class AutomatedTestData {
 					e.printStackTrace();
 				}
 			}
-
 		}else{
 			FileData fd = new FileData();
 			try {
@@ -278,7 +231,7 @@ public class AutomatedTestData {
 		return values;
 	}
 
-	private ArrayList<String> dateType(String[] constraints, String paramType) throws ParseException {
+	private ArrayList<String> dateType(ArrayList<String> constraints, String paramType) throws ParseException {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = constraints.toString();
@@ -289,7 +242,7 @@ public class AutomatedTestData {
 			} else {
 				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
 				for (String t : constraints) {
-					String[] tt = t.split(",");
+					String[] tt = t.split(":");
 					constraint.put(tt[0], tt[1]);
 				}
 				switch (paramType) {
@@ -383,7 +336,7 @@ public class AutomatedTestData {
 		return null;
 	}
 
-	private ArrayList<String> stringType(String[] constraints, String paramType) throws ParseException {
+	private ArrayList<String> stringType(ArrayList<String> constraints, String paramType) throws ParseException {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = null;
@@ -397,7 +350,7 @@ public class AutomatedTestData {
 			} else {
 				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
 				for (String t : constraints) {
-					String[] tt = t.split(",");
+					String[] tt = t.split(":");
 					constraint.put(tt[0], tt[1]);
 				}
 				switch (paramType) {
@@ -431,7 +384,7 @@ public class AutomatedTestData {
 	}
 
 
-	private ArrayList<String> numericalType(String[] constraints, String paramType) {
+	private ArrayList<String> numericalType(ArrayList<String> constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = constraints.toString();
@@ -442,13 +395,13 @@ public class AutomatedTestData {
 			} else {
 				ConcurrentHashMap<String, String> constraint = new ConcurrentHashMap<>();
 				for (String t : constraints) {
-					String[] tt = t.split(",");
+					String[] tt = t.split(":");
 					constraint.put(tt[0], tt[1]);
 				}
 				switch (paramType) {
 				case "byte":
 					ByteData bd = new ByteData(constraint);
-					values = bd.constraintAnalysis();
+				 	values = bd.constraintAnalysis();
 					break;
 				case "int":
 				case "integer":

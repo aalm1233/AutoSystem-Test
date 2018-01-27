@@ -76,8 +76,8 @@ public class ScriptGeneration {
 			generatingTestModelFiles(fileName);//生成操作模型
 			GeneratingOperationSequence operationSequence = new GeneratingOperationSequence(service, fileName, path);
 			operationSequence.generatingOperationSequenceFiles();
-			//GeneratingInterfaceSequence generatingInterfaceSequence = new GeneratingInterfaceSequence(service, fileName, path);
-			//generatingInterfaceSequence.generatingInterfaceSequenceFiles();
+			GeneratingInterfaceSequence generatingInterfaceSequence = new GeneratingInterfaceSequence(service, fileName, path);
+			generatingInterfaceSequence.generatingInterfaceSequenceFiles();
 		}
 	}
 
