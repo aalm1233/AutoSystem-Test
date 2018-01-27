@@ -33,6 +33,7 @@ public class ElementConstrain {
 				String constraintt = constraint.getTextContent();
 				result.add(constraintname + ":" + constraintt);
 			}catch (Exception e) {
+				//System.err.println(e.getMessage());
 			}
 		}
 		return result;

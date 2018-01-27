@@ -24,12 +24,12 @@
 					<element name="birthday" attribute="User.birthday" type="Date" level="1"/>
 					<element name="portrait" attribute="User.portrait" type="String" level="1"/>
 					<element name="status" attribute="User.status" type="UserStatus" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>NotActive</enumeration>
 							<enumeration>Normal</enumeration>
 							<enumeration>Disable</enumeration>
 							<enumeration>Deleted</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="creationDate" attribute="User.creationDate" type="Date" level="1"/>
 					<element name="updateDate" attribute="User.updateDate" type="Date" level="1"/>
@@ -39,14 +39,14 @@
 						</restriction>
 					</element>
 					<element name="toActive" attribute="UserStatus.toActive" type="boolean" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>false</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="flag" attribute="User.flag" type="long" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>0</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 				</param>
 			</request>
@@ -101,12 +101,12 @@
 					<element name="birthday" attribute="User.birthday" type="Date" level="1"/>
 					<element name="portrait" attribute="User.portrait" type="String" level="1"/>
 					<element name="status" attribute="User.status" type="UserStatus" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>NotActive</enumeration>
 							<enumeration>Normal</enumeration>
 							<enumeration>Disable</enumeration>
 							<enumeration>Deleted</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="creationDate" attribute="User.creationDate" type="Date" level="1"/>
 					<element name="updateDate" attribute="User.updateDate" type="Date" level="1"/>
@@ -116,14 +116,14 @@
 						</restriction>
 					</element>
 					<element name="toActive" attribute="UserStatus.toActive" type="boolean" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>false</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="flag" attribute="User.flag" type="long" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>0</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 				</param>
 			</request>
@@ -178,12 +178,12 @@
 					<element name="birthday" attribute="User.birthday" type="Date" level="1"/>
 					<element name="portrait" attribute="User.portrait" type="String" level="1"/>
 					<element name="status" attribute="User.status" type="UserStatus" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>NotActive</enumeration>
 							<enumeration>Normal</enumeration>
 							<enumeration>Disable</enumeration>
 							<enumeration>Deleted</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="creationDate" attribute="User.creationDate" type="Date" level="1"/>
 					<element name="updateDate" attribute="User.updateDate" type="Date" level="1"/>
@@ -193,14 +193,14 @@
 						</restriction>
 					</element>
 					<element name="toActive" attribute="UserStatus.toActive" type="boolean" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>false</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 					<element name="flag" attribute="User.flag" type="long" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>0</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 				</param>
 			</request>
@@ -300,12 +300,12 @@
 					<element name="birthday" attribute="User.birthday" type="Date" level="1"/>
 					<element name="portrait" attribute="User.portrait" type="String" level="1"/>
 					<element name="portrait" attribute="User.portrait" type="String" level="1">
-						<restricition>
+						<restriction>
 							<enumeration>NotActive</enumeration>
 							<enumeration>Normal</enumeration>
 							<enumeration>Disable</enumeration>
 							<enumeration>Deleted</enumeration>
-						</restricition >
+						</restriction >
 					</element>
 				</param>
 			</request>
@@ -381,12 +381,12 @@
 						<element name="birthdayMin" attribute="User.birthday" type="Date" level="2"/>
 						<element name="portrait" attribute="User.portrait" type="String" level="2"/>
 						<element name="status" attribute="User.status" type="UserStatus" level="2">
-							<restricition>
+							<restriction>
 								<enumeration>NotActive</enumeration>
 								<enumeration>Normal</enumeration>
 								<enumeration>Disable</enumeration>
 								<enumeration>Deleted</enumeration>
-							</restricition >
+							</restriction >
 						</element>
 						<element name="creationDateMax" attribute="User.creationDate" type="Date" level="2"/>
 						<element name="creationDateMin" attribute="User.creationDate" type="Date" level="2"/>
