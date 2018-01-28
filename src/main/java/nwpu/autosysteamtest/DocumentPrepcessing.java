@@ -30,7 +30,7 @@ import nwpu.autosysteamtest.enity.Service;
 /**
  * 
  * @author Dengtong
- * @version 3.1,14/01/2018
+ * @version 4.0,28/01/2018
  *
  */
 public class DocumentPrepcessing {
@@ -398,8 +398,7 @@ public class DocumentPrepcessing {
 					level =Integer.parseInt(levelstring);
 				}
 				element2 = new ResponseElement(element.getAttribute(ElementAttribute.name.toString()),
-						element.getAttribute(ElementAttribute.attribute.toString()), 
-						element.getAttribute(ElementAttribute.type.toString()), 
+						element.getAttribute(ElementAttribute.attribute.toString()),
 						level);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -407,15 +406,82 @@ public class DocumentPrepcessing {
 			}
 			return element2;
 		}
+		private void resourceAnalysis(Element resource,String type,ArrayList<nwpu.autosysteamtest.enity.Operation> operations){
+			nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
+					resource.getAttribute(ResourceAttribute.name.toString()),
+					resource.getAttribute(ResourceAttribute.id.toString()),
+					resource.getAttribute(ResourceAttribute.path.toString()),
+					type);
+			out.println("  "+operation.toString());
+			out.flush();
+			NodeList requestAndResponse = resource.getChildNodes();
+			Element request = null;
+			Element response = null;
+			for (int k = 0; k < requestAndResponse.getLength(); k++) {
+				try {
+					Element elementTemp = (Element) requestAndResponse.item(k);
+					if (TagName.request.toString().equals(elementTemp.getNodeName())) {
+						request = elementTemp;
+					}
+					if (TagName.response.toString().equals(elementTemp.getNodeName())) {
+						response = elementTemp;
+					}
+				} catch (Exception e) {
+				}
+			}
+			if (request != null && response != null) {
+				NodeList requestParams = request.getElementsByTagName(Param.param.toString());
+				ArrayList<RequestParam> requestParames = new ArrayList<>();
+				for (int j = 0; j < requestParams.getLength(); j++) {
+					RequestParam requestParam = null;
+					try {
+						requestParam = requestParamAnalysis(resource, (Element) requestParams.item(j));
+						requestParames.add(requestParam);
+					} catch (Exception e) {
+					}
+				}
+				NodeList dependencys = request.getElementsByTagName(Param.dependency.toString());
+				if (dependencys.getLength() != 0) {
+					for (int j = 0; j < dependencys.getLength(); j++) {
+						Element dependency = (Element) dependencys.item(j);
+						String resourcesid = dependency
+								.getAttribute(DependencyAttribute.resourcesid.toString());
+						String resourceid = dependency
+								.getAttribute(DependencyAttribute.resourceid.toString());
+						while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
+							synchronized (this) {
+								try {
+									this.wait();
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+						nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing.searchServiceById(resourcesid).searchAllOperationById(resourceid);
+						operation.addDependency(dependencyInteInterface);
+					}
+				}
+				String responses = response.getAttribute(DataAttribute.dataType.toString());
+				operation.setResponse(responses);
+				NodeList responseParams = response.getElementsByTagName(Param.param.toString());
+				ArrayList<ResponseParam> responseParames = new ArrayList<>();
+				operation.setRequestParams(requestParames);
+				for (int j = 0; j < responseParams.getLength(); j++) {
+					ResponseParam responseParam = null;
+					try {
+						responseParam = responseParamAnalysis(resource, (Element) responseParams.item(j));
+						responseParames.add(responseParam);
+					} catch (Exception e) {
+					}
+				}
+				out.flush();
+
+			}
+			operations.add(operation);
+		}
 		
 		private void initInterfaceSetMap(Node node,
 				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
-			DocumentPrepcessing documentPrepcessing = null;
-			try {
-				documentPrepcessing = DocumentPrepcessing.getInstance();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
 			String type = node.getNodeName();
 			operaterTypes.append("<" + type + ">");
 			NodeList resourceList = node.getChildNodes();
@@ -426,81 +492,10 @@ public class DocumentPrepcessing {
 						Element element = (Element) resourceList.item(i);
 						if (TagName.resource.toString().equals(element.getNodeName())) {
 							Element resource = element;
-							nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
-									resource.getAttribute(ResourceAttribute.name.toString()),
-									resource.getAttribute(ResourceAttribute.id.toString()),
-									resource.getAttribute(ResourceAttribute.path.toString()),
-									type);
-							out.println("  "+operation.toString());
-							out.flush();
-							NodeList requestAndResponse = resource.getChildNodes();
-							Element request = null;
-							Element response = null;
-							for (int k = 0; k < requestAndResponse.getLength(); k++) {
-								try {
-									Element elementTemp = (Element) requestAndResponse.item(k);
-									if (TagName.request.toString().equals(elementTemp.getNodeName())) {
-										request = elementTemp;
-									}
-									if (TagName.response.toString().equals(elementTemp.getNodeName())) {
-										response = elementTemp;
-									}
-								} catch (Exception e) {
-								}
-							}
-							if (request != null && response != null) {
-								NodeList requestParams = request.getElementsByTagName(Param.param.toString());
-								ArrayList<RequestParam> requestParames = new ArrayList<>();
-								for (int j = 0; j < requestParams.getLength(); j++) {
-									RequestParam requestParam = null;
-									try {
-										requestParam = requestParamAnalysis(resource, (Element) requestParams.item(j));
-										requestParames.add(requestParam);
-									} catch (Exception e) {
-									}
-								}
-								NodeList dependencys = request.getElementsByTagName(Param.dependency.toString());
-								if (dependencys.getLength() != 0) {
-									for (int j = 0; j < dependencys.getLength(); j++) {
-										Element dependency = (Element) dependencys.item(j);
-										String resourcesid = dependency
-												.getAttribute(DependencyAttribute.resourcesid.toString());
-										String resourceid = dependency
-												.getAttribute(DependencyAttribute.resourceid.toString());
-										while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
-											synchronized (this) {
-												try {
-													this.wait();
-												} catch (InterruptedException e) {
-													e.printStackTrace();
-												}
-											}
-										}
-										nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing.searchServiceById(resourcesid).searchAllOperationById(resourceid);
-										operation.addDependency(dependencyInteInterface);
-									}
-								}
-								String responses = response.getAttribute(DataAttribute.dataType.toString());
-								operation.setResponse(responses);
-								NodeList responseParams = response.getElementsByTagName(Param.param.toString());
-								ArrayList<ResponseParam> responseParames = new ArrayList<>();
-								operation.setRequestParams(requestParames);
-								for (int j = 0; j < responseParams.getLength(); j++) {
-									ResponseParam responseParam = null;
-									try {
-										responseParam = responseParamAnalysis(resource, (Element) responseParams.item(j));
-										responseParames.add(responseParam);
-									} catch (Exception e) {
-									}
-								}
-								out.flush();
-
-							}
-							operations.add(operation);
+							resourceAnalysis(resource,type,operations);
 						}
 					} catch (Exception e) {
 					}
-					
 				}
 			}
 			synchronized (this) {
@@ -515,10 +510,11 @@ enum DependencyAttribute {
 }
 
 enum ResourcesAttribute {
-	id, name, base, premise
+	id, name, base
 }
 
 enum Operation {
+	//操作类型
 	add, delete, update, find
 }
 

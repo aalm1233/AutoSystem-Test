@@ -192,8 +192,7 @@ public class AutomatedTestData {
 	private ArrayList<String> fileType(ArrayList<String> constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
-			String constraintses = constraints.toString();
-			if (constraintses.contains("enumeration")) {
+			if (constraints.contains("enumeration")) {
 				for (String enumerations : constraints) {
 					values.add(enumerations.split(":")[1]);
 				}

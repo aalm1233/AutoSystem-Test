@@ -48,7 +48,6 @@ public class ScriptGeneration {
 		out.close();
 	}
 	public void run() throws IOException {
-		Set<String> key = mode.keySet();
 		File file = null;
 		try{
 			file = new File(path + "outputxml");
@@ -68,6 +67,7 @@ public class ScriptGeneration {
 		}finally {
 			file = null;
 		}
+		Set<String> key = mode.keySet();
 		for (Iterator<String> it = key.iterator(); it.hasNext();) {
 			resourcesId = (String) it.next();
 			Service service = documentPrepcessing.searchServiceById(resourcesId);

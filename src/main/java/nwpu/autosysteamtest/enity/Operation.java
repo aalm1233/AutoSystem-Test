@@ -7,10 +7,10 @@ public class Operation {
 	private String id;
 	private String path;
 	private String type;
-	private ArrayList<RequestParam> requestParams;
-	private ArrayList<ResponseParam> responseParams;
-	private String response;
 	private ArrayList<Operation> dependencys;
+	private ArrayList<RequestParam> requestParams;
+	private String response;
+	private ArrayList<ResponseParam> responseParams;
 	
 	public Operation(String name,String id,String path,String type){
 		this.name = name;

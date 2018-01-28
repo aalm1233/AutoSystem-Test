@@ -6,14 +6,11 @@ public class ResponseElement {
 	ArrayList<ResponseElement> elements;
 	String name;
 	String attribute;
-	String type;
 	int level;
-	String[] constraint;
 	
-	public ResponseElement(String name,String attribute,String type,int level){
+	public ResponseElement(String name,String attribute,int level){
 		this.name = name;
 		this.attribute = attribute;
-		this.type = type;
 		this.level = level;
 	}
 	public int getLevel(){
