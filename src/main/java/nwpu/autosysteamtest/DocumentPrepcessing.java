@@ -252,6 +252,7 @@ public class DocumentPrepcessing {
 							}
 						}
 					}
+					param.setElements(elementes);
 				} else {
 					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
 							requestParam.getAttribute(ParamAttribute.attribute.toString()), 

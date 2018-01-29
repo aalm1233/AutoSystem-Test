@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script resourcesID="User_Service" sequence="" completed="false" >
+	<step operation="add" path="createOrGetByPhone" name="createOrGetByPhone" >
+		<param name="param" attribute="" location="">
+			<element1 name="name" attribute="User.name" >
+			</element1>
+		</param>
+	</step>
+	<step operation="add" path="createByPhone" name="createByPhone" >
+		<param name="param" attribute="UserCreateParam" location="">
+			<element1 name="name" attribute="User.name" >
+			</element1>
+		</param>
+	</step>
+	<step operation="update" path="changePassword" name="changePassword" >
+		<param name="param" attribute="" location="">
+			<element1 name="userId" attribute="User.viaUserId" >
+			</element1>
+		</param>
+	</step>
+	<step operation="find" path="detail" name="detail" >
+		<param name="param" attribute="" location="">
+			<element1 name="" attribute="" >
+			</element1>
+		</param>
+	</step>
+</script>

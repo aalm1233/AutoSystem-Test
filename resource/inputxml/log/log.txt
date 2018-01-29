@@ -1438,3 +1438,491 @@ find InterfaceSet:
           User_List-param-updateDateMax
           User_List-param-updateDateMin
           User_List-param-permission
+---------------------------Mon Jan 29 14:44:37 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 14:44:54 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 14:46:37 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 15:02:56 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 15:04:09 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 15:08:35 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 15:08:46 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission
+---------------------------Mon Jan 29 15:09:35 CST 2018---------------------------
+service name:User_Service
+add InterfaceSet:
+  Operation [name=createByPhone, id=User_New_Phone, path=createByPhone]
+          User_New_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Phone-param-gender
+          User_New_Phone-param-
+          User_New_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Phone-param-birthday
+          User_New_Phone-param-portrait
+          User_New_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Phone-param-creationDate
+          User_New_Phone-param-updateDate
+          User_New_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Phone-param-toActive[enumeration:false]
+          User_New_Phone-param-flag[enumeration:0]
+  Operation [name=createOrGetByPhone, id=User_New_Get_Phone, path=createOrGetByPhone]
+          User_New_Get_Phone-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_New_Get_Phone-param-gender
+          User_New_Get_Phone-param-
+          User_New_Get_Phone-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_New_Get_Phone-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_New_Get_Phone-param-birthday
+          User_New_Get_Phone-param-portrait
+          User_New_Get_Phone-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_New_Get_Phone-param-creationDate
+          User_New_Get_Phone-param-updateDate
+          User_New_Get_Phone-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+          User_New_Get_Phone-param-toActive[enumeration:false]
+          User_New_Get_Phone-param-flag[enumeration:0]
+update InterfaceSet:
+  Operation [name=changePassword, id=Password_Change, path=changePassword]
+          Password_Change-param-userId
+          Password_Change-param-loginName
+          Password_Change-param-oldPassword[pattern:"^[a-zA-Z]\w{5,17}$"]
+          Password_Change-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+  Operation [name=updatePassword, id=Password_Update, path=updatePassword]
+          Password_Update-param-userId
+          Password_Update-param-password[pattern:"^[a-zA-Z]\w{5,17}$"]
+find InterfaceSet:
+  Operation [name=detail, id=User_Detail_ID, path=detail]
+          User_Detail_ID-param-
+  Operation [name=batchDetail, id=User_Detail_Batch_ID, path=batchDetail]
+          User_Detail_Batch_ID-param-
+  Operation [name=list, id=User_List, path=list]
+          User_List-param-search
+          User_List-param-name[pattern:^[a-zA-Z0-9_]{3,16}$]
+          User_List-param-gender
+          User_List-param-
+          User_List-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          User_List-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          User_List-param-birthdayMax
+          User_List-param-birthdayMin
+          User_List-param-portrait
+          User_List-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          User_List-param-creationDateMax
+          User_List-param-creationDateMin
+          User_List-param-updateDateMax
+          User_List-param-updateDateMin
+          User_List-param-permission

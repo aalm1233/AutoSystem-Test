@@ -81,7 +81,7 @@ public class GeneratingInterfaceSequence {
 		if(deletes != null){
 			deletenum = deletes.size();
 		}if(updates != null){
-			updatenum = deletes.size();
+			updatenum = updates.size();
 		}if(finds != null){
 			findnum = finds.size();
 		}
@@ -228,7 +228,7 @@ public class GeneratingInterfaceSequence {
 		ArrayList<RequestParam> requestParams = operation.getRequestParams();
 		if(requestParams != null&&requestParams.size() != 0){
 			for(RequestParam requestParam : requestParams){
-				out.println("		<param name=\""+requestParam.getName()+"\" attribute=\""+requestParam.getAttribute()+"\" location=\""+requestParam.getLocation()+">");
+				out.println("		<param name=\""+requestParam.getName()+"\" attribute=\""+requestParam.getAttribute()+"\" location=\""+requestParam.getLocation()+"\">");
 				out.flush();
 				ArrayList<RequestElement> requestElements = requestParam.getElements();
 				if(requestElements != null&&requestElements.size() != 0){

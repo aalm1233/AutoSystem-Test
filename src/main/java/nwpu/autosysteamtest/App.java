@@ -1,6 +1,15 @@
 package nwpu.autosysteamtest;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import nwpu.autosysteamtest.enity.Operation;
+import nwpu.autosysteamtest.enity.RequestElement;
+import nwpu.autosysteamtest.enity.RequestParam;
+import nwpu.autosysteamtest.enity.Service;
 
 /**
  * @author Dengtong
@@ -8,9 +17,8 @@ import java.io.IOException;
  */
 public class App 
 {
-    public static void main(String[] args) throws IOException, InterruptedException
-    {
-    	switch (args.length) {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		switch (args.length) {
 		case 0:
 			System.out.println("Please start in the following format >> Java App xmldirpath");
 			break;
@@ -21,6 +29,6 @@ public class App
 		default:
 			break;
 		}
-    }
+	}
     
 }

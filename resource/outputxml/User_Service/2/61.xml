@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script resourcesID="User_Service" sequence="" completed="false" >
+	<step operation="add" path="createOrGetByPhone" name="createOrGetByPhone" >
+		<param name="param" attribute="" location="">
+			<element1 name="name" attribute="User.name" >
+			</element1>
+		</param>
+	</step>
+	<step operation="find" path="detail" name="detail" >
+		<param name="param" attribute="" location="">
+			<element1 name="" attribute="" >
+			</element1>
+		</param>
+	</step>
+	<step operation="find" path="batchDetail" name="batchDetail" >
+		<param name="param" attribute="" location="">
+			<element1 name="" attribute="" >
+			</element1>
+		</param>
+	</step>
+</script>
