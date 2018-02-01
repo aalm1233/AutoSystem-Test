@@ -2,6 +2,7 @@ package nwpu.autosysteamtest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -32,20 +33,21 @@ public class Test {
 		try {
 			dp = DocumentPrepcessing.getInstance(fileSet);
 			while(Thread.activeCount()!=1){}
-			Set<String> key =dp.getOperaterTypesMap().keySet();
-			for (Iterator<String> it = key.iterator(); it.hasNext();){
-				String resourcesId = (String) it.next();
-				Service service= dp.searchServiceById(resourcesId);
-				for(Operation operation: service.getAdds()){
-					String resourceId = operation.getId();
-					for(RequestParam param:operation.getRequestParams()){
-						System.out.println(param.getName()+":");
-						for(RequestElement element:param.getElements()){
-							System.out.println("  "+element.getName());
-						}
-					}
+			Service service= dp.searchServiceById("User_Service");
+			Operation operation = service.searchAllOperationById("User_New_Get_Phone");
+			ArrayList<RequestElement> elements = null;
+			for(RequestParam param: operation.getRequestParams()){
+				if("param".equals(param.getName())){
+					elements = param.getElements();
+					break;
 				}
 			}
+			for(RequestElement element : elements){
+				if("birthday".equals(element.getName())){
+					System.out.println(element.getElements().size());
+				}
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

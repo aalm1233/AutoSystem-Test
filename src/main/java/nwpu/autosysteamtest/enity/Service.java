@@ -23,16 +23,16 @@ public class Service {
 
 	public Operation searchAllOperationById(String id) {
 		Operation reslut = null;
-		if((reslut = searchOperationById(adds,id)) != null){
+		if(adds != null&&(reslut = searchOperationById(adds,id)) != null){
 			return reslut;
 		}
-		if((reslut = searchOperationById(deletes,id)) != null){
+		if(deletes != null&&(reslut = searchOperationById(deletes,id)) != null){
 			return reslut;
 		}
-		if((reslut = searchOperationById(updates,id)) != null){
+		if(updates != null&&(reslut = searchOperationById(updates,id)) != null){
 			return reslut;
 		}
-		if((reslut = searchOperationById(finds,id)) != null){
+		if(finds != null&&(reslut = searchOperationById(finds,id)) != null){
 			return reslut;
 		}
 		return reslut;

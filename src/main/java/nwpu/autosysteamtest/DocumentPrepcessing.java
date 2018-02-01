@@ -64,17 +64,16 @@ public class DocumentPrepcessing {
 	private DocumentPrepcessing() {
 
 	}
-	
-	
+
 	public ArrayList<Service> getServices() {
 		return services;
 	}
 
-	public Service searchServiceById(String id){
+	public Service searchServiceById(String id) {
 		Service reslut = null;
-		for(Service s: services){
+		for (Service s : services) {
 			String sid = s.getId();
-			if(sid.equals(id)){
+			if (sid.equals(id)) {
 				reslut = s;
 				break;
 			}
@@ -166,7 +165,7 @@ public class DocumentPrepcessing {
 				out.flush();
 				ArrayList<nwpu.autosysteamtest.enity.Operation> adds = new ArrayList<>();
 				service.setAdds(adds);
-				initInterfaceSetMap( addNodeList.item(0), adds);
+				initInterfaceSetMap(addNodeList.item(0), adds);
 			}
 			if (deleteNodeList.getLength() == 1) {
 				out.println("delete InterfaceSet:");
@@ -203,60 +202,71 @@ public class DocumentPrepcessing {
 				NodeList elements = requestParam.getElementsByTagName(TagName.element.toString());
 				if (elements.getLength() > 0) {
 					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
-							requestParam.getAttribute(ParamAttribute.attribute.toString()), 
-							requestParam.getAttribute(ParamAttribute.type.toString()), 
+							requestParam.getAttribute(ParamAttribute.attribute.toString()),
+							requestParam.getAttribute(ParamAttribute.type.toString()),
 							requestParam.getAttribute(ParamAttribute.location.toString()));
 					int elementsNum = elements.getLength();
 					ArrayList<RequestElement> elementes = new ArrayList<>();
+					Stack<RequestElement> stack = new Stack<>();
 					for (int i = 0; i < elementsNum; i++) {
-						Stack<RequestElement> stack = new Stack<>();
-						RequestElement requestElement = requestElementAnalysis(
-								resource, 
-								requestParam, 
+						RequestElement requestElement = requestElementAnalysis(resource, requestParam,
 								(Element) elements.item(i));
-						if(stack.isEmpty()){
+						if (stack.isEmpty()) {
 							stack.push(requestElement);
 							elementes.add(requestElement);
-						}else{
+						} else {
 							int parentLevel = stack.peek().getLevel();
-							if(parentLevel == requestElement.getLevel()){
+							int level = requestElement.getLevel();
+							if (parentLevel == level) {
+								if (level == 1) {
+									stack.pop();
+									stack.push(requestElement);
+									elementes.add(requestElement);
+								} else {
+									stack.pop();
+									stack.peek().addElement(requestElement);
+									stack.push(requestElement);
+								}
+							} else if (parentLevel > level) {
 								stack.pop();
-								stack.push(requestElement);
-							}else if(parentLevel > requestElement.getLevel()){
-								stack.pop();
-								for(;;){
-									if(stack.empty()){
+								for (;;) {
+									parentLevel = stack.peek().getLevel();
+									if (stack.empty()) {
 										stack.push(requestElement);
+										elementes.add(requestElement);
 										break;
-									}else{
-										parentLevel = stack.peek().getLevel();
-										if(stack.empty()){
-											stack.push(requestElement);
-											break;
-										}else{
-											if(parentLevel == requestElement.getLevel()){
+									} else {
+										if (parentLevel == level) {
+											if (level == 1) {
 												stack.pop();
 												stack.push(requestElement);
+												elementes.add(requestElement);
 												break;
-											}else if(parentLevel > requestElement.getLevel()){
+											} else {
 												stack.pop();
-												continue;
+												stack.peek().addElement(requestElement);
+												stack.push(requestElement);
+												break;
 											}
+										} else if (parentLevel > level) {
+											stack.pop();
+											continue;
 										}
 									}
 								}
-							}else if(parentLevel < requestElement.getLevel()){
+							} else if (parentLevel < level) {
 								RequestElement parentElement = stack.peek();
 								parentElement.addElement(requestElement);
 								stack.push(requestElement);
 							}
+
 						}
 					}
 					param.setElements(elementes);
 				} else {
 					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
-							requestParam.getAttribute(ParamAttribute.attribute.toString()), 
-							requestParam.getAttribute(ParamAttribute.type.toString()), 
+							requestParam.getAttribute(ParamAttribute.attribute.toString()),
+							requestParam.getAttribute(ParamAttribute.type.toString()),
 							requestParam.getAttribute(ParamAttribute.location.toString()));
 					NodeList restrictions = requestParam.getElementsByTagName(ParamElement.restriction.toString());
 					if (restrictions.getLength() == 1) {
@@ -264,18 +274,12 @@ public class DocumentPrepcessing {
 						ParameterConstrain constrain = new ParameterConstrain(restriction);
 						ArrayList<String> parameterConstrains = constrain.getResult();
 						param.setConstraint(parameterConstrains);
-						out.println("    "
-								+resource.getAttribute(
-								ResourcesAttribute.id.toString())
-								+"-"+
-								requestParam.getAttribute(ParamAttribute.name.toString())
-								+parameterConstrains.toString());
-					}else{
-						out.println("    "
-								+resource.getAttribute(
-								ResourcesAttribute.id.toString())
-								+"-"+
-								requestParam.getAttribute(ParamAttribute.name.toString()));
+						out.println("    " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
+								+ requestParam.getAttribute(ParamAttribute.name.toString())
+								+ parameterConstrains.toString());
+					} else {
+						out.println("    " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
+								+ requestParam.getAttribute(ParamAttribute.name.toString()));
 					}
 				}
 				return param;
@@ -284,39 +288,31 @@ public class DocumentPrepcessing {
 			}
 			return param;
 		}
+
 		private RequestElement requestElementAnalysis(Element resource, Element requestParam, Element element) {
 			RequestElement element2 = null;
 			try {
 				String levelstring = element.getAttribute(ElementAttribute.level.toString());
 				int level = 1;
-				if(!"".equals(levelstring)){
-					level =Integer.parseInt(levelstring);
+				if (!"".equals(levelstring)) {
+					level = Integer.parseInt(levelstring);
 				}
-				element2 = new RequestElement(
-						element.getAttribute(ElementAttribute.name.toString()),
-						element.getAttribute(ElementAttribute.attribute.toString()), 
+				element2 = new RequestElement(element.getAttribute(ElementAttribute.name.toString()),
+						element.getAttribute(ElementAttribute.attribute.toString()),
 						element.getAttribute(ElementAttribute.type.toString()),
-						element.getAttribute(ElementAttribute.location.toString()),
-						level);
+						element.getAttribute(ElementAttribute.location.toString()), level);
 				NodeList restrictions = element.getElementsByTagName(ParamElement.restriction.toString());
 				if (restrictions.getLength() == 1) {
 					Node restriction = restrictions.item(0);
 					ElementConstrain constrain = new ElementConstrain(restriction);
 					ArrayList<String> elementConstrains = constrain.getResult();
 					element2.setConstraints(elementConstrains);
-					out.println("          "
-							+resource.getAttribute(ResourcesAttribute.id.toString()) 
-							+ "-" 
-							+ requestParam.getAttribute(ParamAttribute.name.toString()) 
-							+ "-" 
-							+ element.getAttribute(ElementAttribute.name.toString()) 
-							+ elementConstrains.toString());
-				}else{
-					out.println("          "
-							+resource.getAttribute(ResourcesAttribute.id.toString()) 
-							+ "-" 
-							+ requestParam.getAttribute(ParamAttribute.name.toString()) 
-							+ "-" 
+					out.println("          " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
+							+ requestParam.getAttribute(ParamAttribute.name.toString()) + "-"
+							+ element.getAttribute(ElementAttribute.name.toString()) + elementConstrains.toString());
+				} else {
+					out.println("          " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
+							+ requestParam.getAttribute(ParamAttribute.name.toString()) + "-"
 							+ element.getAttribute(ElementAttribute.name.toString()));
 				}
 			} catch (Exception e) {
@@ -337,83 +333,83 @@ public class DocumentPrepcessing {
 					ArrayList<ResponseElement> elementes = new ArrayList<>();
 					for (int i = 0; i < elementsNum; i++) {
 						Stack<ResponseElement> stack = new Stack<>();
-						ResponseElement responseElement = responseElementAnalysis(
-								resource, 
-								responseParam, 
+						ResponseElement responseElement = responseElementAnalysis(resource, responseParam,
 								(Element) elements.item(i));
-						if(stack.isEmpty()){
+						if (stack.isEmpty()) {
 							stack.push(responseElement);
 							elementes.add(responseElement);
-						}else{
+						} else {
 							int parentLevel = stack.peek().getLevel();
-							if(parentLevel == responseElement.getLevel()){
+							if (parentLevel == responseElement.getLevel()) {
 								stack.pop();
 								stack.push(responseElement);
-							}else if(parentLevel > responseElement.getLevel()){
+							} else if (parentLevel > responseElement.getLevel()) {
 								stack.pop();
-								for(;;){
-									if(stack.empty()){
+								for (;;) {
+									if (stack.empty()) {
 										stack.push(responseElement);
 										break;
-									}else{
+									} else {
 										parentLevel = stack.peek().getLevel();
-										if(stack.empty()){
+										if (stack.empty()) {
 											stack.push(responseElement);
 											break;
-										}else{
-											if(parentLevel == responseElement.getLevel()){
+										} else {
+											if (parentLevel == responseElement.getLevel()) {
 												stack.pop();
 												stack.push(responseElement);
 												break;
-											}else if(parentLevel > responseElement.getLevel()){
+											} else if (parentLevel > responseElement.getLevel()) {
 												stack.pop();
 												continue;
 											}
 										}
 									}
 								}
-							}else if(parentLevel < responseElement.getLevel()){
+							} else if (parentLevel < responseElement.getLevel()) {
 								ResponseElement parentElement = stack.peek();
 								parentElement.addElement(responseElement);
 								stack.push(responseElement);
 							}
 						}
 					}
+					param.setElements(elementes);
 				} else {
 					param = new ResponseParam(responseParam.getAttribute(ParamAttribute.name.toString()),
 							responseParam.getAttribute(ParamAttribute.attribute.toString()));
 				}
+
 				return param;
 			} catch (Exception e) {
 				System.err.println("param error");
 			}
 			return param;
 		}
-		
+
 		private ResponseElement responseElementAnalysis(Element resource, Element responseParam, Element element) {
 			ResponseElement element2 = null;
 			try {
 				String levelstring = element.getAttribute(ElementAttribute.level.toString());
 				int level = 1;
-				if(!"".equals(levelstring)){
-					level =Integer.parseInt(levelstring);
+				if (!"".equals(levelstring)) {
+					level = Integer.parseInt(levelstring);
 				}
 				element2 = new ResponseElement(element.getAttribute(ElementAttribute.name.toString()),
-						element.getAttribute(ElementAttribute.attribute.toString()),
-						level);
+						element.getAttribute(ElementAttribute.attribute.toString()), level);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.err.println("element error");
 			}
 			return element2;
 		}
-		private void resourceAnalysis(Element resource,String type,ArrayList<nwpu.autosysteamtest.enity.Operation> operations){
+
+		private void resourceAnalysis(Element resource, String type,
+				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
 			nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
 					resource.getAttribute(ResourceAttribute.name.toString()),
 					resource.getAttribute(ResourceAttribute.id.toString()),
-					resource.getAttribute(ResourceAttribute.path.toString()),
-					type);
-			out.println("  "+operation.toString());
+					resource.getAttribute(ResourceAttribute.path.toString()), type);
+			out.println("  " + operation.toString());
 			out.flush();
 			NodeList requestAndResponse = resource.getChildNodes();
 			Element request = null;
@@ -445,10 +441,8 @@ public class DocumentPrepcessing {
 				if (dependencys.getLength() != 0) {
 					for (int j = 0; j < dependencys.getLength(); j++) {
 						Element dependency = (Element) dependencys.item(j);
-						String resourcesid = dependency
-								.getAttribute(DependencyAttribute.resourcesid.toString());
-						String resourceid = dependency
-								.getAttribute(DependencyAttribute.resourceid.toString());
+						String resourcesid = dependency.getAttribute(DependencyAttribute.resourcesid.toString());
+						String resourceid = dependency.getAttribute(DependencyAttribute.resourceid.toString());
 						while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
 							synchronized (this) {
 								try {
@@ -458,7 +452,8 @@ public class DocumentPrepcessing {
 								}
 							}
 						}
-						nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing.searchServiceById(resourcesid).searchAllOperationById(resourceid);
+						nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing
+								.searchServiceById(resourcesid).searchAllOperationById(resourceid);
 						operation.addDependency(dependencyInteInterface);
 					}
 				}
@@ -480,9 +475,8 @@ public class DocumentPrepcessing {
 			}
 			operations.add(operation);
 		}
-		
-		private void initInterfaceSetMap(Node node,
-				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
+
+		private void initInterfaceSetMap(Node node, ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
 			String type = node.getNodeName();
 			operaterTypes.append("<" + type + ">");
 			NodeList resourceList = node.getChildNodes();
@@ -493,7 +487,7 @@ public class DocumentPrepcessing {
 						Element element = (Element) resourceList.item(i);
 						if (TagName.resource.toString().equals(element.getNodeName())) {
 							Element resource = element;
-							resourceAnalysis(resource,type,operations);
+							resourceAnalysis(resource, type, operations);
 						}
 					} catch (Exception e) {
 					}
@@ -515,7 +509,7 @@ enum ResourcesAttribute {
 }
 
 enum Operation {
-	//操作类型
+	// 操作类型
 	add, delete, update, find
 }
 

@@ -234,7 +234,6 @@ public class GeneratingInterfaceSequence {
 				if(requestElements != null&&requestElements.size() != 0){
 					for(RequestElement requestElement:requestElements){
 						printlnElement(requestElement,out);
-						break;
 					}
 				}
 				out.println("		</param>");
@@ -263,7 +262,6 @@ public class GeneratingInterfaceSequence {
 		if(requestElements != null&&requestElements.size() != 0){
 			for(RequestElement re:requestElements){
 				printlnElement(re,out);
-				break;
 			}
 		}
 		out.println("			</element"+requestElement.getLevel()+">");
