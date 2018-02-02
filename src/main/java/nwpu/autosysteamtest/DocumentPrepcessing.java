@@ -224,33 +224,42 @@ public class DocumentPrepcessing {
 									elementes.add(requestElement);
 								} else {
 									stack.pop();
-									stack.peek().addElement(requestElement);
-									stack.push(requestElement);
+									for (;;) {
+										parentLevel = stack.peek().getLevel();
+										if (parentLevel == level) {
+											stack.pop();
+											continue;
+										} else if (parentLevel < level) {
+											stack.peek().addElement(requestElement);
+											stack.push(requestElement);
+											break;
+										}
+									}
 								}
 							} else if (parentLevel > level) {
 								stack.pop();
-								for (;;) {
+								a : for (;;) {
 									parentLevel = stack.peek().getLevel();
 									if (stack.empty()) {
 										stack.push(requestElement);
 										elementes.add(requestElement);
-										break;
+										break a;
 									} else {
 										if (parentLevel == level) {
 											if (level == 1) {
 												stack.pop();
 												stack.push(requestElement);
 												elementes.add(requestElement);
-												break;
+												break a;
 											} else {
 												stack.pop();
 												stack.peek().addElement(requestElement);
 												stack.push(requestElement);
-												break;
+												break a;
 											}
 										} else if (parentLevel > level) {
 											stack.pop();
-											continue;
+											continue a;
 										}
 									}
 								}
