@@ -215,6 +215,7 @@ public class DocumentPrepcessing {
 							stack.push(requestElement);
 							elementes.add(requestElement);
 						} else {
+							
 							int parentLevel = stack.peek().getLevel();
 							int level = requestElement.getLevel();
 							if (parentLevel == level) {
@@ -226,7 +227,7 @@ public class DocumentPrepcessing {
 									stack.pop();
 									for (;;) {
 										parentLevel = stack.peek().getLevel();
-										if (parentLevel == level) {
+										if (parentLevel == level||parentLevel > level) {
 											stack.pop();
 											continue;
 										} else if (parentLevel < level) {
@@ -246,20 +247,15 @@ public class DocumentPrepcessing {
 										break a;
 									} else {
 										if (parentLevel == level) {
-											if (level == 1) {
-												stack.pop();
-												stack.push(requestElement);
-												elementes.add(requestElement);
-												break a;
-											} else {
-												stack.pop();
-												stack.peek().addElement(requestElement);
-												stack.push(requestElement);
-												break a;
-											}
+											stack.pop();
+											continue a;
 										} else if (parentLevel > level) {
 											stack.pop();
 											continue a;
+										}else if (parentLevel < level) {
+											stack.peek().addElement(requestElement);
+											stack.push(requestElement);
+											break a;
 										}
 									}
 								}
@@ -268,7 +264,6 @@ public class DocumentPrepcessing {
 								parentElement.addElement(requestElement);
 								stack.push(requestElement);
 							}
-
 						}
 					}
 					param.setElements(elementes);
@@ -349,33 +344,49 @@ public class DocumentPrepcessing {
 							elementes.add(responseElement);
 						} else {
 							int parentLevel = stack.peek().getLevel();
-							if (parentLevel == responseElement.getLevel()) {
-								stack.pop();
-								stack.push(responseElement);
-							} else if (parentLevel > responseElement.getLevel()) {
-								stack.pop();
-								for (;;) {
-									if (stack.empty()) {
-										stack.push(responseElement);
-										break;
-									} else {
+							int level = responseElement.getLevel();
+							if (parentLevel == level) {
+								if (level == 1) {
+									stack.pop();
+									stack.push(responseElement);
+									elementes.add(responseElement);
+								} else {
+									stack.pop();
+									for (;;) {
 										parentLevel = stack.peek().getLevel();
-										if (stack.empty()) {
+										if (parentLevel == level||parentLevel > level) {
+											stack.pop();
+											continue;
+										} else if (parentLevel < level) {
+											stack.peek().addElement(responseElement);
 											stack.push(responseElement);
 											break;
-										} else {
-											if (parentLevel == responseElement.getLevel()) {
-												stack.pop();
-												stack.push(responseElement);
-												break;
-											} else if (parentLevel > responseElement.getLevel()) {
-												stack.pop();
-												continue;
-											}
 										}
 									}
 								}
-							} else if (parentLevel < responseElement.getLevel()) {
+							} else if (parentLevel > level) {
+								stack.pop();
+								a : for (;;) {
+									parentLevel = stack.peek().getLevel();
+									if (stack.empty()) {
+										stack.push(responseElement);
+										elementes.add(responseElement);
+										break a;
+									} else {
+										if (parentLevel == level) {
+											stack.pop();
+											continue a;
+										} else if (parentLevel > level) {
+											stack.pop();
+											continue a;
+										}else if (parentLevel < level) {
+											stack.peek().addElement(responseElement);
+											stack.push(responseElement);
+											break a;
+										}
+									}
+								}
+							} else if (parentLevel < level) {
 								ResponseElement parentElement = stack.peek();
 								parentElement.addElement(responseElement);
 								stack.push(responseElement);
