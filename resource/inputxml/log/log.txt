@@ -2768,3 +2768,2489 @@ find InterfaceSet:
           User_List-param-updateDateMax
           User_List-param-updateDateMin
           User_List-param-permission
+---------------------------Wed Feb 07 16:25:33 CST 2018---------------------------
+---------------------------Wed Feb 07 16:25:33 CST 2018---------------------------
+---------------------------Wed Feb 07 16:25:33 CST 2018---------------------------
+service name:SiteUserGroup_Service
+add InterfaceSet:
+service name:Site_Service
+add InterfaceSet:
+service name:SiteUser_Service
+add InterfaceSet:
+  Operation [name=create, id=SiteUser_New, path=create]
+  Operation [name=create, id=Site_New, path=create]
+  Operation [name=create, id=SiteUserGroup_New, path=create]
+          Site_New-param-createUserId
+          Site_New-param-name
+          Site_New-param-type
+          Site_New-param-status
+          SiteUserGroup_New-param-groupId
+          SiteUserGroup_New-param-siteId
+          SiteUserGroup_New-param-siteUserId
+          SiteUserGroup_New-param-permission
+delete InterfaceSet:
+delete InterfaceSet:
+  Operation [name=delete, id=Site_Delete, path=delete]
+  Operation [name=delete, id=SiteUserGroup_Delete, path=delete]
+          SiteUser_New-param-groupId
+          SiteUser_New-param-siteId
+          SiteUser_New-param-userId
+          SiteUser_New-param-name
+          SiteUser_New-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          SiteUser_New-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          SiteUser_New-param-permission
+          SiteUser_New-param-status
+          SiteUser_New-param-properties
+          SiteUser_New-param-flag
+          Site_Delete-param-id
+delete InterfaceSet:
+  Operation [name=remove, id=SiteUser_Delete, path=remove]
+update InterfaceSet:
+          SiteUserGroup_Delete-param-groupId
+          SiteUserGroup_Delete-param-siteUserId
+          SiteUserGroup_Delete-param-siteId
+  Operation [name=update, id=Site_Update, path=update]
+find InterfaceSet:
+  Operation [name=select, id=SiteUserGroup_Find_Search, path=select]
+          SiteUser_Delete-param-id
+update InterfaceSet:
+  Operation [name=update, id=SiteUser_Update, path=update]
+          Site_Update-param-id
+          Site_Update-param-createUserId
+          Site_Update-param-name
+          Site_Update-param-type
+          Site_Update-param-status
+  Operation [name=active, id=Site_Active, path=active]
+          SiteUserGroup_Find_Search-param-search
+          SiteUserGroup_Find_Search-param-siteId
+          SiteUserGroup_Find_Search-param-permission
+          SiteUserGroup_Find_Search-param-groupId
+          SiteUserGroup_Find_Search-param-siteUserId
+  Operation [name=getSiteUserGroupInfo, id=SiteUserGroup_Detail, path=getSiteUserGroupInfo]
+          Site_Active-param-id
+  Operation [name=disable, id=Site_Disable, path=disable]
+          SiteUser_Update-param-id
+          SiteUser_Update-param-name
+          SiteUser_Update-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          SiteUser_Update-param-phone
+  Operation [name=move, id=SiteUser_Move, path=move]
+          Site_Disable-param-id
+find InterfaceSet:
+          SiteUser_Move-param-siteUserId
+          SiteUser_Move-param-groupId
+          SiteUser_Move-param-destGroupId
+  Operation [name=list, id=Site_Find_Search, path=list]
+  Operation [name=active, id=SiteUser_Active, path=active]
+          SiteUserGroup_Detail-param-groupIdList
+          SiteUserGroup_Detail-param-
+          SiteUserGroup_Detail-param-userNameScope
+  Operation [name=userGroup, id=SiteUserGroup_Find_SiteUserGroupId, path=userGroup]
+          Site_Find_Search-param-search
+          Site_Find_Search-param-name
+          Site_Find_Search-param-type
+          Site_Find_Search-param-status
+          Site_Find_Search-param-createUserId
+          SiteUser_Active-param-id
+  Operation [name=listByIds, id=Site_Find_Id, path=listByIds]
+  Operation [name=disable, id=SiteUser_Disable, path=disable]
+          SiteUserGroup_Find_SiteUserGroupId-param-
+          SiteUser_Disable-param-id
+          Site_Find_Id-param-ids
+          Site_Find_Id-param-
+  Operation [name=detail, id=Site_Find_Detail, path=detail]
+find InterfaceSet:
+  Operation [name=list, id=SiteUser_Find_Search, path=list]
+          Site_Find_Detail-param-id
+          SiteUser_Find_Search-param-search
+          SiteUser_Find_Search-param-siteId
+          SiteUser_Find_Search-param-siteIds
+          SiteUser_Find_Search-param-
+          SiteUser_Find_Search-param-userId
+          SiteUser_Find_Search-param-userIds
+          SiteUser_Find_Search-param-
+          SiteUser_Find_Search-param-name
+          SiteUser_Find_Search-param-permission
+          SiteUser_Find_Search-param-groupId
+          SiteUser_Find_Search-param-recursive
+          SiteUser_Find_Search-param-phone
+          SiteUser_Find_Search-param-email
+          SiteUser_Find_Search-param-status
+          SiteUser_Find_Search-param-keyword
+          SiteUser_Find_Search-param-withFlag
+          SiteUser_Find_Search-param-withoutFlag
+  Operation [name=listByIds, id=SiteUser_Find_Id, path=listByIds]
+          SiteUser_Find_Id-param-ids
+          SiteUser_Find_Id-param-
+  Operation [name=listByUserIds, id=SiteUser_Find_UserId, path=listByUserIds]
+          SiteUser_Find_UserId-param-ids
+          SiteUser_Find_UserId-param-
+  Operation [name=detail, id=SiteUser_Find_Detail, path=detail]
+          SiteUser_Find_Detail-param-id
+---------------------------Wed Feb 07 17:07:31 CST 2018---------------------------
+---------------------------Wed Feb 07 17:07:31 CST 2018---------------------------
+---------------------------Wed Feb 07 17:07:31 CST 2018---------------------------
+---------------------------Wed Feb 07 17:07:31 CST 2018---------------------------
+---------------------------Wed Feb 07 17:07:31 CST 2018---------------------------
+service name:Site_Service
+add InterfaceSet:
+service name:SiteUserGroup_Service
+add InterfaceSet:
+service name:SiteUserPermission_Service
+add InterfaceSet:
+  Operation [name=create, id=Site_New, path=create]
+  Operation [name=create, id=SiteUserGroup_New, path=create]
+  Operation [name=permissionAppend, id=SiteUserPermission_New, path=permissionAppend]
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+service name:SiteUser_Service
+add InterfaceSet:
+  Operation [name=create, id=SiteUser_New, path=create]
+          SiteUserGroup_New-param-groupId
+          SiteUserGroup_New-param-siteId
+          SiteUserGroup_New-param-siteUserId
+          SiteUserGroup_New-param-permission
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=SiteUserGroup_Delete, path=delete]
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          SiteUserPermission_New-param-groupId
+          SiteUserPermission_New-param-siteId
+          SiteUserPermission_New-param-siteUserId
+          SiteUserPermission_New-param-permission
+          Site_New-param-createUserId
+          Site_New-param-name
+          Site_New-param-type
+          Site_New-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          SiteUserGroup_Delete-param-groupId
+          SiteUserGroup_Delete-param-siteUserId
+          SiteUserGroup_Delete-param-siteId
+          Group_Delete-param-id
+delete InterfaceSet:
+delete InterfaceSet:
+  Operation [name=delete, id=Site_Delete, path=delete]
+  Operation [name=permissionDelete, id=SiteUserPermisson_Delete, path=permissionDelete]
+find InterfaceSet:
+          Site_Delete-param-id
+  Operation [name=select, id=SiteUserGroup_Find_Search, path=select]
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+update InterfaceSet:
+          SiteUserPermisson_Delete-param-groupId
+          SiteUserPermisson_Delete-param-siteId
+          SiteUserPermisson_Delete-param-siteUserId
+          SiteUserPermisson_Delete-param-permission
+  Operation [name=update, id=Site_Update, path=update]
+update InterfaceSet:
+  Operation [name=permissionRemove, id=SiteUserPermisson_Remove, path=permissionRemove]
+          SiteUser_New-param-groupId
+          SiteUser_New-param-siteId
+          SiteUser_New-param-userId
+          SiteUser_New-param-name
+          SiteUser_New-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          SiteUser_New-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          SiteUser_New-param-permission
+          SiteUser_New-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          SiteUser_New-param-properties
+          SiteUser_New-param-flag
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          SiteUserGroup_Find_Search-param-search
+          SiteUserGroup_Find_Search-param-siteId
+          SiteUserGroup_Find_Search-param-permission
+          SiteUserGroup_Find_Search-param-groupId
+          SiteUserGroup_Find_Search-param-siteUserId
+  Operation [name=getSiteUserGroupInfo, id=SiteUserGroup_Detail, path=getSiteUserGroupInfo]
+          SiteUserPermisson_Remove-param-groupId
+          SiteUserPermisson_Remove-param-siteId
+          SiteUserPermisson_Remove-param-siteUserId
+          SiteUserPermisson_Remove-param-permission
+delete InterfaceSet:
+  Operation [name=permissionUpdate, id=SiteUserPermisson_Update, path=permissionUpdate]
+          Site_Update-param-id
+          Site_Update-param-createUserId
+          Site_Update-param-name
+          Site_Update-param-type
+          Site_Update-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+  Operation [name=remove, id=SiteUser_Delete, path=remove]
+  Operation [name=active, id=Site_Active, path=active]
+          SiteUser_Delete-param-id
+          SiteUserPermisson_Update-param-groupId
+          SiteUserPermisson_Update-param-siteId
+          SiteUserPermisson_Update-param-siteUserId
+          SiteUserPermisson_Update-param-permission
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+update InterfaceSet:
+  Operation [name=update, id=SiteUser_Update, path=update]
+find InterfaceSet:
+find InterfaceSet:
+  Operation [name=list, id=SiteUserPermission_Find_Search, path=list]
+  Operation [name=list, id=Group_List, path=list]
+          Site_Active-param-id
+  Operation [name=disable, id=Site_Disable, path=disable]
+          Site_Disable-param-id
+          SiteUserPermission_Find_Search-param-search
+          SiteUserPermission_Find_Search-param-groupId
+          SiteUserPermission_Find_Search-param-siteId
+          SiteUserPermission_Find_Search-param-siteUserId
+find InterfaceSet:
+  Operation [name=getMap, id=SiteUserPermission_Find_Map, path=getMap]
+  Operation [name=list, id=Site_Find_Search, path=list]
+          Group_List-param-search
+          Group_List-param-siteId
+          Group_List-param-scopes
+          Group_List-param-
+          Group_List-param-parentId
+          Group_List-param-recursive
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Site_Find_Search-param-search[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          Site_Find_Search-param-name
+          Site_Find_Search-param-type
+          Site_Find_Search-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          Site_Find_Search-param-createUserId
+  Operation [name=listByIds, id=Site_Find_Id, path=listByIds]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+          Site_Find_Id-param-ids
+          Site_Find_Id-param-
+  Operation [name=detail, id=Site_Find_Detail, path=detail]
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          SiteUserPermission_Find_Map-param-search
+          SiteUserPermission_Find_Map-param-groupId
+          SiteUserPermission_Find_Map-param-siteId
+          SiteUserPermission_Find_Map-param-siteUserId
+  Operation [name=batchValidate, id=SiteUserPermission_Find_batchValidate, path=batchValidate]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          SiteUserGroup_Detail-param-groupIdList
+          SiteUserGroup_Detail-param-
+          SiteUserGroup_Detail-param-userNameScope
+  Operation [name=userGroup, id=SiteUserGroup_Find_SiteUserGroupId, path=userGroup]
+          Group_List_Parent-param-id
+          SiteUserPermission_Find_batchValidate-param-groupIds
+          SiteUserPermission_Find_batchValidate-param-
+          SiteUserPermission_Find_batchValidate-param-siteId[enumeration:0]
+  Operation [name=validate, id=SiteUserPermission_Find_validate, path=validate]
+          Site_Find_Detail-param-id
+          SiteUserPermission_Find_validate-param-groupId
+          SiteUserPermission_Find_validate-param-siteId[enumeration:0]
+          SiteUserPermission_Find_validate-param-siteUserId
+          SiteUserPermission_Find_validate-param-permission[enumeration:0xFFFFFFFF]
+          SiteUserGroup_Find_SiteUserGroupId-param-
+          SiteUser_Update-param-id
+          SiteUser_Update-param-name
+          SiteUser_Update-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          SiteUser_Update-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+  Operation [name=move, id=SiteUser_Move, path=move]
+          SiteUser_Move-param-siteUserId
+          SiteUser_Move-param-groupId
+          SiteUser_Move-param-destGroupId
+  Operation [name=active, id=SiteUser_Active, path=active]
+          SiteUser_Active-param-id
+  Operation [name=disable, id=SiteUser_Disable, path=disable]
+          SiteUser_Disable-param-id
+find InterfaceSet:
+  Operation [name=list, id=SiteUser_Find_Search, path=list]
+          SiteUser_Find_Search-param-search
+          SiteUser_Find_Search-param-siteId
+          SiteUser_Find_Search-param-siteIds
+          SiteUser_Find_Search-param-
+          SiteUser_Find_Search-param-userId
+          SiteUser_Find_Search-param-userIds
+          SiteUser_Find_Search-param-
+          SiteUser_Find_Search-param-name
+          SiteUser_Find_Search-param-permission
+          SiteUser_Find_Search-param-groupId
+          SiteUser_Find_Search-param-recursive
+          SiteUser_Find_Search-param-phone[pattern:^1[3|4|5|7|8][0-9]{9}$]
+          SiteUser_Find_Search-param-email[pattern:^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$]
+          SiteUser_Find_Search-param-status[enumeration:NotActive, enumeration:Normal, enumeration:Disable, enumeration:Deleted]
+          SiteUser_Find_Search-param-keyword
+          SiteUser_Find_Search-param-withFlag
+          SiteUser_Find_Search-param-withoutFlag[enumeration:0x1]
+  Operation [name=listByIds, id=SiteUser_Find_Id, path=listByIds]
+          SiteUser_Find_Id-param-ids
+          SiteUser_Find_Id-param-
+  Operation [name=listByUserIds, id=SiteUser_Find_UserId, path=listByUserIds]
+          SiteUser_Find_UserId-param-ids
+          SiteUser_Find_UserId-param-
+  Operation [name=detail, id=SiteUser_Find_Detail, path=detail]
+          SiteUser_Find_Detail-param-id
+---------------------------Wed Feb 07 20:46:24 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 20:48:22 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:01:37 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:03:45 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:12:34 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:14:27 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:15:09 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:17:56 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:18:47 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:21:52 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:22:17 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:26:02 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:27:43 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:28:05 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:28:36 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:28:52 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:30:18 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:30:39 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:31:13 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:32:36 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:35:05 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:35:48 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:36:40 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:37:29 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:38:43 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:41:00 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:41:38 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:41:59 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:42:45 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:43:33 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:44:42 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:47:46 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:47:57 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id
+---------------------------Wed Feb 07 21:49:56 CST 2018---------------------------
+service name:Group_Service
+add InterfaceSet:
+  Operation [name=create, id=Group_New, path=create]
+          Group_New-param-siteId
+          Group_New-param-parentId
+          Group_New-param-name
+delete InterfaceSet:
+  Operation [name=delete, id=Group_Delete, path=delete]
+          Group_Delete-param-id
+update InterfaceSet:
+  Operation [name=updateName, id=Group_Update_Name, path=updateName]
+          Group_Update_Name-param-id
+          Group_Update_Name-param-siteId
+          Group_Update_Name-param-name
+  Operation [name=move, id=Group_Move, path=move]
+          Group_Move-param-id
+          Group_Move-param-siteId
+          Group_Move-param-name
+          Group_Move-param-parentId
+find InterfaceSet:
+  Operation [name=list, id=Group_List, path=list]
+          Group_List-param-search[enumeration:true]
+          Group_List-param-siteId
+          Group_List-param-scopes[enumeration:true]
+          Group_List-param-[enumeration:true]
+          Group_List-param-parentId
+          Group_List-param-recursive[enumeration:true]
+          Group_List-param-levelMax
+          Group_List-param-levelMin
+          Group_List-param-name
+          Group_List-param-keyword
+          Group_List-param-permission
+  Operation [name=detail, id=Group_Detail, path=detail]
+          Group_Detail-param-id
+  Operation [name=batchDetail, id=Group_Batch_Detail, path=batchDetail]
+          Group_Batch_Detail-param-ids
+          Group_Batch_Detail-param-
+  Operation [name=selectTree, id=Group_Select_Tree, path=selectTree]
+          Group_Select_Tree-param-pageNo
+          Group_Select_Tree-param-pageSize
+          Group_Select_Tree-param-siteId
+          Group_Select_Tree-param-siteUserId
+          Group_Select_Tree-param-permission[enumeration:0xffffffff]
+          Group_Select_Tree-param-parentGroupId
+  Operation [name=getTree, id=Group_Get_Tree, path=getTree]
+          Group_Get_Tree-param-id
+  Operation [name=selectList, id=Group_Select_List, path=selectList]
+          Group_Select_List-param-pageNo
+          Group_Select_List-param-pageSize
+          Group_Select_List-param-siteId
+          Group_Select_List-param-siteUserId
+          Group_Select_List-param-permission[enumeration:0xffffffff]
+          Group_Select_List-param-parentGroupId
+  Operation [name=selectGroupIds, id=Group_Select_Group_Ids, path=selectGroupIds]
+          Group_Select_Group_Ids-param-pageNo
+          Group_Select_Group_Ids-param-pageSize
+          Group_Select_Group_Ids-param-siteId
+          Group_Select_Group_Ids-param-siteUserId
+          Group_Select_Group_Ids-param-permission[enumeration:0xffffffff]
+          Group_Select_Group_Ids-param-parentGroupId
+  Operation [name=listParent, id=Group_List_Parent, path=listParent]
+          Group_List_Parent-param-id

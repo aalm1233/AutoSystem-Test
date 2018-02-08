@@ -101,7 +101,7 @@ public class GeneratingInterfaceSequence {
 				for(int j = 0;j<addnum;j++){
 					arrayList.add(adds.get(j));
 					if(interfaceSequenceConstraint1(arrayList)){
-						recursiveGenerationInterfaceSequence(++i,arrayList);
+						recursiveGenerationInterfaceSequence(i+1,arrayList);
 					}
 					arrayList.remove(arrayList.size()-1);
 				}
@@ -110,7 +110,7 @@ public class GeneratingInterfaceSequence {
 				for(int j = 0;j<updatenum;j++){
 					arrayList.add(updates.get(j));
 					if(interfaceSequenceConstraint1(arrayList)){
-						recursiveGenerationInterfaceSequence(++i,arrayList);
+						recursiveGenerationInterfaceSequence(i+1,arrayList);
 					}
 					arrayList.remove(arrayList.size()-1);
 				}
@@ -119,7 +119,7 @@ public class GeneratingInterfaceSequence {
 				for(int j = 0;j<deletenum;j++){
 					arrayList.add(deletes.get(j));
 					if(interfaceSequenceConstraint1(arrayList)){
-						recursiveGenerationInterfaceSequence(++i,arrayList);
+						recursiveGenerationInterfaceSequence(i+1,arrayList);
 					}
 					arrayList.remove(arrayList.size()-1);
 				}
@@ -128,7 +128,7 @@ public class GeneratingInterfaceSequence {
 				for(int j = 0;j<findnum;j++){
 					arrayList.add(finds.get(j));
 					if(interfaceSequenceConstraint2(arrayList)){
-						recursiveGenerationInterfaceSequence(++i,arrayList);
+						recursiveGenerationInterfaceSequence(i+1,arrayList);
 					}
 					arrayList.remove(arrayList.size()-1);
 				}

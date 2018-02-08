@@ -63,10 +63,11 @@ public class GeneratingOperationSequence {
 			tail = tail.substring(1);
 		}
 		int expressionLength = getMaxExpressionLength();
-		for (int i = 0; i < expressionLength - 2; i++) {
+		for (int i = 0; i < expressionLength; i++) {
 			recursiveGenerationOperationSequence(0, i, midle, new StringBuffer(head), result);
 		}
 		return result;
+		
 	}
 	/**
 	 * 获取接口序列的最大长度
@@ -93,32 +94,33 @@ public class GeneratingOperationSequence {
 	 * @param result
 	 */
 	private void recursiveGenerationOperationSequence(int i, int j, String midle, StringBuffer sb, ArrayList<String> result) {
-		if (i < j) {
+		if (i < j+1) {
 			if (midle.contains("A")) {
 				sb.append("A");
-				recursiveGenerationOperationSequence(++i, j, midle, sb, result);
+				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("U")) {
 				sb.append("U");
 				if (operationSequenceConstraint2(sb.toString())) {
-					recursiveGenerationOperationSequence(++i, j, midle, sb, result);
+					recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
 				}
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("D")) {
 				sb.append("D");
 				if (operationSequenceConstraint2(sb.toString())) {
-					recursiveGenerationOperationSequence(++i, j, midle, sb, result);
+					recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
 				}
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("F")) {
 				sb.append("F");
-				recursiveGenerationOperationSequence(++i, j, midle, sb, result);
+				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
+				
 				sb.deleteCharAt(sb.length() - 1);
 			}
-		} else if (i == j) {
+		}else if (i == j+1) {
 			if (operationSequenceConstraint1(sb.toString())) {
 				result.add(sb.toString() + "F");
 			}
@@ -160,7 +162,7 @@ public class GeneratingOperationSequence {
 		for (int i = 0; i < result.length(); i++) {
 			if (result.charAt(i) == 'A') {
 				aNum++;
-			} else if (result.charAt(i) == 'F') {
+			} else if (result.charAt(i) == 'D') {
 				dNum++;
 			}
 		}
