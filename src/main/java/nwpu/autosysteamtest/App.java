@@ -1,15 +1,6 @@
 package nwpu.autosysteamtest;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
-
-import nwpu.autosysteamtest.enity.Operation;
-import nwpu.autosysteamtest.enity.RequestElement;
-import nwpu.autosysteamtest.enity.RequestParam;
-import nwpu.autosysteamtest.enity.Service;
 
 /**
  * @author Dengtong

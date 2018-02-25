@@ -1,0 +1,464 @@
+<resources id="Group_Service" name="GroupService" base="./group">
+	<add>
+		<resource id="Group_New" name="create" path="create">
+			<dependency resourcesId="Site_Service" resourceId="Site_New"/>
+			<request>
+				<param name="param" type="GroupCreateParam">
+					<element name="siteId" attribute="Group.siteId" type="long" location="Site.Id" level="1"/>
+					<element name="parentId" attribute="Group.parentId" type="long" level="1"/>
+					<element name="name" attribute="Group.name" type="String" unique="true" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+						<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>请指定部门</enumeration>
+						<enumeration>站点消息有误</enumeration>
+						<enumeration>站点未找到</enumeration>
+						<enumeration>上级部门不存在</enumeration>
+						<enumeration>部门层级过多</enumeration>
+						<enumeration>同级部门名称不能重复</enumeration>
+						<enumeration>保存失败</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="group" type="GroupView" level="2">
+							<element name="id" attribute="Group.id" level="3"/>
+							<element name="fullName" attribute="GroupView.fullName" level="3"/>
+							<element name="siteId" attribute="Group.siteId" level="3"/>
+							<element name="level" attribute="Group.level" level="3"/>
+							<element name="name" attribute="Group.name" level="3"/>
+							<element name="parentId" attribute="Group.parent1" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+	</add>
+	<update>
+		<resource id="Group_Update_Name" name="updateName" path="updateName">
+			<request>
+				<param name="param" type="GroupUpdateNameParam">
+				    <element name="id" attribute="Group.id" type="long" location="Group.id" level="1"/>
+					<element name="siteId" attribute="Group.siteId" type="long" location="Group.siteId" level="1"/>	
+					<element name="name" attribute="Group.name" type="String" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					 <restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>请指定部门</enumeration>
+						<enumeration>站点未找到</enumeration>
+						<enumeration>部门不存在</enumeration>
+						<enumeration>上级部门未找到</enumeration>
+						<enumeration>同级部门名称不能重复</enumeration>
+						<enumeration>保存失败</enumeration>
+						<enumeration>参数有误</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="group" type="GroupView" level="2">
+							<element name="id" attribute="Group.id" level="3"/>
+							<element name="fullName" attribute="GroupView.fullName" level="3"/>
+							<element name="siteId" attribute="Group.siteId" level="3"/>
+							<element name="level" attribute="Group.level" level="3"/>
+							<element name="name" attribute="Group.name" level="3"/>
+							<element name="parentId" attribute="Group.parent1" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Move" name="move" path="move">
+			<request>
+				<param name="param" type="GroupMoveParam">
+					<element name="id" attribute="Group.id" type="long" location="Group.id" level="1"/>
+					<element name="siteId" attribute="Group.siteId" type="Long" location="Group.siteId" level="1"/>
+					<element name="name" type="String" attribute="Group.name" location="Group.name" level="1"/>
+					<element name="parentId" type="Long" attribute="Group.parent1" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>请指定部门名称</enumeration>
+						<enumeration>部门不存在</enumeration>
+						<enumeration>站点未找到</enumeration>
+						<enumeration>部门已存在于目标部门中</enumeration>
+						<enumeration>上级部门未找到</enumeration>
+						<enumeration> 已存在于 </enumeration>
+						<enumeration>同级部门名称不能重复</enumeration>
+						<enumeration>保存失败</enumeration>
+						<enumeration>参数有误</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="group" type="GroupView" level="2">
+							<element name="id" attribute="Group.id" level="3"/>
+							<element name="fullName" attribute="GroupView.fullName" level="3"/>
+							<element name="siteId" attribute="Group.siteId" level="3"/>
+							<element name="level" attribute="Group.level" level="3"/>
+							<element name="name" attribute="Group.name" level="3"/>
+							<element name="parentId" attribute="Group.parent1" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+	</update>
+	<delete>
+		<resource id="Group_Delete" name="delete" path="delete">
+			<request>
+				<param name="param" type="IDParam">
+					<element name="id"  attribute="Group.id" type="long" location="Group.id" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>参数有误</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="group" type="GroupView" level="2">
+							<element name="id" attribute="Group.id" level="3"/>
+							<element name="fullName" attribute="GroupView.fullName" level="3"/>
+							<element name="siteId" attribute="Group.siteId" level="3"/>
+							<element name="level" attribute="Group.level" level="3"/>
+							<element name="name" attribute="Group.name" level="3"/>
+							<element name="parentId" attribute="Group.parent1" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>	
+	</delete>
+	<find>
+		<resource id="Group_List" name="list" path="list">
+			<request>
+				<param name="param" type="GroupListParam">
+					<element name="search" type="GroupListSearchCriteria" level="1">
+						<element name="siteId" attribute="Group.siteId" type="Long" location="Group.siteId" level="2"/>
+                        <element name="scopes" type="List" level="2">
+							<element type="GroupSearchScope" level="3">
+								<element name="parentId" attribute="Group.parent1" type="Long" location="Group.parent1" level="4"/>
+								<element name="recursive" type="Boolean" level="4">
+								<restriction><enumeration>true</enumeration></restriction>
+								</element>
+							</element>
+						</element>
+						<element name="levelMax" attribute="Group.level" type="Integer" location="Group.level" level="2"/>
+						<element name="levelMin" attribute="Group.level" type="Integer" location="Group.level" level="2"/>
+						<element name="name" attribute="Group.name" type="String" location="Group.name" level="2"/>
+						<element name="keyword" type="String" level="2"/>
+						<element name="permission" type="Long" level="2"/>
+					</element>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>ERROR</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>NULL</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="list" type="List" level="2">
+							<element type="GroupView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="fullName" attribute="GroupView.fullName" level="4"/>
+								<element name="siteId" attribute="Group.siteId" level="4"/>
+								<element name="level" attribute="Group.level" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="parentId" attribute="Group.parent1" level="4"/>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Detail" name="detail" path="detail">
+			<request>
+				<param name="param" type="IDParam">
+					<element name="id" attributr="Group.id" type="long" location="Group.id" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>参数有误</enumeration>
+						<enumeration>未找到</enumeration>
+						<enumeration>请求数据未找到</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="group" type="GroupView" level="2">
+							<element name="id" attribute="Group.id" level="3"/>
+							<element name="fullName" attribute="GroupView.fullName" level="3"/>
+							<element name="siteId" attribute="Group.siteId" level="3"/>
+							<element name="level" attribute="Group.level" level="3"/>
+							<element name="name" attribute="Group.name" level="3"/>
+							<element name="parentId" attribute="Group.parent1" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>	
+		<resource id="Group_Batch_Detail" name="batchDetail" path="batchDetail">
+			<request>
+				<param name="param" type="IDListParam">
+					<element name="ids" type="List" level="1">
+						<element attribute="Group.id" type="long" location="Group.id" level="2"/>
+					</element>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>ERROR</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+											<enumeration>参数有误</enumeration>
+					</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="list" type="List" level="2">
+							<element type="GroupView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="fullName" attribute="GroupView.fullName" level="4"/>
+								<element name="siteId" attribute="Group.siteId" level="4"/>
+								<element name="level" attribute="Group.level" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="parentId" attribute="Group.parent1" level="4"/>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Select_Tree" name="selectTree" path="selectTree">
+			<request>
+				<param name="param" type="GroupSelectWithPermissionParam">
+					<element name="pageNo" type="int" level="1"/>
+					<element name="pageSize" type="int" level="1"/>
+					<element name="siteId" attribute="Group.siteId" type="Long" location="Group.siteId" level="1"/>
+					<element name="siteUserId" attribute="SiteUser.id" type="Long" location="SiteUser.id" level="1"/>
+					<element name="permission" attribute="SiteUser.permission" type="long" level="1">
+						<restriction>
+							<enumeration>0xffffffff</enumeration>
+						</restriction>
+					</element>
+					<element name="parentGroupId" attribute="Group.parent1" type="long" location="Group.parent1" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>参数有误</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="groups" type="List" level="2">
+							<element type="GroupTreeView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="permission" attribute="Group.permission" level="4"/>
+								<element name="subGroups" type="List" level="4">
+									<element type="GroupTreeView" level="5"/>
+								</element>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Get_Tree" name="getTree" path="getTree">
+			<request>
+				<param name="param" type="IDParam">
+					<element name="id" attribute="Group.id" type="long" location="Group.id" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+						<enumeration>SUCCESS</enumeration>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="groups" type="List" level="2">
+							<element type="GroupTreeView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="permission" attribute="Group.permission" level="4"/>
+								<element name="subGroups" type="List" level="4">
+									<element type="GroupTreeView" level="5"/>
+								</element>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Select_List" name="selectList" path="selectList">
+			<request>
+				<param name="param" type="GroupSelectWithPermissionParam">
+					<element name="pageNo" type="int" level="1"/>
+					<element name="pageSize" type="int" level="1"/>
+					<element name="siteId" attribute="Group.siteId" type="Long" location="Group.siteId" level="1"/>
+					<element name="siteUserId" attribute="SiteUser.id" type="Long" location="SiteUser.id" level="1"/>
+					<element name="permission" attribute="SiteUser.permission" type="long" level="1">
+						<restriction>
+							<enumeration>0xffffffff</enumeration>
+						</restriction>
+					</element>
+					<element name="parentGroupId" attribute="Group.parent1" type="long" location="Group.parent1" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+						<enumeration>参数有误</enumeration>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="list" type="List" level="2">
+							<element type="GroupView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="fullName" attribute="GroupView.fullName" level="4"/>
+								<element name="siteId" attribute="Group.siteId" level="4"/>
+								<element name="level" attribute="Group.level" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="parentId" attribute="Group.parent1" level="4"/>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_Select_Group_Ids" name="selectGroupIds" path="selectGroupIds">
+			<request>
+				<param name="param" type="GroupSelectWithPermissionParam">
+					<element name="pageNo" type="int" level="1"/>
+					<element name="pageSize" type="int" level="1"/>
+					<element name="siteId" attribute="Group.siteId" type="Long" location="Group.siteId" level="1"/>
+					<element name="siteUserId" attribute="SiteUser.id" type="Long" location="SiteUser.id" level="1"/>
+					<element name="permission" attribute="SiteUser.permission" type="long" level="1">
+						<restriction>
+							<enumeration>0xffffffff</enumeration>
+						</restriction>
+					</element>
+					<element name="parentGroupId" attribute="Group.parent1" type="long" location="Group.parent1" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>参数有误</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="ids" type="List" level="2">
+							<element attribute="Group.id" type="Long" level="3"/>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+		<resource id="Group_List_Parent" name="listParent" path="listParent">
+			<request>
+				<param name="param" type="IDParam">
+					<element name="id" attribute="Group.id" type="Long" location="Group.id" level="1"/>
+				</param>
+			</request>
+			<response dataType="JSON">
+				<param name="rst" type="JsonDataResult">
+					<element name="status" attribute="JSONResult.status" level="1">
+					<restriction>
+						<enumeration>FAIL</enumeration>
+						<enumeration>ERROR</enumeration>
+						<enumeration>SUCCESS</enumeration>
+						</restriction>
+					</element>
+					<element name="message" attribute="JSONResult.message" level="1">
+					<restriction>
+						<enumeration>部门不存在</enumeration>
+						<enumeration>GroupService.listParent.1</enumeration>
+						</restriction>
+					</element>
+					<element name="data" attribute="JSONResult.data" level="1">
+						<element name="list" type="List" level="2">
+							<element type="GroupView" level="3">
+								<element name="id" attribute="Group.id" level="4"/>
+								<element name="fullName" attribute="GroupView.fullName" level="4"/>
+								<element name="siteId" attribute="Group.siteId" level="4"/>
+								<element name="level" attribute="Group.level" level="4"/>
+								<element name="name" attribute="Group.name" level="4"/>
+								<element name="parentId" attribute="Group.parent1" level="4"/>
+							</element>
+						</element>
+					</element>
+				</param>
+			</response>
+		</resource>
+	</find>
+</resources>

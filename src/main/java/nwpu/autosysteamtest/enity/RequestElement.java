@@ -15,6 +15,9 @@ public class RequestElement {
 		this.attribute =attribute;
 		this.type = type;
 		this.location = location;
+		if("".equals(this.location)){
+			this.location = "false";
+		}
 		this.level = level;
 		elements = null;
 		constraints = null;

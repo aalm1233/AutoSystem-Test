@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import nwpu.autosysteamtest.data.*;
 import nwpu.autosysteamtest.enity.Operation;
+import nwpu.autosysteamtest.enity.RequestElement;
 import nwpu.autosysteamtest.enity.RequestParam;
 import nwpu.autosysteamtest.enity.Service;
 
@@ -23,8 +24,8 @@ public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
 	private ConcurrentHashMap<String, String> operaterTypesMap;
 	protected Service service;
-	protected String resourcesid; 
-	protected String path;	
+	protected String resourcesid;
+	protected String path;
 
 	public AutomatedTestData(String path) throws InterruptedException {
 		this.path = path;
@@ -91,38 +92,44 @@ public class AutomatedTestData {
 			} finally {
 				file = null;
 			}
-			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + resourceid + "\\",
-					xInterface);
+			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + resourceid + "\\", xInterface);
 		}
 	}
 
 	private void analyticParameter(String path, Operation xInterface) throws ParseException {
-			ArrayList<RequestParam> params = xInterface.getRequestParams();
-			PrintWriter out = null;
-			for (RequestParam param : params) {
-				try {
-					out = new PrintWriter(path + param.getName() + ".xml");	
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				String paramAtributte = param.getAttribute();
-				String paramStatus = param.getLocation();
-				String paramName = param.getName();
-				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				out.flush();
-				if("false".equals(paramStatus)){
-					out.println("<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
-					out.flush();
-				}
-				analyticParameterComposition(path, param,out,paramStatus);
-				out.println("</param>");
-				out.flush();
-				out.close();
+		ArrayList<RequestParam> params = xInterface.getRequestParams();
+		PrintWriter out = null;
+		for (RequestParam param : params) {
+			try {
+				out = new PrintWriter(path + param.getName() + ".xml");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			}
+			String paramAtributte = param.getAttribute();
+			String paramStatus = param.getLocation();
+			String paramName = param.getName();
+			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			out.flush();
+			if ("false".equals(paramStatus)) {
+				out.println(
+						"<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
+				out.flush();
+			} else {
+				out.println("<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\""
+						+ paramStatus + "\">");
+				out.flush();
+			}
+			analyticParameterComposition(path, param, out, paramStatus);
+			out.println("</param>");
+			out.flush();
+			out.close();
+		}
 	}
 
-	private void analyticParameterComposition(String path, RequestParam param,PrintWriter out,String paramStatus) throws ParseException {
+	private void analyticParameterComposition(String path, RequestParam param, PrintWriter out, String paramStatus)
+			throws ParseException {
 		String paramType = param.getType();
+		boolean flag = false;
 		if ("false".equals(paramStatus)) {
 			ArrayList<String> values = new ArrayList<>();
 			ArrayList<String> constraints = param.getConstraint();
@@ -174,15 +181,27 @@ public class AutomatedTestData {
 				values = setTypeType(constraints, paramType);
 				break;
 			default:
+				values = ObjectType(param,out);
+				flag = true;
 				break;
 			}
 			for (String value : values) {
-				out.println("	<value>" + value + "</value>");
-				out.flush();
+				if (!flag) {
+					out.println("	<value>" + value + "</value>");
+					out.flush();
+				}
 			}
-		} else{
+		} else {
 		}
 
+	}
+
+	private ArrayList<String> ObjectType(RequestParam param,PrintWriter out) {
+		ArrayList<RequestElement> elements = param.getElements();
+		for (RequestElement element : elements){
+			String elementName = element.getName();
+		}
+		return null;
 	}
 
 	private ArrayList<String> setTypeType(ArrayList<String> constraints, String paramType) {
@@ -210,7 +229,7 @@ public class AutomatedTestData {
 					e.printStackTrace();
 				}
 			}
-		}else{
+		} else {
 			FileData fd = new FileData();
 			try {
 				values = fd.constraintAnalysis();
@@ -286,7 +305,7 @@ public class AutomatedTestData {
 				}
 			}
 
-		}else{
+		} else {
 			switch (paramType) {
 			case "Date":
 				DatesData dd = new DatesData();
@@ -297,7 +316,7 @@ public class AutomatedTestData {
 				values = dtd.constraintAnalysis();
 				break;
 			case "duration":
-				//values = durationType();
+				// values = durationType();
 				break;
 			case "gDay":
 				GDayData gdd = new GDayData();
@@ -339,7 +358,7 @@ public class AutomatedTestData {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
 			String constraintses = null;
-			for(String p :constraints){
+			for (String p : constraints) {
 				constraintses += p;
 			}
 			if (constraintses.contains("enumeration")) {
@@ -382,7 +401,6 @@ public class AutomatedTestData {
 		return values;
 	}
 
-
 	private ArrayList<String> numericalType(ArrayList<String> constraints, String paramType) {
 		ArrayList<String> values = new ArrayList<>();
 		if (constraints != null) {
@@ -400,7 +418,7 @@ public class AutomatedTestData {
 				switch (paramType) {
 				case "byte":
 					ByteData bd = new ByteData(constraint);
-				 	values = bd.constraintAnalysis();
+					values = bd.constraintAnalysis();
 					break;
 				case "int":
 				case "integer":
@@ -457,7 +475,7 @@ public class AutomatedTestData {
 					try {
 						values = dtd.constraintAnalysis();
 					} catch (ParseException e) {
-	
+
 						e.printStackTrace();
 					}
 					break;
@@ -555,6 +573,6 @@ public class AutomatedTestData {
 }
 
 enum Constraints {
-	//约束
+	// 约束
 	enumeration, totalDigits, fractionDigit, minExclusive, maxExclusive, minInclusive, maxInclusive, length, minLength, maxLength, pattern, format, size, minSize, maxSize, whiteSpace
 }

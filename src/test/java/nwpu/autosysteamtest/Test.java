@@ -33,8 +33,11 @@ public class Test {
 		try {
 			dp = DocumentPrepcessing.getInstance(fileSet);
 			while(Thread.activeCount()!=1){}
-			Service service= dp.searchServiceById("User_Service");
-			Operation operation = service.searchAllOperationById("User_New_Get_Phone");
+			Service service= dp.searchServiceById("Group_Service");
+			for(Operation operation : service.getAdds()){
+				System.out.println(operation.getName());
+			}
+			Operation operation = service.searchAllOperationById("Group_New");
 			ArrayList<RequestElement> elements = null;
 			for(RequestParam param: operation.getRequestParams()){
 				if("param".equals(param.getName())){
@@ -43,8 +46,8 @@ public class Test {
 				}
 			}
 			for(RequestElement element : elements){
-				if("birthday".equals(element.getName())){
-					System.out.println(element.getElements().size());
+				if("parentId".equals(element.getName())){
+					System.out.println(element.getLocation());
 				}
 			}
 

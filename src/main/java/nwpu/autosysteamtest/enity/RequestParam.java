@@ -14,6 +14,9 @@ public class RequestParam {
 		this.attribute = attribute;
 		this.type = type;
 		this.location = location;
+		if("".equals(this.location)){
+			this.location = "false";
+		}
 		constraints = null;
 		elements = null;
 	}
