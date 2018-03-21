@@ -199,7 +199,6 @@ public class AutomatedTestData {
 	private ArrayList<String> ObjectType(RequestParam param,PrintWriter out) {
 		ArrayList<RequestElement> elements = param.getElements();
 		for (RequestElement element : elements){
-			String elementName = element.getName();
 		}
 		return null;
 	}
