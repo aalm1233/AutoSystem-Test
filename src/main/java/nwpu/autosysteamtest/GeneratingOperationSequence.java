@@ -127,6 +127,50 @@ public class GeneratingOperationSequence {
 		}
 	}
 	/**
+	 * 操作序列约束规则3:当没有D和U时，只保留AF
+	 * 
+	 * @param result
+	 * @return
+	 */
+	private boolean operationSequenceConstraint3(String result) {
+		boolean output = true;
+		int dNum = 0;// delete操作数量
+		int uNum = 0;// update操作数量 
+		for (int i = 0; i < result.length(); i++) {
+			if (result.charAt(i) == 'U') {
+				uNum++;
+			} else if (result.charAt(i) == 'D') {
+				dNum++;
+			}
+		}
+		if (uNum == 0 && dNum == 0) {
+			output = false;
+		}
+		return output;
+	}
+	/**
+	 * 操作序列约束规则4:
+	 * 
+	 * @param result
+	 * @return
+	 */
+	private boolean operationSequenceConstraint4(String result) {
+		boolean output = true;
+		int aNum = 0;// add操作数量
+		int dNum = 0;// delete操作数量
+		for (int i = 0; i < result.length(); i++) {
+			if (result.charAt(i) == 'A') {
+				aNum++;
+			} else if (result.charAt(i) == 'D') {
+				dNum++;
+			}
+		}
+		if (aNum < dNum) {
+			output = false;
+		}
+		return output;
+	}
+	/**
 	 * 操作序列约束规则2:一个操纵作序列中，update之前add数量应当大于delete数量.
 	 * 
 	 * @param result
