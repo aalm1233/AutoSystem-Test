@@ -66,6 +66,7 @@ public class GeneratingOperationSequence {
 		for (int i = 0; i < expressionLength; i++) {
 			recursiveGenerationOperationSequence(0, i, midle, new StringBuffer(head), result);
 		}
+		result.add(0, "AF");
 		return result;
 		
 	}
@@ -94,7 +95,7 @@ public class GeneratingOperationSequence {
 	 * @param result
 	 */
 	private void recursiveGenerationOperationSequence(int i, int j, String midle, StringBuffer sb, ArrayList<String> result) {
-		if (i < j+1) {
+		if (i < j) {
 			if (midle.contains("A")) {
 				sb.append("A");
 				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
@@ -120,8 +121,8 @@ public class GeneratingOperationSequence {
 				
 				sb.deleteCharAt(sb.length() - 1);
 			}
-		}else if (i == j+1) {
-			if (operationSequenceConstraint1(sb.toString())) {
+		}else if (i == j) {
+			if (operationSequenceConstraint3(sb.toString())&&operationSequenceConstraint1(sb.toString())) {
 				result.add(sb.toString() + "F");
 			}
 		}
@@ -149,7 +150,7 @@ public class GeneratingOperationSequence {
 		return output;
 	}
 	/**
-	 * 操作序列约束规则4:
+	 * 操作序列约束规则4:当只有U没有D的时候，F的数量应等于U数量-1(因为未计算末尾F)
 	 * 
 	 * @param result
 	 * @return
