@@ -46,8 +46,9 @@ public class Test {
 				}
 			}
 			for(RequestElement element : elements){
+				System.out.println(element);
 				if("parentId".equals(element.getName())){
-					System.out.println(element.getLocation());
+					System.out.println(element);
 				}
 			}
 

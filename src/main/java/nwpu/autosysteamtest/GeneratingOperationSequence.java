@@ -158,15 +158,15 @@ public class GeneratingOperationSequence {
 	private boolean operationSequenceConstraint4(String result) {
 		boolean output = true;
 		int aNum = 0;// add操作数量
-		int dNum = 0;// delete操作数量
+		int fNum = 0;// delete操作数量
 		for (int i = 0; i < result.length(); i++) {
 			if (result.charAt(i) == 'A') {
 				aNum++;
-			} else if (result.charAt(i) == 'D') {
-				dNum++;
+			} else if (result.charAt(i) == 'F') {
+				fNum++;
 			}
 		}
-		if (aNum < dNum) {
+		if (aNum < fNum) {
 			output = false;
 		}
 		return output;
