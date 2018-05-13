@@ -63,7 +63,7 @@ public class GeneratingOperationSequence {
 			tail = tail.substring(1);
 		}
 		int expressionLength = getMaxExpressionLength();
-		for (int i = 0; i < expressionLength; i++) {
+		for (int i = 0; i < expressionLength-1; i++) {
 			recursiveGenerationOperationSequence(0, i, midle, new StringBuffer(head), result);
 		}
 		result.add(0, "AF");
@@ -116,10 +116,11 @@ public class GeneratingOperationSequence {
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("F")) {
-				sb.append("F");
-				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
-				
-				sb.deleteCharAt(sb.length() - 1);
+				if(operationSequenceConstraint4(sb.toString())){
+					sb.append("F");
+					recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
+					sb.deleteCharAt(sb.length() - 1);
+				}
 			}
 		}else if (i == j) {
 			if (operationSequenceConstraint3(sb.toString())&&operationSequenceConstraint1(sb.toString())) {
@@ -150,23 +151,14 @@ public class GeneratingOperationSequence {
 		return output;
 	}
 	/**
-	 * 操作序列约束规则4:当只有U没有D的时候，F的数量应等于U数量-1(因为未计算末尾F)
+	 * 操作序列约束规则4:F不连续使用
 	 * 
 	 * @param result
 	 * @return
 	 */
 	private boolean operationSequenceConstraint4(String result) {
 		boolean output = true;
-		int aNum = 0;// add操作数量
-		int fNum = 0;// delete操作数量
-		for (int i = 0; i < result.length(); i++) {
-			if (result.charAt(i) == 'A') {
-				aNum++;
-			} else if (result.charAt(i) == 'F') {
-				fNum++;
-			}
-		}
-		if (aNum < fNum) {
+		if (result.charAt(result.length()-1) == 'F') {
 			output = false;
 		}
 		return output;
@@ -188,7 +180,7 @@ public class GeneratingOperationSequence {
 				dNum++;
 			}
 		}
-		if (aNum < dNum) {
+		if (aNum <= dNum) {
 			output = false;
 		}
 		return output;
