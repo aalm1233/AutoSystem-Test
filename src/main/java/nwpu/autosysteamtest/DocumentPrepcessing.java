@@ -267,6 +267,8 @@ public class DocumentPrepcessing {
 						}
 					}
 					param.setElements(elementes);
+					out.println("    " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
+								+ requestParam.getAttribute(ParamAttribute.name.toString()));
 				} else {
 					param = new RequestParam(requestParam.getAttribute(ParamAttribute.name.toString()),
 							requestParam.getAttribute(ParamAttribute.attribute.toString()),
@@ -277,7 +279,7 @@ public class DocumentPrepcessing {
 						Node restriction = restrictions.item(0);
 						ParameterConstrain constrain = new ParameterConstrain(restriction);
 						ArrayList<String> parameterConstrains = constrain.getResult();
-						param.setConstraint(parameterConstrains);
+						param.setConstraints(parameterConstrains);
 						out.println("    " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
 								+ requestParam.getAttribute(ParamAttribute.name.toString())
 								+ parameterConstrains.toString());
@@ -294,14 +296,14 @@ public class DocumentPrepcessing {
 		}
 
 		private RequestElement requestElementAnalysis(Element resource, Element requestParam, Element element) {
-			RequestElement element2 = null;
+			RequestElement childElement = null;
 			try {
 				String levelstring = element.getAttribute(ElementAttribute.level.toString());
 				int level = 1;
 				if (!"".equals(levelstring)) {
 					level = Integer.parseInt(levelstring);
 				}
-				element2 = new RequestElement(element.getAttribute(ElementAttribute.name.toString()),
+				childElement = new RequestElement(element.getAttribute(ElementAttribute.name.toString()),
 						element.getAttribute(ElementAttribute.attribute.toString()),
 						element.getAttribute(ElementAttribute.type.toString()),
 						element.getAttribute(ElementAttribute.location.toString()), level);
@@ -310,7 +312,7 @@ public class DocumentPrepcessing {
 					Node restriction = restrictions.item(0);
 					ElementConstrain constrain = new ElementConstrain(restriction);
 					ArrayList<String> elementConstrains = constrain.getResult();
-					element2.setConstraints(elementConstrains);
+					childElement.setConstraints(elementConstrains);
 					out.println("          " + resource.getAttribute(ResourcesAttribute.id.toString()) + "-"
 							+ requestParam.getAttribute(ParamAttribute.name.toString()) + "-"
 							+ element.getAttribute(ElementAttribute.name.toString()) + elementConstrains.toString());
@@ -323,7 +325,7 @@ public class DocumentPrepcessing {
 				e.printStackTrace();
 				System.err.println("element error");
 			}
-			return element2;
+			return childElement;
 		}
 
 		private ResponseParam responseParamAnalysis(Element resource, Element responseParam) {
@@ -407,20 +409,20 @@ public class DocumentPrepcessing {
 		}
 
 		private ResponseElement responseElementAnalysis(Element resource, Element responseParam, Element element) {
-			ResponseElement element2 = null;
+			ResponseElement childElement = null;
 			try {
 				String levelstring = element.getAttribute(ElementAttribute.level.toString());
 				int level = 1;
 				if (!"".equals(levelstring)) {
 					level = Integer.parseInt(levelstring);
 				}
-				element2 = new ResponseElement(element.getAttribute(ElementAttribute.name.toString()),
+				childElement = new ResponseElement(element.getAttribute(ElementAttribute.name.toString()),
 						element.getAttribute(ElementAttribute.attribute.toString()), level);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.err.println("element error");
 			}
-			return element2;
+			return childElement;
 		}
 
 		private void resourceAnalysis(Element resource, String type,

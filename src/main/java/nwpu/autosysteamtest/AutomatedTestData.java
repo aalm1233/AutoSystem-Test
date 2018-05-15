@@ -18,7 +18,7 @@ import nwpu.autosysteamtest.enity.Service;
 /**
  * 
  * @author Dengtong
- * @version 0.90,07/01/2018
+ * @version 1.0.0,15/05/2018
  */
 public class AutomatedTestData {
 	DocumentPrepcessing documentPrepcessing;
@@ -132,7 +132,7 @@ public class AutomatedTestData {
 		boolean flag = false;
 		if ("false".equals(paramStatus)) {
 			ArrayList<String> values = new ArrayList<>();
-			ArrayList<String> constraints = param.getConstraint();
+			ArrayList<String> constraints = param.getConstraints();
 			switch (paramType) {
 			case "byte":
 			case "decimal":
@@ -181,27 +181,126 @@ public class AutomatedTestData {
 				values = setTypeType(constraints, paramType);
 				break;
 			default:
-				values = ObjectType(param,out);
+				ObjectType(param,out);
 				flag = true;
 				break;
 			}
-			for (String value : values) {
-				if (!flag) {
+			if(!flag){
+				for (String value : values){
 					out.println("	<value>" + value + "</value>");
 					out.flush();
 				}
 			}
-		} else {
-		}
-
+		} 
 	}
 
 	private ArrayList<String> ObjectType(RequestParam param,PrintWriter out) {
 		ArrayList<RequestElement> elements = param.getElements();
 		for (RequestElement element : elements){
-			String elementName = element.getName();
+			generateObjectDataFile(element,out);
 		}
 		return null;
+	}
+
+	private void generateObjectDataFile(RequestElement element,PrintWriter out) {
+		if(element.isObject()){
+			ArrayList<RequestElement> elements = element.getElements();
+			for (RequestElement childelement : elements){
+				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
+						" attribute\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
+				out.flush();
+				generateObjectDataFile(childelement,out);
+				out.println("</element"+element.getLevel()+" >");
+				out.flush();
+			}
+		}else{
+			if("false".equals(element.getLocation())){
+				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
+						" attribute\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
+				out.flush();
+				try {
+					analyticElementComposition(element,out);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				out.println("</element"+element.getLevel()+">");
+				out.flush();
+			}else{
+				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
+						" attribute\""+element.getAttribute()+"\""+" status=\""+element.getLocation()+"\""+" >");
+				out.flush();
+				out.println("</element"+element.getLevel()+">");
+				out.flush();
+			}
+
+		}
+		
+	}
+	private void analyticElementComposition(RequestElement element, PrintWriter out)
+			throws ParseException {
+		String elementType = element.getType();
+		boolean flag = false;
+		if ("false".equals(element.getLocation())) {
+			ArrayList<String> values = new ArrayList<>();
+			ArrayList<String> constraints = element.getConstraints();
+			switch (elementType) {
+			case "byte":
+			case "decimal":
+			case "int":
+			case "integer":
+			case "long":
+			case "negativeInteger":
+			case "nonNegativeInteger":
+			case "nonPositiveInteger":
+			case "positiveInteger":
+			case "short":
+			case "unsignedLong":
+			case "unsignedInt":
+			case "unsignedShort":
+			case "unsignedByte":
+			case "float":
+			case "double":
+				values = numericalType(constraints, elementType);
+				break;
+			case "String":
+			case "token":
+				values = stringType(constraints, elementType);
+				break;
+			case "Date":
+			case "DateTime":
+			case "duration":
+			case "gDay":
+			case "gMonth":
+			case "gMonthDay":
+			case "gYear":
+			case "gYearMonth":
+			case "time":
+				try {
+					values = dateType(constraints, elementType);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case "boolean":
+				values = boolType();
+				break;
+			case "anyURI":
+				values = fileType(constraints, elementType);
+				break;
+			case "setType":
+				values = setTypeType(constraints, elementType);
+				break;
+			default:
+				break;
+			}
+			if(!flag){
+				for (String value : values){
+					out.println("	<value>" + value + "</value>");
+					out.flush();
+				}
+			}
+		} 
 	}
 
 	private ArrayList<String> setTypeType(ArrayList<String> constraints, String paramType) {
