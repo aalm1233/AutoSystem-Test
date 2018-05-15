@@ -19,7 +19,11 @@ public class RequestElement extends RequestParam{
 	}
 	
 	public boolean isObject(){
-		return !this.elements.isEmpty();
+		if(elements == null){
+			return false;
+		}else{
+			return true;
+		}
 	} 
 
 	public void addElement(RequestElement element) {

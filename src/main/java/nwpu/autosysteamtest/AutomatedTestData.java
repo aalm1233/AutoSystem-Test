@@ -99,30 +99,32 @@ public class AutomatedTestData {
 	private void analyticParameter(String path, Operation xInterface) throws ParseException {
 		ArrayList<RequestParam> params = xInterface.getRequestParams();
 		PrintWriter out = null;
-		for (RequestParam param : params) {
-			try {
-				out = new PrintWriter(path + param.getName() + ".xml");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			String paramAtributte = param.getAttribute();
-			String paramStatus = param.getLocation();
-			String paramName = param.getName();
-			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			out.flush();
-			if ("false".equals(paramStatus)) {
-				out.println(
-						"<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
+		if(params != null){
+			for (RequestParam param : params) {
+				try {
+					out = new PrintWriter(path + param.getName() + ".xml");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				String paramAtributte = param.getAttribute();
+				String paramStatus = param.getLocation();
+				String paramName = param.getName();
+				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				out.flush();
-			} else {
-				out.println("<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\""
-						+ paramStatus + "\">");
+				if ("false".equals(paramStatus)) {
+					out.println(
+							"<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\"generate\">");
+					out.flush();
+				} else {
+					out.println("<param name=\"" + paramName + "\" attribute=\"" + paramAtributte + "\" status=\""
+							+ paramStatus + "\">");
+					out.flush();
+				}
+				analyticParameterComposition(path, param, out, paramStatus);
+				out.println("</param>");
 				out.flush();
+				out.close();
 			}
-			analyticParameterComposition(path, param, out, paramStatus);
-			out.println("</param>");
-			out.flush();
-			out.close();
 		}
 	}
 
@@ -207,7 +209,7 @@ public class AutomatedTestData {
 			ArrayList<RequestElement> elements = element.getElements();
 			for (RequestElement childelement : elements){
 				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
-						" attribute\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
+						" attribute=\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
 				out.flush();
 				generateObjectDataFile(childelement,out);
 				out.println("</element"+element.getLevel()+" >");
@@ -216,7 +218,7 @@ public class AutomatedTestData {
 		}else{
 			if("false".equals(element.getLocation())){
 				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
-						" attribute\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
+						" attribute=\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
 				out.flush();
 				try {
 					analyticElementComposition(element,out);
@@ -228,7 +230,7 @@ public class AutomatedTestData {
 				out.flush();
 			}else{
 				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
-						" attribute\""+element.getAttribute()+"\""+" status=\""+element.getLocation()+"\""+" >");
+						" attribute=\""+element.getAttribute()+"\""+" status=\""+element.getLocation()+"\""+" >");
 				out.flush();
 				out.println("</element"+element.getLevel()+">");
 				out.flush();
@@ -304,7 +306,8 @@ public class AutomatedTestData {
 	}
 
 	private ArrayList<String> setTypeType(ArrayList<String> constraints, String paramType) {
-		return null;
+		ArrayList<String> values = new ArrayList<>();
+		return values;
 	}
 
 	private ArrayList<String> fileType(ArrayList<String> constraints, String paramType) {

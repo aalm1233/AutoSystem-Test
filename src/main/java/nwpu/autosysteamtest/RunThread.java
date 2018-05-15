@@ -9,7 +9,7 @@ import java.io.File;
 public class RunThread {
 
 	public RunThread(String path) {
-		File folder = new File(path+"\\resource\\inputxml");
+		File folder = new File(path);
 		File[] fileSet = folder.listFiles();
 		 DocumentPrepcessing dp;
 		try {
@@ -17,10 +17,10 @@ public class RunThread {
 			while(Thread.activeCount()!=1){}
 			TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
 			tpg.run();
-			ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\", tpg.getMode());
+			ScriptGeneration sg = new ScriptGeneration(path+"\\", tpg.getMode());
 			sg.run();
-			//AutomatedTestData atd = new AutomatedTestData(path+"\\resource\\");
-			//atd.run1();
+			AutomatedTestData atd = new AutomatedTestData(path+"\\");
+			atd.run1();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
