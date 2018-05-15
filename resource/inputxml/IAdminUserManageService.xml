@@ -7,7 +7,7 @@
 		<resource name="Add_Seller" path="addSeller" id="addSeller">
 			<request>
 				<param name="seller" type="Seller">
-					<element type="Integer" attribute="Seller.idseller" level="1"
+					<element type="integer" attribute="Seller.idseller" level="1"
 						location="false" name="idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
 						location="false" name="loginName">
@@ -61,17 +61,17 @@
 						level="1" location="false" name="productType"></element>
 					<element type="String" attribute="Seller.pathType" level="1"
 						location="false" name="pathType"></element>
-					<element type="Set" attribute="Seller.products" level="1"
+					<element type="setType" attribute="Seller.products" level="1"
 						location="false" name="products"></element>
-					<element type="Set" attribute="Seller.personincharges"
+					<element type="setType" attribute="Seller.personincharges"
 						level="1" location="false" name="personincharges"></element>
-					<element type="Set" attribute="Seller.receivermapnotices"
+					<element type="setType" attribute="Seller.receivermapnotices"
 						level="1" location="false" name="receivermapnotices"></element>
-					<element type="Set" attribute="Seller.traffics" level="1"
+					<element type="setType" attribute="Seller.traffics" level="1"
 						location="false" name="traffics"></element>
-					<element type="Set" attribute="Seller.materialinformations"
+					<element type="setType" attribute="Seller.materialinformations"
 						level="1" location="false" name="materialinformations"></element>
-					<element type="Set" attribute="Seller.orders" level="1"
+					<element type="setType" attribute="Seller.orders" level="1"
 						location="false" name="orders"></element>
 				</param>
 			</request>
@@ -96,7 +96,7 @@
 		<resource name="Update_Seller" path="updateSeller" id="updateSeller">
 			<request>
 				<param name="seller" type="Seller">
-					<element type="Integer" attribute="Seller.idseller" level="1"
+					<element type="integer" attribute="Seller.idseller" level="1"
 						location="Seller.idseller" name="idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
 						location="false" name="loginName">
@@ -150,17 +150,17 @@
 						level="1" location="false" name="productType"></element>
 					<element type="String" attribute="Seller.pathType" level="1"
 						location="false" name="pathType"></element>
-					<element type="Set" attribute="Seller.products" level="1"
+					<element type="setType" attribute="Seller.products" level="1"
 						location="false" name="products"></element>
-					<element type="Set" attribute="Seller.personincharges"
+					<element type="setType" attribute="Seller.personincharges"
 						level="1" location="false" name="personincharges"></element>
-					<element type="Set" attribute="Seller.receivermapnotices"
+					<element type="setType" attribute="Seller.receivermapnotices"
 						level="1" location="false" name="receivermapnotices"></element>
-					<element type="Set" attribute="Seller.traffics" level="1"
+					<element type="setType" attribute="Seller.traffics" level="1"
 						location="false" name="traffics"></element>
-					<element type="Set" attribute="Seller.materialinformations"
+					<element type="setType" attribute="Seller.materialinformations"
 						level="1" location="false" name="materialinformations"></element>
-					<element type="Set" attribute="Seller.orders" level="1"
+					<element type="setType" attribute="Seller.orders" level="1"
 						location="false" name="orders"></element>
 				</param>
 			</request>
@@ -170,7 +170,7 @@
 			id="changeSellerForbid">
 			<request>
 				<param name="seller" type="Seller">
-					<element type="Integer" attribute="Seller.idseller" level="1"
+					<element type="integer" attribute="Seller.idseller" level="1"
 						name="idseller" location="Seller.idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
 						name="loginName" location="Seller.loginName">
@@ -224,17 +224,17 @@
 						level="1" name="productType" location="Seller.productType"></element>
 					<element type="String" attribute="Seller.pathType" level="1"
 						name="pathType" location="Seller.productType"></element>
-					<element type="Set" attribute="Seller.products" level="1"
+					<element type="setType" attribute="Seller.products" level="1"
 						name="products" location="Seller.productType"></element>
-					<element type="Set" attribute="Seller.personincharges"
+					<element type="setType" attribute="Seller.personincharges"
 						level="1" name="personincharges" location="Seller.personincharges"></element>
-					<element type="Set" attribute="Seller.receivermapnotices"
+					<element type="setType" attribute="Seller.receivermapnotices"
 						level="1" name="receivermapnotices" location="Seller.receivermapnotices"></element>
-					<element type="Set" attribute="Seller.traffics" level="1"
+					<element type="setType" attribute="Seller.traffics" level="1"
 						name="traffics" location="Seller.traffics"></element>
-					<element type="Set" attribute="Seller.materialinformations"
+					<element type="setType" attribute="Seller.materialinformations"
 						level="1" name="materialinformations" location="Seller.materialinformations"></element>
-					<element type="Set" attribute="Seller.orders" level="1"
+					<element type="setType" attribute="Seller.orders" level="1"
 						name="orders" location="Seller.orders"></element>
 				</param>
 			</request>
@@ -244,7 +244,7 @@
 	<find>
 		<resource name="Get_Seller_ByID" path="getSellerByID" id="getSellerByID">
 			<request>
-				<param name="sellerID" type="Integer" attribute="Seller.idseller"
+				<param name="sellerID" type="integer" attribute="Seller.idseller"
 					location="Seller.idseller"></param>
 			</request>
 			<response dataType="Seller">
