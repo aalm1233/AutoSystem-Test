@@ -6,7 +6,7 @@
 	<add>
 		<resource name="Add_Seller" path="addSeller" id="addSeller">
 			<request>
-				<param name="seller" type="Seller">
+				<param name="seller" type="Seller" attribute="Seller" >
 					<element type="integer" attribute="Seller.idseller" level="1"
 						location="false" name="idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
@@ -84,7 +84,7 @@
 	<delete>
 		<resource name="Delete_Seller" path="deleteSeller" id="deleteSeller">
 			<request>
-				<param name="seller" type="Seller" location="Seller">
+				<param name="seller" type="Seller" attribute="Seller" location="Seller">
 				</param>
 			</request>
 			<response dataType="boolean">
@@ -95,7 +95,7 @@
 	<update>
 		<resource name="Update_Seller" path="updateSeller" id="updateSeller">
 			<request>
-				<param name="seller" type="Seller">
+				<param name="seller" type="Seller" attribute="Seller">
 					<element type="integer" attribute="Seller.idseller" level="1"
 						location="Seller.idseller" name="idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
@@ -169,7 +169,7 @@
 		<resource name="Change_Seller_Forbid" path="changeSellerForbid"
 			id="changeSellerForbid">
 			<request>
-				<param name="seller" type="Seller">
+				<param name="seller" type="Seller" attribute="Seller">
 					<element type="integer" attribute="Seller.idseller" level="1"
 						name="idseller" location="Seller.idseller"></element>
 					<element type="String" attribute="Seller.loginName" level="1"
