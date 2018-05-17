@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,6 +35,8 @@ public class AutomatedTestData implements Runnable {
 	}
 
 	public void run() {
+		long startTime = System.currentTimeMillis();
+		System.out.println("Data generation started");
 		Set<String> key = operaterTypesMap.keySet();
 		File file = null;
 		try {
@@ -68,6 +71,8 @@ public class AutomatedTestData implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		long endTime = System.currentTimeMillis();
+		System.out.println("Data generation finished.run with "+(endTime - startTime)+" ms");
 	}
 
 	protected void run2() throws FileNotFoundException, ParseException {

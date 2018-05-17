@@ -19,13 +19,11 @@ public class RunThread {
 			TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
 			tpg.run();
 			ScriptGeneration sg = new ScriptGeneration(path+"\\", tpg.getMode());
-			System.out.println("Script Generation Start");
 			new Thread(sg).start();
 			AutomatedTestData atd = new AutomatedTestData(path+"\\");
-			System.out.println("Data Generation Start");
 			new Thread(atd).start();
 			while(Thread.activeCount()!=1){}
-			System.out.println("Finich Generation at"+new Date());
+			System.out.println("Finich Generation at "+new Date());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

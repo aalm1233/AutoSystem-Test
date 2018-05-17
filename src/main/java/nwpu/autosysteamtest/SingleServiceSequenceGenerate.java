@@ -12,6 +12,8 @@ public class SingleServiceSequenceGenerate implements Runnable{
         this.path = path;
     }
     public void run(){
+    	long startTime = System.currentTimeMillis();
+		System.out.println("Service : "+service.getId()+" Script generation start");
         GeneratingOperationSequence operationSequence = new GeneratingOperationSequence(service, fileName, path);
         try {
             operationSequence.generatingOperationSequenceFiles();
@@ -24,5 +26,7 @@ public class SingleServiceSequenceGenerate implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println("Service : "+service.getId()+" Script generation finished.run with "+(endTime - startTime)+" ms");
     }
 }
