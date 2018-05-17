@@ -20,7 +20,7 @@ import nwpu.autosysteamtest.enity.Service;
  * @author Dengtong
  * @version 1.0.0,15/05/2018
  */
-public class AutomatedTestData {
+public class AutomatedTestData implements Runnable {
 	DocumentPrepcessing documentPrepcessing;
 	private ConcurrentHashMap<String, String> operaterTypesMap;
 	protected Service service;
@@ -33,7 +33,7 @@ public class AutomatedTestData {
 		this.operaterTypesMap = documentPrepcessing.getOperaterTypesMap();
 	}
 
-	public void run1() {
+	public void run() {
 		Set<String> key = operaterTypesMap.keySet();
 		File file = null;
 		try {
