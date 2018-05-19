@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources base="./service/administer" id="IAdministerSellerManageService"
+	name="IAdministerSellerManageService" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3school.com.cn ../schema/XMLSchema11_24.xsd ">
+	<add>
+		<resource name="Add_Seller" path="addSeller" id="addSeller">
+			<request>
+				<param name="seller" type="Seller" attribute="Seller" >
+					<element type="integer" attribute="Seller.idseller" level="1"
+						location="false" name="idseller"></element>
+					<element type="String" attribute="Seller.loginName" level="1"
+						location="false" name="loginName">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.passWord" level="1"
+						location="false" name="passWord">
+						<restriction>
+							<pattern>^[a-zA-Z]\w{5,17}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.name" level="1"
+						location="false" name="name">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.mobilePhone"
+						level="1" location="false" name="mobilePhone">
+						<restriction>
+							<pattern>^1[34578][0-9]{9}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.telephone" level="1"
+						location="false" name="telephone">
+						<restriction>
+							<pattern>^(0[0-9]{2,3}-)?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.email" level="1"
+						location="false" name="email">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_-]+\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.qq" level="1"
+						location="false" name="qq">
+						<restriction>
+							<pattern>^[1-9]\d{4,14}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.forbid" level="1"
+						location="false" name="forbid"></element>
+					<element type="String" attribute="Seller.company" level="1"
+						location="false" name="company"></element>
+					<element type="String" attribute="Seller.businessLicense"
+						level="1" location="false" name="businessLicense"></element>
+					<element type="String" attribute="Seller.productType"
+						level="1" location="false" name="productType"></element>
+					<element type="String" attribute="Seller.pathType" level="1"
+						location="false" name="pathType"></element>
+					<element type="setType" attribute="Seller.products" level="1"
+						location="false" name="products"></element>
+					<element type="setType" attribute="Seller.personincharges"
+						level="1" location="false" name="personincharges"></element>
+					<element type="setType" attribute="Seller.receivermapnotices"
+						level="1" location="false" name="receivermapnotices"></element>
+					<element type="setType" attribute="Seller.traffics" level="1"
+						location="false" name="traffics"></element>
+					<element type="setType" attribute="Seller.materialinformations"
+						level="1" location="false" name="materialinformations"></element>
+					<element type="setType" attribute="Seller.orders" level="1"
+						location="false" name="orders"></element>
+				</param>
+			</request>
+			<response dataType="boolean">
+				<param name="isAddSuccess" type="boolean"></param>
+
+			</response>
+		</resource>
+	</add>
+	<delete>
+		<resource name="Delete_Seller" path="deleteSeller" id="deleteSeller">
+			<request>
+				<param name="seller" type="Seller" attribute="Seller" location="Seller">
+				</param>
+			</request>
+			<response dataType="boolean">
+				<param name="isDeleteSuccess" type="boolean"></param>
+			</response>
+		</resource>
+	</delete>
+	<update>
+		<resource name="Update_Seller" path="updateSeller" id="updateSeller">
+			<request>
+				<param name="seller" type="Seller" attribute="Seller">
+					<element type="integer" attribute="Seller.idseller" level="1"
+						location="Seller.idseller" name="idseller"></element>
+					<element type="String" attribute="Seller.loginName" level="1"
+						location="false" name="loginName">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.passWord" level="1"
+						location="false" name="passWord">
+						<restriction>
+							<pattern>^[a-zA-Z]\w{5,17}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.name" level="1"
+						location="false" name="name">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.mobilePhone"
+						level="1" location="false" name="mobilePhone">
+						<restriction>
+							<pattern>^1[34578][0-9]{9}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.telephone" level="1"
+						location="false" name="telephone">
+						<restriction>
+							<pattern>^(0[0-9]{2,3}-)?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.email" level="1"
+						location="false" name="email">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_-]+\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.qq" level="1"
+						location="false" name="qq">
+						<restriction>
+							<pattern>^[1-9]\d{4,14}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.forbid" level="1"
+						location="false" name="forbid"></element>
+					<element type="String" attribute="Seller.company" level="1"
+						location="false" name="company"></element>
+					<element type="String" attribute="Seller.businessLicense"
+						level="1" location="false" name="businessLicense"></element>
+					<element type="String" attribute="Seller.productType"
+						level="1" location="false" name="productType"></element>
+					<element type="String" attribute="Seller.pathType" level="1"
+						location="false" name="pathType"></element>
+					<element type="setType" attribute="Seller.products" level="1"
+						location="false" name="products"></element>
+					<element type="setType" attribute="Seller.personincharges"
+						level="1" location="false" name="personincharges"></element>
+					<element type="setType" attribute="Seller.receivermapnotices"
+						level="1" location="false" name="receivermapnotices"></element>
+					<element type="setType" attribute="Seller.traffics" level="1"
+						location="false" name="traffics"></element>
+					<element type="setType" attribute="Seller.materialinformations"
+						level="1" location="false" name="materialinformations"></element>
+					<element type="setType" attribute="Seller.orders" level="1"
+						location="false" name="orders"></element>
+				</param>
+			</request>
+			<response dataType="Null"></response>
+		</resource>
+		<resource name="Change_Seller_Forbid" path="changeSellerForbid"
+			id="changeSellerForbid">
+			<request>
+				<param name="seller" type="Seller" attribute="Seller">
+					<element type="integer" attribute="Seller.idseller" level="1"
+						name="idseller" location="Seller.idseller"></element>
+					<element type="String" attribute="Seller.loginName" level="1"
+						name="loginName" location="Seller.loginName">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.passWord" level="1"
+						name="passWord" location="Seller.passWord">
+						<restriction>
+							<pattern>^[a-zA-Z]\w{5,17}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.name" level="1"
+						name="name" location="Seller.name">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_]{3,16}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.mobilePhone"
+						level="1" name="mobilePhone" location="Seller.name">
+						<restriction>
+							<pattern>^1[34578][0-9]{9}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.telephone" level="1"
+						name="telephone" location="Seller.telephone">
+						<restriction>
+							<pattern>^(0[0-9]{2,3}-)?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.email" level="1"
+						name="email" location="Seller.email">
+						<restriction>
+							<pattern>^[a-zA-Z0-9_-]+\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.qq" level="1"
+						name="qq" location="Seller.qq">
+						<restriction>
+							<pattern>^[1-9]\d{4,14}$</pattern>
+						</restriction>
+					</element>
+					<element type="String" attribute="Seller.forbid" level="1"
+						name="forbid" location="false"></element>
+					<element type="String" attribute="Seller.company" level="1"
+						name="company" location="Seller.company"></element>
+					<element type="String" attribute="Seller.businessLicense"
+						level="1" name="businessLicense" location="Seller.businessLicense"></element>
+					<element type="String" attribute="Seller.productType"
+						level="1" name="productType" location="Seller.productType"></element>
+					<element type="String" attribute="Seller.pathType" level="1"
+						name="pathType" location="Seller.productType"></element>
+					<element type="setType" attribute="Seller.products" level="1"
+						name="products" location="Seller.productType"></element>
+					<element type="setType" attribute="Seller.personincharges"
+						level="1" name="personincharges" location="Seller.personincharges"></element>
+					<element type="setType" attribute="Seller.receivermapnotices"
+						level="1" name="receivermapnotices" location="Seller.receivermapnotices"></element>
+					<element type="setType" attribute="Seller.traffics" level="1"
+						name="traffics" location="Seller.traffics"></element>
+					<element type="setType" attribute="Seller.materialinformations"
+						level="1" name="materialinformations" location="Seller.materialinformations"></element>
+					<element type="setType" attribute="Seller.orders" level="1"
+						name="orders" location="Seller.orders"></element>
+				</param>
+			</request>
+			<response dataType="Null"></response>
+		</resource>
+	</update>
+	<find>
+		<resource name="Get_Seller_ByID" path="getSellerByID" id="getSellerByID">
+			<request>
+				<param name="sellerID" type="integer" attribute="Seller.idseller"
+					location="Seller.idseller"></param>
+			</request>
+			<response dataType="Seller">
+				<param name="seller" attribute="Seller">
+				</param>
+			</response>
+		</resource>
+		<resource name="Get_SellerNumber" path="getSellerNumber" id="getSellerNumber">
+			<request>
+			</request>
+			<response dataType="int">
+				<param name="sellerNumber" type="int"></param>
+			</response>
+		</resource>
+		<resource name="Find_Seller_ByLoginName" path="findSellerByLoginName"
+			id="findSellerByLoginName">
+			<request>
+				<param name="loginName" type="String" attribute="Seller.loginName"
+					location="Seller.loginName"></param>
+			</request>
+			<response dataType="boolean">
+				<param name="isFindSuccess" type="boolean"></param>
+			</response>
+		</resource>
+		<resource name="Find_Seller_ByName" path="findSellerByName" id="findSellerByName">
+		</resource>
+	</find>
+</resources>

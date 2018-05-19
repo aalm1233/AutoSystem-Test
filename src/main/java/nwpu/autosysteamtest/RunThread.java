@@ -1,6 +1,7 @@
 package nwpu.autosysteamtest;
 
 import java.io.File;
+import java.util.Date;
 /**
  * 专门启动该系列算法的类
  * @author Dengtong
@@ -9,18 +10,20 @@ import java.io.File;
 public class RunThread {
 
 	public RunThread(String path) {
-		File folder = new File(path+"\\resource\\inputxml");
+		File folder = new File(path);
 		File[] fileSet = folder.listFiles();
-		 DocumentPrepcessing dp;
+		DocumentPrepcessing dp;
 		try {
 			dp = DocumentPrepcessing.getInstance(fileSet);
 			while(Thread.activeCount()!=1){}
-			//TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
-			//tpg.run();
-			//ScriptGeneration sg = new ScriptGeneration(path+"\\resource\\", tpg.getMode());
-			//sg.run();
-			AutomatedTestData atd = new AutomatedTestData(path+"\\resource\\");
-			atd.run1();
+			TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
+			tpg.run();
+			ScriptGeneration sg = new ScriptGeneration(path+"\\", tpg.getMode());
+			new Thread(sg).start();
+			AutomatedTestData atd = new AutomatedTestData(path+"\\");
+			new Thread(atd).start();
+			while(Thread.activeCount()!=1){}
+			System.out.println("Finich Generation at "+new Date());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -32,10 +32,10 @@ public class RequestParam {
 	public String getLocation() {
 		return location;
 	}
-	public ArrayList<String> getConstraint() {
+	public ArrayList<String> getConstraints() {
 		return constraints;
 	}
-	public void setConstraint(ArrayList<String> constraints) {
+	public void setConstraints(ArrayList<String> constraints) {
 		this.constraints = constraints;
 	}
 	public ArrayList<RequestElement> getElements() {

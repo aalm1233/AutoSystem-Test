@@ -63,9 +63,10 @@ public class GeneratingOperationSequence {
 			tail = tail.substring(1);
 		}
 		int expressionLength = getMaxExpressionLength();
-		for (int i = 0; i < expressionLength; i++) {
+		for (int i = 0; i < expressionLength-1; i++) {
 			recursiveGenerationOperationSequence(0, i, midle, new StringBuffer(head), result);
 		}
+		result.add(0, "AF");
 		return result;
 		
 	}
@@ -94,7 +95,7 @@ public class GeneratingOperationSequence {
 	 * @param result
 	 */
 	private void recursiveGenerationOperationSequence(int i, int j, String midle, StringBuffer sb, ArrayList<String> result) {
-		if (i < j+1) {
+		if (i < j) {
 			if (midle.contains("A")) {
 				sb.append("A");
 				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
@@ -115,16 +116,52 @@ public class GeneratingOperationSequence {
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if (midle.contains("F")) {
-				sb.append("F");
-				recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
-				
-				sb.deleteCharAt(sb.length() - 1);
+				if(operationSequenceConstraint4(sb.toString())){
+					sb.append("F");
+					recursiveGenerationOperationSequence(i+1, j, midle, sb, result);
+					sb.deleteCharAt(sb.length() - 1);
+				}
 			}
-		}else if (i == j+1) {
-			if (operationSequenceConstraint1(sb.toString())) {
+		}else if (i == j) {
+			if (operationSequenceConstraint3(sb.toString())&&operationSequenceConstraint1(sb.toString())) {
 				result.add(sb.toString() + "F");
 			}
 		}
+	}
+	/**
+	 * 操作序列约束规则3:当没有D和U时，只保留AF
+	 * 
+	 * @param result
+	 * @return
+	 */
+	private boolean operationSequenceConstraint3(String result) {
+		boolean output = true;
+		int dNum = 0;// delete操作数量
+		int uNum = 0;// update操作数量 
+		for (int i = 0; i < result.length(); i++) {
+			if (result.charAt(i) == 'U') {
+				uNum++;
+			} else if (result.charAt(i) == 'D') {
+				dNum++;
+			}
+		}
+		if (uNum == 0 && dNum == 0) {
+			output = false;
+		}
+		return output;
+	}
+	/**
+	 * 操作序列约束规则4:F不连续使用
+	 * 
+	 * @param result
+	 * @return
+	 */
+	private boolean operationSequenceConstraint4(String result) {
+		boolean output = true;
+		if (result.charAt(result.length()-1) == 'F') {
+			output = false;
+		}
+		return output;
 	}
 	/**
 	 * 操作序列约束规则2:一个操纵作序列中，update之前add数量应当大于delete数量.
@@ -143,7 +180,7 @@ public class GeneratingOperationSequence {
 				dNum++;
 			}
 		}
-		if (aNum < dNum) {
+		if (aNum <= dNum) {
 			output = false;
 		}
 		return output;

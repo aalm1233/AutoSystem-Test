@@ -14,6 +14,11 @@ import nwpu.autosysteamtest.enity.RequestParam;
 import nwpu.autosysteamtest.enity.ResponseParam;
 import nwpu.autosysteamtest.enity.Service;
 
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0.0,15/05/2018
+ */
 public class GeneratingInterfaceSequence {
 	private int addnum;
 	private int findnum;
@@ -256,7 +261,7 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 	}
 	private void printlnElement(RequestElement requestElement, PrintWriter out) {
-		out.println("			<element"+requestElement.getLevel()+" name=\""+requestElement.getName()+"\" attribute=\""+requestElement.getAttribute()+"\" >");
+		out.println("			<element"+requestElement.getLevel()+" name=\""+requestElement.getName()+"\" attribute=\""+requestElement.getAttribute()+"\""+" location=\""+requestElement.getLocation()+"\""+" >");
 		out.flush();
 		ArrayList<RequestElement> requestElements = requestElement.getElements();
 		if(requestElements != null&&requestElements.size() != 0){
