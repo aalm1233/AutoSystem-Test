@@ -1,7 +1,11 @@
 package nwpu.autosysteamtest;
 
 import nwpu.autosysteamtest.enity.Service;
-
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,28/01/2018
+ */
 public class SingleServiceSequenceGenerate implements Runnable{
     Service service;
     String fileName;
@@ -11,6 +15,7 @@ public class SingleServiceSequenceGenerate implements Runnable{
         this.fileName = fileName;
         this.path = path;
     }
+    @Override
     public void run(){
     	long startTime = System.currentTimeMillis();
 		System.out.println("Service : "+service.getId()+" Script generation start");

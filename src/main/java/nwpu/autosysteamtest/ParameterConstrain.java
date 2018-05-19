@@ -37,5 +37,6 @@ public class ParameterConstrain {
 
 }
 enum Constraint{
+	//枚举类型
 	enumeration,totalDigits,fractionDigit,minExclusive,maxExclusive,minInclusive,maxInclusive,length,minLength,maxLength,minDate,maxDate,pattern,format,minSize,maxSize,whiteSpace
 }

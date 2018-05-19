@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,28/01/2018
+ */
 public class ElementConstrain {
 	private NodeList constraints = null;
 

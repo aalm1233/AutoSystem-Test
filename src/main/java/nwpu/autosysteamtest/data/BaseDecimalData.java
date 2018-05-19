@@ -16,7 +16,7 @@ public abstract class BaseDecimalData extends BaseData{
 		super();
 	}
 	/**
-	 * 
+	 * 根据表达式生成数据
 	 * @param pattern 正则表达式
 	 * @param minValue 最小值
 	 * @param maxValue 最大值

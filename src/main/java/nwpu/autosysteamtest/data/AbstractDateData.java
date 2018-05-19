@@ -18,7 +18,7 @@ public abstract class AbstractDateData extends BaseData{
 		super();
 	}
 	/**
-	 * 
+	 * 生成数据
 	 * @param lowtime 最低时间
 	 * @param hightime 最长时间
 	 * @return 生成的数据

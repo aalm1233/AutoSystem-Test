@@ -1,7 +1,11 @@
 package nwpu.autosysteamtest.enity;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,28/01/2018
+ */
 public class ResponseParam {
 	String name;
 	String attribute;

@@ -16,7 +16,7 @@ public abstract class BaseData {
 	public BaseData(){
 	}
 	/**
-	 * 
+	 * 生成数据
 	 * @return 生成的数据
 	 * @throws ParseException
 	 */

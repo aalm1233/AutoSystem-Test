@@ -523,10 +523,12 @@ public class DocumentPrepcessing {
 }
 
 enum DependencyAttribute {
+	//依赖
 	resourcesid, resourceid
 }
 
 enum ResourcesAttribute {
+	//服务属性
 	id, name, base
 }
 
@@ -536,29 +538,36 @@ enum Operation {
 }
 
 enum ResourceAttribute {
+	//接口属性
 	id, name, path, cascade
 }
 
 enum DataAttribute {
+	//回复属性
 	dataType
 }
 
 enum Param {
+	//参数类型
 	param, dependency
 }
 
 enum ParamAttribute {
+	//参数属性
 	name, attribute, type, required, location
 }
 
 enum ParamElement {
+	//参数子节点
 	restriction, element,
 }
 
 enum ElementAttribute {
+	//子参数属性
 	name, level, type, attribute, location
 }
 
 enum TagName {
+	//xmlTag名称
 	resources, resource, add, find, delete, update, param, element, restricition, request, response
 }
