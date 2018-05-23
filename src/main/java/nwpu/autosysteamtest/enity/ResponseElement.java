@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @version 1.0,28/01/2018
  */
 public class ResponseElement {
-	ArrayList<ResponseElement> elements;
+	ArrayList<ResponseElement> elements = null;
 	String name;
 	String attribute;
 	int level;
@@ -21,6 +21,12 @@ public class ResponseElement {
 		return level;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	public String getAttribute() {
+		return attribute;
+	}
 	public ArrayList<ResponseElement> getElements() {
 		return elements;
 	}

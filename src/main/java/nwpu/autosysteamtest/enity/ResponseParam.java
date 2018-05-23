@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ResponseParam {
 	String name;
 	String attribute;
-	ArrayList<ResponseElement> elements;
+	ArrayList<ResponseElement> elements = null;
 	public ResponseParam(String name,String attribute){
 		this.name = name;
 		this.attribute = attribute;

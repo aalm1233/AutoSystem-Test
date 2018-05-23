@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import nwpu.autosysteamtest.enity.Operation;
 import nwpu.autosysteamtest.enity.RequestElement;
 import nwpu.autosysteamtest.enity.RequestParam;
+import nwpu.autosysteamtest.enity.ResponseElement;
 import nwpu.autosysteamtest.enity.ResponseParam;
 import nwpu.autosysteamtest.enity.Service;
 
@@ -246,18 +247,36 @@ public class GeneratingInterfaceSequence {
 			}
 		}
 		if(responseParams != null){
-			out.println("	<response type=\""+operation.getResponse()+"\" >");
+			out.println("		<response type=\""+operation.getResponse()+"\" >");
 			out.flush();
 			if(responseParams.size() != 0){
 				for(ResponseParam responseParam : responseParams){
-					out.println("		<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" />");
+					out.println("			<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" />");
 					out.flush();
+					ArrayList<ResponseElement> responseElements = responseParam.getElements();
+					if(responseElements != null){
+						for(ResponseElement responseElement : responseElements){
+							printlnElement(responseElement,out);
+						}
+					}
 				}
 			}
-			out.println("	</response>");
+			out.println("		</response>");
 			out.flush();
 		}
 		out.println("	</step>");
+		out.flush();
+	}
+	private void printlnElement(ResponseElement responseElement,PrintWriter out){
+		out.println("			<element"+responseElement.getLevel()+" name=\""+responseElement.getName()+" attribute=\""+responseElement.getAttribute()+"\""+" >");
+		out.flush();
+		ArrayList<ResponseElement> responseElements = responseElement.getElements();
+		if(responseElements != null&&responseElements.size() != 0){
+			for(ResponseElement re:responseElements){
+				printlnElement(re,out);
+			}
+		}
+		out.println("			</element"+responseElement.getLevel()+">");
 		out.flush();
 	}
 	private void printlnElement(RequestElement requestElement, PrintWriter out) {

@@ -492,8 +492,9 @@ public class DocumentPrepcessing {
 					} catch (Exception e) {
 					}
 				}
+				operation.setResponseParams(responseParames);
 				out.flush();
-
+				
 			}
 			operations.add(operation);
 		}
