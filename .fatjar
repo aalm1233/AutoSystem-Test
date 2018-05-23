@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed May 23 10:25:55 CST 2018
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=C\:\\Users\\dhq-xkd\\Desktop\\app.jar
+manifest.mergeall=true
+manifest.mainclass=nwpu.autosysteamtest.App
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=<jar|guava-23.3-jre.jar>
+includes=

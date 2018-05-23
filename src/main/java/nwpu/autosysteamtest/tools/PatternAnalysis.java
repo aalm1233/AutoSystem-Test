@@ -136,7 +136,7 @@ public class PatternAnalysis {
 		String regex = patten;
         Xeger generator = new Xeger(regex);
         for(;values.size() < 5;){
-        	 String result = generator.generate();
+         	 String result = generator.generate();
         	 assert result.matches(regex);
         	 if(minLength <= result.length()&&maxLength >= result.length()){
             	 values.add(result);

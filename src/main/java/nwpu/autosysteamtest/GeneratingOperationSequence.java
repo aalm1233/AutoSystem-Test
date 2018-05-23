@@ -7,7 +7,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import nwpu.autosysteamtest.enity.Service;
-
+/**
+ * 
+ * @author Dengtong
+ * @version 1.0,28/01/2018
+ */
 public class GeneratingOperationSequence {
 	private Service service;
 	private String filename;

@@ -33,7 +33,7 @@ public class AutomatedTestData implements Runnable {
 		documentPrepcessing = DocumentPrepcessing.getInstance();
 		this.operaterTypesMap = documentPrepcessing.getOperaterTypesMap();
 	}
-
+	@Override
 	public void run() {
 		long startTime = System.currentTimeMillis();
 		System.out.println("Data generation started");
@@ -188,7 +188,7 @@ public class AutomatedTestData implements Runnable {
 				values = setTypeType(constraints, paramType);
 				break;
 			default:
-				ObjectType(param,out);
+				objectType(param,out);
 				flag = true;
 				break;
 			}
@@ -201,7 +201,7 @@ public class AutomatedTestData implements Runnable {
 		} 
 	}
 
-	private ArrayList<String> ObjectType(RequestParam param,PrintWriter out) {
+	private ArrayList<String> objectType(RequestParam param,PrintWriter out) {
 		ArrayList<RequestElement> elements = param.getElements();
 		for (RequestElement element : elements){
 			generateObjectDataFile(element,out);

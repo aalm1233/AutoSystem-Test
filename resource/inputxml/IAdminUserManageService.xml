@@ -270,6 +270,13 @@
 			</response>
 		</resource>
 		<resource name="Find_Seller_ByName" path="findSellerByName" id="findSellerByName">
+			<request>
+				<param name="name" type="String" attribute="Seller.name"
+					location="Seller.name"></param>
+			</request>
+			<response dataType="boolean">
+				<param name="isFindSuccess" type="boolean"></param>
+			</response>
 		</resource>
 	</find>
 </resources>
