@@ -29,7 +29,9 @@ public class RequestElement extends RequestParam{
 			return true;
 		}
 	} 
-
+	public ArrayList<RequestElement> getElements() {
+		return elements;
+	}
 	public void addElement(RequestElement element) {
 		if(elements == null){
 			elements = new ArrayList<>();

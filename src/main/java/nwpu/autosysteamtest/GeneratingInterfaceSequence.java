@@ -208,6 +208,7 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 		out.println("<script resourcesID=\""+service.getId()+"\""+" sequence=\"\" completed=\"false\" >");
 		out.flush();
+		int i =0;
 		for(Operation operation :output){
 			printlnOperation(operation,out);
 		}
@@ -268,7 +269,7 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 	}
 	private void printlnElement(ResponseElement responseElement,PrintWriter out){
-		out.println("			<element"+responseElement.getLevel()+" name=\""+responseElement.getName()+" attribute=\""+responseElement.getAttribute()+"\""+" >");
+		out.println("			<element"+responseElement.getLevel()+" name=\""+responseElement.getName()+"\" attribute=\""+responseElement.getAttribute()+"\""+" >");
 		out.flush();
 		ArrayList<ResponseElement> responseElements = responseElement.getElements();
 		if(responseElements != null&&responseElements.size() != 0){

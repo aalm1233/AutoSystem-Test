@@ -1,6 +1,7 @@
 package nwpu.autosysteamtest.enity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 /**
  * 
  * @author Dengtong

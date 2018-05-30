@@ -40,7 +40,6 @@ public class GeneratingOperationSequence {
 			ArrayList<String> outputlines = analyticeExpression(line);
 			for (String outputline : outputlines) {
 				out.println(outputline);
-				num++;
 				out.flush();
 			}
 			out.close();
@@ -184,7 +183,7 @@ public class GeneratingOperationSequence {
 				dNum++;
 			}
 		}
-		if (aNum <= dNum) {
+		if (aNum < dNum) {
 			output = false;
 		}
 		return output;

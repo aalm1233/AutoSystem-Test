@@ -154,6 +154,7 @@ public class DocumentPrepcessing {
 			service = new Service(root.getAttribute(ResourcesAttribute.name.toString()),
 					root.getAttribute(ResourcesAttribute.id.toString()),
 					root.getAttribute(ResourcesAttribute.base.toString()));
+			System.out.println(service.getId()+": start anlysis");
 			out.flush();
 			out.println("service name:" + service.getId());
 			NodeList addNodeList = root.getElementsByTagName(Operation.add.toString());
@@ -193,6 +194,7 @@ public class DocumentPrepcessing {
 			documentPrepcessing.addService(service);
 			documentPrepcessing.getOperaterTypesMap().put(root.getAttribute(ResourcesAttribute.id.toString()),
 					operaterTypes.toString());
+			System.out.println(service.getId()+" :anlysis finished");
 			out.close();
 		}
 
@@ -240,12 +242,12 @@ public class DocumentPrepcessing {
 							} else if (parentLevel > level) {
 								stack.pop();
 								a : for (;;) {
-									parentLevel = stack.peek().getLevel();
 									if (stack.empty()) {
 										stack.push(requestElement);
 										elementes.add(requestElement);
 										break a;
 									} else {
+										parentLevel = stack.peek().getLevel();
 										if (parentLevel == level) {
 											stack.pop();
 											continue a;
@@ -290,6 +292,7 @@ public class DocumentPrepcessing {
 				}
 				return param;
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.err.println("param error");
 			}
 			return param;
@@ -459,7 +462,7 @@ public class DocumentPrepcessing {
 					} catch (Exception e) {
 					}
 				}
-				NodeList dependencys = request.getElementsByTagName(Param.dependency.toString());
+				NodeList dependencys = resource.getElementsByTagName(Param.dependency.toString());
 				if (dependencys.getLength() != 0) {
 					for (int j = 0; j < dependencys.getLength(); j++) {
 						Element dependency = (Element) dependencys.item(j);
@@ -468,12 +471,14 @@ public class DocumentPrepcessing {
 						while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
 							synchronized (this) {
 								try {
-									this.wait();
+									System.out.println(service.getName()+" :find a dependency not in the RAM,start wait");
+									Thread.sleep(2000);
 								} catch (InterruptedException e) {
 									e.printStackTrace();
 								}
 							}
 						}
+						System.out.println(service.getName()+" :find it continue anlysis");
 						nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing
 								.searchServiceById(resourcesid).searchAllOperationById(resourceid);
 						operation.addDependency(dependencyInteInterface);
@@ -511,6 +516,9 @@ public class DocumentPrepcessing {
 						if (TagName.resource.toString().equals(element.getNodeName())) {
 							Element resource = element;
 							resourceAnalysis(resource, type, operations);
+						}else if(TagName.dependency.toString().equals(element.getNodeName())){
+							Element dependency = element;
+							dependencyAnalysis(dependency,operations);
 						}
 					} catch (Exception e) {
 					}
@@ -519,6 +527,27 @@ public class DocumentPrepcessing {
 			synchronized (this) {
 				this.notifyAll();
 			}
+		}
+
+		private void dependencyAnalysis(Element dependency,
+				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
+			String resourcesid = dependency.getAttribute(DependencyAttribute.resourcesid.toString());
+			String resourceid = dependency.getAttribute(DependencyAttribute.resourceid.toString());
+			while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
+				synchronized (this) {
+					try {
+						System.out.println(service.getName()+" :find a dependency not in the RAM,start wait");
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			System.out.println(service.getName()+" :find it continue anlysis");
+			nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing
+					.searchServiceById(resourcesid).searchAllOperationById(resourceid);
+			operations.add(dependencyInteInterface);
+			
 		}
 	}
 }
@@ -570,5 +599,5 @@ enum ElementAttribute {
 
 enum TagName {
 	//xmlTag名称
-	resources, resource, add, find, delete, update, param, element, restricition, request, response
+	resources, resource, add, find, delete, update, param, element, restricition, request, response ,dependency
 }

@@ -16,6 +16,7 @@ public class RunThread {
 		try {
 			dp = DocumentPrepcessing.getInstance(fileSet);
 			while(Thread.activeCount()!=1){}
+			System.out.println("DocumentPrepcessing Generation at "+new Date());
 			TestPatternGeneration tpg = new TestPatternGeneration(dp.getOperaterTypesMap());
 			tpg.run();
 			ScriptGeneration sg = new ScriptGeneration(path+"\\", tpg.getMode());

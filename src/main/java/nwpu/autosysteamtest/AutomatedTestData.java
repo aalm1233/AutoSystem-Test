@@ -77,27 +77,29 @@ public class AutomatedTestData implements Runnable {
 
 	protected void run2() throws FileNotFoundException, ParseException {
 		xAutomated("add", service.getAdds());
-		xAutomated("upData", service.getUpdates());
+		xAutomated("updata", service.getUpdates());
 		xAutomated("delete", service.getDeletes());
 		xAutomated("find", service.getFinds());
 	}
 
 	private void xAutomated(String operation, ArrayList<Operation> xInterfaces)
 			throws FileNotFoundException, ParseException {
-		for (Operation xInterface : xInterfaces) {
-			String resourceid = xInterface.getId();
-			File file = null;
-			try {
-				file = new File(path + this.resourcesid + "\\" + operation + "\\" + resourceid);
-				if (!file.exists()) {
-					file.mkdirs();
-				}
-			} catch (Exception e) {
+		if(xInterfaces != null){
+			for (Operation xInterface : xInterfaces) {
+				String resourceid = xInterface.getId();
+				File file = null;
+				try {
+					file = new File(path + this.resourcesid + "\\" + operation + "\\" + resourceid);
+					if (!file.exists()) {
+						file.mkdirs();
+					}
+				} catch (Exception e) {
 
-			} finally {
-				file = null;
+				} finally {
+					file = null;
+				}
+				analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + resourceid + "\\", xInterface);
 			}
-			analyticParameter(this.path + this.resourcesid + "\\" + operation + "\\" + resourceid + "\\", xInterface);
 		}
 	}
 
@@ -212,14 +214,14 @@ public class AutomatedTestData implements Runnable {
 	private void generateObjectDataFile(RequestElement element,PrintWriter out) {
 		if(element.isObject()){
 			ArrayList<RequestElement> elements = element.getElements();
+			out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
+					" attribute=\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
+			out.flush();
 			for (RequestElement childelement : elements){
-				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+
-						" attribute=\""+element.getAttribute()+"\""+" status=\"generate\""+" >");
-				out.flush();
 				generateObjectDataFile(childelement,out);
-				out.println("</element"+element.getLevel()+" >");
-				out.flush();
 			}
+			out.println("</element"+element.getLevel()+" >");
+			out.flush();
 		}else{
 			if("false".equals(element.getLocation())){
 				out.println("<element"+element.getLevel()+" name=\""+element.getName()+"\""+

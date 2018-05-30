@@ -27,30 +27,20 @@ public class Test {
 		}
 	}
 	private void runThread(String path) {
-		File folder = new File(path+"\\resource\\inputxml");
+		File folder = new File(path);
 		File[] fileSet = folder.listFiles();
 		 DocumentPrepcessing dp;
 		try {
 			dp = DocumentPrepcessing.getInstance(fileSet);
 			while(Thread.activeCount()!=1){}
-			Service service= dp.searchServiceById("Group_Service");
+			Service service= dp.searchServiceById("ISellerPersonInChargeManageService");
 			for(Operation operation : service.getAdds()){
 				System.out.println(operation.getName());
 			}
-			Operation operation = service.searchAllOperationById("Group_New");
+			Operation operation = service.searchAllOperationById("addPersonincharge");
 			ArrayList<RequestElement> elements = null;
-			for(RequestParam param: operation.getRequestParams()){
-				if("param".equals(param.getName())){
-					elements = param.getElements();
-					break;
-				}
-			}
-			for(RequestElement element : elements){
-				System.out.println(element);
-				if("parentId".equals(element.getName())){
-					System.out.println(element);
-				}
-			}
+			System.out.println(operation);
+			System.out.println(operation.getDependency());
 
 		} catch (Exception e) {
 			e.printStackTrace();
