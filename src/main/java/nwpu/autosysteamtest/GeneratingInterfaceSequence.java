@@ -252,7 +252,7 @@ public class GeneratingInterfaceSequence {
 			out.flush();
 			if(responseParams.size() != 0){
 				for(ResponseParam responseParam : responseParams){
-					out.println("			<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" />");
+					out.println("			<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" >");
 					out.flush();
 					ArrayList<ResponseElement> responseElements = responseParam.getElements();
 					if(responseElements != null){
@@ -260,6 +260,8 @@ public class GeneratingInterfaceSequence {
 							printlnElement(responseElement,out);
 						}
 					}
+					out.println("			</param>");
+					out.flush();
 				}
 			}
 			out.println("		</response>");
