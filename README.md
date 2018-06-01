@@ -102,35 +102,64 @@ Java -jar App.jar resoucepath
 
 ### Service
 
-一个Service对象对应一个输入文件。
+一个Service对象对应一个输入文件.
 
 <b>以下是该类的参数介绍</b>：
 
-| 参数名 | 类型 | 说明 |
-| - | :-: | -: |
+| 参数名 | 类型  | 说明 |
+| - | :-: | :- |
+| name | String | 服务名称 |
+| id | String | 服务的标识(唯一) |
+| base | String | 域名 |
+| adds | ArrayList<Operation> | 存放所有的Add类型操作接口 |
+| updates | ArrayList<Operation> | 存放所有的Update类型操作接口 |
+| deletes | ArrayList<Operation> | 存放所有的Delete类型操作接口 |
+| finds | ArrayList<Operation> | 存放所有的Find类型操作接口 |
 
-<b>以下是该类的方法介绍(忽略Get以及Set方法)</b>：
+<b>以下是该类的方法介绍(忽略get以及set方法)</b>：
 
 | 方法 | 说明 | 返回类型 |
-| - | :-: | -: |
-|Service(String name, String id, String base)|构造函数|构造函数|
-|searchAllOperationById(String id)|通过操作接口id查找带对应的接口|Operation|
+| - | :- | :-: |
+| Service(String name, String id, String base) | 构造函数 | 无 |
+| searchAllOperationById(String id) | 通过操作接口id查找到对应的接口 | Operation |
 
+###  Operation
 
-<table class="table table-bordered table-striped table-condensed">  
-	<th>
-	</th>
-    <tr>  
-        <td>北京</td>  
-    <td>雾霾</td>  
-    </tr>  
-    <tr>  
-        <td>深圳</td>  
-    <td>暴雨</td>  
-    </tr>  
-</table>
+一个Operation对象对应一个操作接口.
 
-###  
+<b>以下是该类的参数介绍</b>：
 
+| 参数名 | 类型  | 说明 |
+| - | :-: | :- |
+| name | String | 接口(方法)名称 |
+| id | String | 接口的标识(唯一) |
+| path | String | 接口路径 |
+| type | String | 接口的操作类型(四种操作类型的一种) |
+| dependencys | ArrayList<Operation> | 该接口操作所关联的所有其他服务的操作接口(前置操作) |
+| requestParams | ArrayList<RequestParam> | 存放该接口所需的所有输入参数 |
+| response | String | 返回参数的格式(如JSON) |
+| responseParams | ArrayList<ResponseParam> | 存放返回的所有参数 |
 
+<b>以下是该类的方法介绍(忽略get、set以及toString方法)</b>：
 
+| 方法 | 说明 | 返回类型 |
+| - | :- | :-: |
+| equals(Operation obj) | 比较两个接口操作是否为同一个 |  boolean |
+| addDependency(Operation dependency) | 为该接口添加一个关联接口 | 无 |
+
+### RequestParam
+
+一个RequestParam对象对应一个输入参数.
+
+<b>以下是该类的参数介绍</b>：
+
+| 参数名 | 类型  | 说明 |
+| - | :-: | :- |
+| name | String | 参数名称 |
+| attribute | String | 参数对应的实体属性名称以匹配生成的数据 |
+| type | String | 参数类型 |
+| location | String | 标记该参数是否需要生成，若值为`false`则需要生成，若依赖于向上的接口操作则需要填写对应的实体属性 |
+| constraints | ArrayList<String> | 存放该参数的约束，字符串的形式为 `约束类型：约束值` |
+| elements | ArrayList<RequestElement> |  当输入参数是一个对象时，存放该对象所需的所有输入参数 |
+
+<b>该对象仅有get和set方法,不做介绍</b>
