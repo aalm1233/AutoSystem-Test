@@ -1,6 +1,6 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
-import nwpu.autosysteamtest.enity.Service;
+import nwpu.autosysteamtest.entity.Service;
 /**
  * 
  * @author Dengtong

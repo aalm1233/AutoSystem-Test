@@ -2,6 +2,8 @@ package nwpu.autosysteamtest;
 
 import java.io.IOException;
 
+import nwpu.autosysteamtest.run.RunThread;
+
 /**
  * @author Dengtong
  * @version 2.0,23/11/2017

@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest.enity;
+package nwpu.autosysteamtest.entity;
 
 import java.util.ArrayList;
 import java.util.HashSet;

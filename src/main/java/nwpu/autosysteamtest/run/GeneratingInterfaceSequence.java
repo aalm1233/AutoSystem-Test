@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import nwpu.autosysteamtest.enity.Operation;
-import nwpu.autosysteamtest.enity.RequestElement;
-import nwpu.autosysteamtest.enity.RequestParam;
-import nwpu.autosysteamtest.enity.ResponseElement;
-import nwpu.autosysteamtest.enity.ResponseParam;
-import nwpu.autosysteamtest.enity.Service;
+import nwpu.autosysteamtest.entity.Operation;
+import nwpu.autosysteamtest.entity.RequestElement;
+import nwpu.autosysteamtest.entity.RequestParam;
+import nwpu.autosysteamtest.entity.ResponseElement;
+import nwpu.autosysteamtest.entity.ResponseParam;
+import nwpu.autosysteamtest.entity.Service;
 
 /**
  * 

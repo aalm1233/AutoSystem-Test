@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,11 +21,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import nwpu.autosysteamtest.enity.RequestElement;
-import nwpu.autosysteamtest.enity.RequestParam;
-import nwpu.autosysteamtest.enity.ResponseElement;
-import nwpu.autosysteamtest.enity.ResponseParam;
-import nwpu.autosysteamtest.enity.Service;
+import nwpu.autosysteamtest.entity.RequestElement;
+import nwpu.autosysteamtest.entity.RequestParam;
+import nwpu.autosysteamtest.entity.ResponseElement;
+import nwpu.autosysteamtest.entity.ResponseParam;
+import nwpu.autosysteamtest.entity.Service;
 
 /**
  * 
@@ -164,21 +164,21 @@ public class DocumentPrepcessing {
 			if (addNodeList.getLength() == 1) {
 				out.println("add InterfaceSet:");
 				out.flush();
-				ArrayList<nwpu.autosysteamtest.enity.Operation> adds = new ArrayList<>();
+				ArrayList<nwpu.autosysteamtest.entity.Operation> adds = new ArrayList<>();
 				service.setAdds(adds);
 				initInterfaceSetMap(addNodeList.item(0), adds);
 			}
 			if (deleteNodeList.getLength() == 1) {
 				out.println("delete InterfaceSet:");
 				out.flush();
-				ArrayList<nwpu.autosysteamtest.enity.Operation> deletes = new ArrayList<>();
+				ArrayList<nwpu.autosysteamtest.entity.Operation> deletes = new ArrayList<>();
 				service.setDeletes(deletes);
 				initInterfaceSetMap(deleteNodeList.item(0), deletes);
 			}
 			if (updateNodeList.getLength() == 1) {
 				out.println("update InterfaceSet:");
 				out.flush();
-				ArrayList<nwpu.autosysteamtest.enity.Operation> updates = new ArrayList<>();
+				ArrayList<nwpu.autosysteamtest.entity.Operation> updates = new ArrayList<>();
 				service.setUpdates(updates);
 				initInterfaceSetMap(updateNodeList.item(0), updates);
 
@@ -186,7 +186,7 @@ public class DocumentPrepcessing {
 			if (findNodeList.getLength() == 1) {
 				out.println("find InterfaceSet:");
 				out.flush();
-				ArrayList<nwpu.autosysteamtest.enity.Operation> finds = new ArrayList<>();
+				ArrayList<nwpu.autosysteamtest.entity.Operation> finds = new ArrayList<>();
 				service.setFinds(finds);
 				initInterfaceSetMap(findNodeList.item(0), finds);
 
@@ -429,8 +429,8 @@ public class DocumentPrepcessing {
 		}
 
 		private void resourceAnalysis(Element resource, String type,
-				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
-			nwpu.autosysteamtest.enity.Operation operation = new nwpu.autosysteamtest.enity.Operation(
+				ArrayList<nwpu.autosysteamtest.entity.Operation> operations) {
+			nwpu.autosysteamtest.entity.Operation operation = new nwpu.autosysteamtest.entity.Operation(
 					resource.getAttribute(ResourceAttribute.name.toString()),
 					resource.getAttribute(ResourceAttribute.id.toString()),
 					resource.getAttribute(ResourceAttribute.path.toString()), type);
@@ -479,7 +479,7 @@ public class DocumentPrepcessing {
 							}
 						}
 						System.out.println(service.getName()+" :find it continue anlysis");
-						nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing
+						nwpu.autosysteamtest.entity.Operation dependencyInteInterface = documentPrepcessing
 								.searchServiceById(resourcesid).searchAllOperationById(resourceid);
 						operation.addDependency(dependencyInteInterface);
 					}
@@ -504,7 +504,7 @@ public class DocumentPrepcessing {
 			operations.add(operation);
 		}
 
-		private void initInterfaceSetMap(Node node, ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
+		private void initInterfaceSetMap(Node node, ArrayList<nwpu.autosysteamtest.entity.Operation> operations) {
 			String type = node.getNodeName();
 			operaterTypes.append("<" + type + ">");
 			NodeList resourceList = node.getChildNodes();
@@ -530,7 +530,7 @@ public class DocumentPrepcessing {
 		}
 
 		private void dependencyAnalysis(Element dependency,
-				ArrayList<nwpu.autosysteamtest.enity.Operation> operations) {
+				ArrayList<nwpu.autosysteamtest.entity.Operation> operations) {
 			String resourcesid = dependency.getAttribute(DependencyAttribute.resourcesid.toString());
 			String resourceid = dependency.getAttribute(DependencyAttribute.resourceid.toString());
 			while (!documentPrepcessing.getOperaterTypesMap().containsKey(resourcesid)) {
@@ -544,7 +544,7 @@ public class DocumentPrepcessing {
 				}
 			}
 			System.out.println(service.getName()+" :find it continue anlysis");
-			nwpu.autosysteamtest.enity.Operation dependencyInteInterface = documentPrepcessing
+			nwpu.autosysteamtest.entity.Operation dependencyInteInterface = documentPrepcessing
 					.searchServiceById(resourcesid).searchAllOperationById(resourceid);
 			operations.add(dependencyInteInterface);
 			

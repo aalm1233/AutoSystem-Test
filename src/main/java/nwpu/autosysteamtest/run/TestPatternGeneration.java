@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
 
 import java.util.ArrayList;
