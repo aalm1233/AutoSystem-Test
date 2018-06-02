@@ -445,6 +445,10 @@ delete InterfaceSet:
   Operation [name=Delete_Seller, id=deleteSeller, path=deleteSeller]
     deleteSeller-seller
 ```
+### testmodelfiles
 
+存放所有服务的测试模型，文件名格式为`服务名+Model`
 
+示例：
+![](https://github.com/aalm1233/AutoSystem-Test/blob/master/resource/img/testmodels.png)
 
