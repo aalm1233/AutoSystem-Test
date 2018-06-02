@@ -489,4 +489,216 @@ delete InterfaceSet:
 
 ## 测试脚本格式
 
-测试脚本为了上下文一致以及后续的驱动解析方便
+测试脚本为了上下文一致以及后续的驱动解析方便采用xml格式.
+
+测试脚本示例：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<script resourcesID="IAddTravelDateService" sequence="" completed="false">
+	<step operation="add" path="addTravelDate" name="Add_TravelDate">
+		<param name="travelDate" attribute="Traveldate" location="false">
+			<element1 name="idtravelDate" attribute="Traveldate.idtravelDate" location="false">
+			</element1>
+			<element1 name="product" attribute="Product" location="false">
+				<element2 name="idproduct" attribute="Product.idproduct" location="false">
+				</element2>
+				<element2 name="seller" attribute="Seller" location="false">
+					<element3 name="idseller" attribute="Seller.idseller" location="false">
+					</element3>
+					<element3 name="loginName" attribute="Seller.loginName" location="false">
+					</element3>
+					<element3 name="passWord" attribute="Seller.passWord" location="false">
+					</element3>
+					<element3 name="name" attribute="Seller.name" location="false">
+					</element3>
+					<element3 name="mobilePhone" attribute="Seller.mobilePhone" location="false">
+					</element3>
+					<element3 name="telephone" attribute="Seller.telephone" location="false">
+					</element3>
+					<element3 name="email" attribute="Seller.email" location="false">
+					</element3>
+					<element3 name="qq" attribute="Seller.qq" location="false">
+					</element3>
+					<element3 name="forbid" attribute="Seller.forbid" location="false">
+					</element3>
+					<element3 name="company" attribute="Seller.company" location="false">
+					</element3>
+					<element3 name="businessLicense" attribute="Seller.businessLicense" location="false">
+					</element3>
+					<element3 name="productType" attribute="Seller.productType" location="false">
+					</element3>
+					<element3 name="pathType" attribute="Seller.pathType" location="false">
+					</element3>
+					<element3 name="products" attribute="Seller.products" location="false">
+					</element3>
+					<element3 name="personincharges" attribute="Seller.personincharges" location="false">
+					</element3>
+					<element3 name="receivermapnotices" attribute="Seller.receivermapnotices" location="false">
+					</element3>
+					<element3 name="traffics" attribute="Seller.traffics" location="false">
+					</element3>
+					<element3 name="materialinformations" attribute="Seller.materialinformations" location="false">
+					</element3>
+					<element3 name="orders" attribute="Seller.orders" location="false">
+					</element3>
+				</element2>
+				<element2 name="type" attribute="Product.type" location="false">
+				</element2>
+				<element2 name="pathType" attribute="Product.pathType" location="false">
+				</element2>
+				<element2 name="warmPrompt" attribute="Product.warmPrompt" location="false">
+				</element2>
+				<element2 name="journeyWord" attribute="Product.journeyWord" location="false">
+				</element2>
+				<element2 name="title" attribute="Product.title" location="false">
+				</element2>
+				<element2 name="traveLagency" attribute="Product.traveLagency" location="false">
+				</element2>
+				<element2 name="feature" attribute="Product.feature" location="false">
+				</element2>
+				<element2 name="placeDeparture" attribute="Product.placeDeparture" location="false">
+				</element2>
+				<element2 name="destination" attribute="Product.destination" location="false">
+				</element2>
+				<element2 name="travelScheduleDays" attribute="Product.travelScheduleDays" location="false">
+				</element2>
+				<element2 name="travelScheduleNights" attribute="Product.travelScheduleNights" location="false">
+				</element2>
+				<element2 name="notesForApplication" attribute="Product.notesForApplication" location="false">
+				</element2>
+				<element2 name="priceInclude" attribute="Product.priceInclude" location="false">
+				</element2>
+				<element2 name="priceNotIncludes" attribute="Product.priceNotIncludes" location="false">
+				</element2>
+				<element2 name="salesInformation" attribute="Product.salesInformation" location="false">
+				</element2>
+				<element2 name="informationState" attribute="Product.informationState" location="false">
+				</element2>
+				<element2 name="salesState" attribute="Product.salesState" location="false">
+				</element2>
+				<element2 name="trafficInformation" attribute="Product.trafficInformation" location="false">
+				</element2>
+				<element2 name="themeLabele" attribute="Product.themeLabele" location="false">
+				</element2>
+				<element2 name="featureLabele" attribute="Product.featureLabele" location="false">
+				</element2>
+				<element2 name="publicIsNot" attribute="Product.publicIsNot" location="false">
+				</element2>
+				<element2 name="recommendLabele" attribute="Product.recommendLabele" location="false">
+				</element2>
+				<element2 name="updateTime" attribute="Product.updateTime" location="false">
+				</element2>
+				<element2 name="detailpicturedayses" attribute="Product.detailpicturedayses" location="false">
+				</element2>
+				<element2 name="detailpictures" attribute="Product.detailpictures" location="false">
+				</element2>
+				<element2 name="detailtexts" attribute="Product.detailtexts" location="false">
+				</element2>
+				<element2 name="orders" attribute="Product.orders" location="false">
+				</element2>
+				<element2 name="traveldates" attribute="Product.traveldates" location="false">
+				</element2>
+			</element1>
+			<element1 name="travelDate" attribute="Traveldate.travelDate" location="false">
+			</element1>
+			<element1 name="price" attribute="Traveldate.price" location="false">
+			</element1>
+			<element1 name="priceTag" attribute="Traveldate.priceTag" location="false">
+			</element1>
+			<element1 name="remainingSeats" attribute="Traveldate.remainingSeats" location="false">
+			</element1>
+			<element1 name="childPrice" attribute="Traveldate.childPrice" location="false">
+			</element1>
+			<element1 name="childPriceTag" attribute="Traveldate.childPriceTag" location="false">
+			</element1>
+			<element1 name="childRemainingSeats" attribute="Traveldate.childRemainingSeats" location="false">
+			</element1>
+			<element1 name="orders" attribute="Traveldate.orders" location="false">
+			</element1>
+		</param>
+		<response type="">
+		</response>
+	</step>
+	<step operation="find" path="findTravelDateById" name="Find_TravelDate_ById">
+		<param name="id" attribute="Traveldate.idtravelDate" location="false">
+		</param>
+		<response type="Traveldate">
+			<param name="travelDate" attribute="Traveldate">
+			</param>
+		</response>
+	</step>
+</script>
+
+```
+
+**标签定义如下**：
+
+| 标签名 | 描述内容 | 属性 |
+| :-: |:-|:-|
+| script | 脚本开始/结束 | resourcesId  服务标识 |
+| step | 执行步骤 | operation  接口类型<br>path  接口访问路径<br>resourceId 接口标识 |
+| param | 接口参数 |name  参数名称<br>attribute  对应实体属性名称<br>location 对象定位 |
+| element | 容器类型元素 | name  元素名称<br>attribute  对应实体属性名称<br>location 对象定位 |
+| response | 响应数据 | dataType 返回数据类型 |
+
+### 测试数据格式
+
+测试数据为了上下文一致以及后续的驱动解析方便采用xml格式.
+
+测试数据示例：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<param name="personincharge" attribute="Personincharge" status="generate">
+<element1 name="idpersonIncharge" attribute="Personincharge.idpersonIncharge" status="generate" >
+	<value>652</value>
+	<value>1</value>
+	<value>5</value>
+	<value>6</value>
+	<value>3</value>
+	<value>-2147483647</value>
+	<value>-2147483648</value>
+	<value>2147483646</value>
+	<value>2147483647</value>
+	<value>0</value>
+</element1>
+<element1 name="seller" attribute="Seller" status="Seller" >
+</element1>
+<element1 name="name" attribute="Personincharge.name" status="generate" >
+	<value>V1___zi0_8_</value>
+	<value>3__</value>
+	<value>_95_W8VB__</value>
+	<value>d2_</value>
+	<value>QL</value>
+</element1>
+<element1 name="mobilPhone" attribute="Personincharge.mobilPhone" status="generate" >
+	<value>18387512968</value>
+	<value>14063735156</value>
+	<value>17355473481</value>
+	<value>17244010118</value>
+	<value>13858784952</value>
+</element1>
+<element1 name="telephone" attribute="Personincharge.telephone" status="generate" >
+	<value>34958653-4273</value>
+	<value>7463474</value>
+	<value>536462004144138-31</value>
+	<value>0738-86185550</value>
+	<value>7679844-5</value>
+</element1>
+<element1 name="email" attribute="Personincharge.email" status="generate" >
+	<value>8f--B__-K1@U7.-</value>
+	<value>T0@FL_.-</value>
+	<value>n1t-___6@5.9-_6W.__3-a.90-3-0-2_G_----2--</value>
+	<value>y_OP__330_I-H@70P.D-4F_</value>
+	<value>X-N_-q5mIe-@UP08B-___X._SC_</value>
+</element1>
+<element1 name="qq" attribute="Personincharge.qq" status="generate" >
+	<value>84865561301</value>
+	<value>4623518</value>
+	<value>64931</value>
+	<value>6538533</value>
+	<value>281773215</value>
+</element1>
+</param>
+```
