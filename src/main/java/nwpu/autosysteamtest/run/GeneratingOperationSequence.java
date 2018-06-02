@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import nwpu.autosysteamtest.enity.Service;
+import nwpu.autosysteamtest.entity.Service;
 /**
  * 
  * @author Dengtong
@@ -40,7 +40,6 @@ public class GeneratingOperationSequence {
 			ArrayList<String> outputlines = analyticeExpression(line);
 			for (String outputline : outputlines) {
 				out.println(outputline);
-				num++;
 				out.flush();
 			}
 			out.close();
@@ -184,7 +183,7 @@ public class GeneratingOperationSequence {
 				dNum++;
 			}
 		}
-		if (aNum <= dNum) {
+		if (aNum < dNum) {
 			output = false;
 		}
 		return output;

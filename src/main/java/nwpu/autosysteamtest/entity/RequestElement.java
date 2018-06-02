@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest.enity;
+package nwpu.autosysteamtest.entity;
 
 import java.util.ArrayList;
 /**
@@ -29,7 +29,9 @@ public class RequestElement extends RequestParam{
 			return true;
 		}
 	} 
-
+	public ArrayList<RequestElement> getElements() {
+		return elements;
+	}
 	public void addElement(RequestElement element) {
 		if(elements == null){
 			elements = new ArrayList<>();

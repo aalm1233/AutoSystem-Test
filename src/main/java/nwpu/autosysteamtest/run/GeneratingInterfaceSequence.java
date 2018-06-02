@@ -1,4 +1,4 @@
-package nwpu.autosysteamtest;
+package nwpu.autosysteamtest.run;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import nwpu.autosysteamtest.enity.Operation;
-import nwpu.autosysteamtest.enity.RequestElement;
-import nwpu.autosysteamtest.enity.RequestParam;
-import nwpu.autosysteamtest.enity.ResponseElement;
-import nwpu.autosysteamtest.enity.ResponseParam;
-import nwpu.autosysteamtest.enity.Service;
+import nwpu.autosysteamtest.entity.Operation;
+import nwpu.autosysteamtest.entity.RequestElement;
+import nwpu.autosysteamtest.entity.RequestParam;
+import nwpu.autosysteamtest.entity.ResponseElement;
+import nwpu.autosysteamtest.entity.ResponseParam;
+import nwpu.autosysteamtest.entity.Service;
 
 /**
  * 
@@ -208,6 +208,7 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 		out.println("<script resourcesID=\""+service.getId()+"\""+" sequence=\"\" completed=\"false\" >");
 		out.flush();
+		int i =0;
 		for(Operation operation :output){
 			printlnOperation(operation,out);
 		}
@@ -251,7 +252,7 @@ public class GeneratingInterfaceSequence {
 			out.flush();
 			if(responseParams.size() != 0){
 				for(ResponseParam responseParam : responseParams){
-					out.println("			<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" />");
+					out.println("			<param name=\""+responseParam.getName()+"\" attribute=\""+responseParam.getAttribute()+"\" >");
 					out.flush();
 					ArrayList<ResponseElement> responseElements = responseParam.getElements();
 					if(responseElements != null){
@@ -259,6 +260,8 @@ public class GeneratingInterfaceSequence {
 							printlnElement(responseElement,out);
 						}
 					}
+					out.println("			</param>");
+					out.flush();
 				}
 			}
 			out.println("		</response>");
@@ -268,7 +271,7 @@ public class GeneratingInterfaceSequence {
 		out.flush();
 	}
 	private void printlnElement(ResponseElement responseElement,PrintWriter out){
-		out.println("			<element"+responseElement.getLevel()+" name=\""+responseElement.getName()+" attribute=\""+responseElement.getAttribute()+"\""+" >");
+		out.println("			<element"+responseElement.getLevel()+" name=\""+responseElement.getName()+"\" attribute=\""+responseElement.getAttribute()+"\""+" >");
 		out.flush();
 		ArrayList<ResponseElement> responseElements = responseElement.getElements();
 		if(responseElements != null&&responseElements.size() != 0){
