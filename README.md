@@ -445,6 +445,48 @@ delete InterfaceSet:
   Operation [name=Delete_Seller, id=deleteSeller, path=deleteSeller]
     deleteSeller-seller
 ```
+### testmodelfiles
 
+存放所有服务的测试模型，文件名格式为`服务名+Model`
 
+示例：
 
+![](https://github.com/aalm1233/AutoSystem-Test/blob/master/resource/img/testmodels.png)
+
+### operationsequencelfiles
+
+存放所有服务的操作测试序列模式，文件名格式为`服务名+Sequence`
+
+示例：
+
+![](https://github.com/aalm1233/AutoSystem-Test/blob/master/resource/img/testsequence.png)
+
+### outputxml
+
+存放所有的测试脚本，文件目录结构如下:
+
++ outputxml
+	+ 服务名
+		+ 测试脚本长度
+			+ 测试脚本
+
+示例：
+
+![](https://github.com/aalm1233/AutoSystem-Test/blob/master/resource/img/testscipt.png)
+
+### Data
+
+存放所有的测试数据,文件目录结构如下：
+
++ 服务名
+	+ 操作类型
+		+ 操作接口名
+			+ 对应参数数据文件(xml格式) 
+
+示例：
+
+![](https://github.com/aalm1233/AutoSystem-Test/blob/master/resource/img/testdata.png)
+
+## 测试脚本格式
+
+测试脚本为了上下文一致以及后续的驱动解析方便
