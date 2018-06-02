@@ -489,6 +489,7 @@ delete InterfaceSet:
 
 ## 测试脚本格式
 
+<<<<<<< HEAD
 测试脚本为了上下文一致以及后续的驱动解析方便采用xml格式.
 
 测试脚本示例：
@@ -702,3 +703,6 @@ delete InterfaceSet:
 </element1>
 </param>
 ```
+=======
+测试脚本为了上下文一致以及后续的驱动解析方便
+>>>>>>> eca0373f19894ba5126b1a4dd96625bb66a61d40
