@@ -21,3 +21,6 @@
 hs_err_pid*
 /example.docx
 .vscode/launch.json
+
+target/
+
